@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/bottom_sheet_login_scene"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_margin="50dp"
+        android:layout_marginTop="50dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_logo2" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        app:boxBackgroundMode="outline"
+        app:endIconCheckable="true"
+        app:endIconDrawable="@drawable/ic_close_18"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/iv_logo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_email"
+
+            android:drawablePadding="15dp"
+            android:drawableTint="@color/dark_grey"
+            android:hint="E-mail" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_password"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        app:boxBackgroundMode="outline"
+        app:layout_constraintTop_toBottomOf="@id/til_email"
+        app:passwordToggleEnabled="true"
+
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_password_18"
+            android:drawablePadding="15dp"
+            android:drawableTint="@color/dark_grey"
+            android:hint="PassWord"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:text="로그인"
+        android:textSize="20sp"
+        app:icon="@drawable/ic_check_"
+        app:iconGravity="textStart"
+        app:iconPadding="10dp"
+        app:iconSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/til_password" />
+
+    <TextView
+        android:id="@+id/tv_login_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="로그인 상태 유지"
+        app:layout_constraintBottom_toBottomOf="@id/cb_login_state"
+        app:layout_constraintEnd_toStartOf="@id/cb_login_state"
+        app:layout_constraintTop_toTopOf="@id/cb_login_state" />
+
+    <CheckBox
+        android:id="@+id/cb_login_state"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:checked="false"
+        app:layout_constraintBottom_toTopOf="@id/til_email"
+        app:layout_constraintEnd_toEndOf="@id/til_email" />
+
+    <TextView
+        android:id="@+id/tv_register_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="처음 이용하시는 건가요?"
+        app:layout_constraintStart_toStartOf="@id/btn_login"
+        app:layout_constraintTop_toBottomOf="@id/btn_login" />
+
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="회원가입"
+        android:textColor="@color/main_color_2"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tv_register_comment"
+        app:layout_constraintStart_toEndOf="@id/tv_register_comment"
+        app:layout_constraintTop_toTopOf="@id/tv_register_comment" />
+
+    <TextView
+        android:id="@+id/tv_social_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="소셜 로그인"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/btn_social_login_toggle"
+        app:layout_constraintEnd_toStartOf="@id/btn_social_login_toggle"
+        app:layout_constraintTop_toTopOf="@id/btn_social_login_toggle" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_social_login_toggle"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/ic_down_arrow"
+        android:backgroundTint="@color/dark_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        />
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
