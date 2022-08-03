@@ -138,13 +138,23 @@
         android:id="@+id/btn_social_login_toggle"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/ic_down_arrow"
         android:backgroundTint="@color/dark_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
+        />
+
+    <include
+        android:id="@+id/included_social_login_layout"
+        layout="@layout/include_social_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/btn_social_login_toggle"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         />
 
 

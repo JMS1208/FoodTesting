@@ -13,6 +13,7 @@
     <color name="main_color_4">#B8E4F0</color>
     <color name="bright_grey">#DCDCDC</color>
     <color name="grey">#9F9F9F</color>
+    <color name="middle_grey">#777777</color>
     <color name="dark_grey">#5A5A5A</color>
     <color name="red">#E31919</color>
 </resources>
