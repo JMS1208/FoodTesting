@@ -24,5 +24,9 @@
         android:id="@+id/fragment_login"
         android:name="com.capstone.foodtesting.ui.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_fragment_login_to_fragment_home"
+            app:destination="@id/fragment_home" />
+    </fragment>
 </navigation>

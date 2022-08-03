@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_nav_menu"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
