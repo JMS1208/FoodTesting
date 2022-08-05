@@ -6,15 +6,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.capstone.foodtesting.R
+import com.capstone.foodtesting.databinding.BottomSheetListSortingBinding
+import com.capstone.foodtesting.databinding.BottomSheetSettingAddressBinding
 import com.capstone.foodtesting.databinding.FragmentDashBoardBinding
+import com.capstone.foodtesting.databinding.ItemSortedBinding
 import com.capstone.foodtesting.ui.dashboard.category.*
 import com.capstone.foodtesting.util.hide
 import com.capstone.foodtesting.util.show
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,15 +35,44 @@ class DashBoardFragment : Fragment() {
     private val viewModel by viewModels<DashBoardViewModel>()
 
 
-    private val categoryFragments: Array<Fragment> = arrayOf(
-        TotalFoodFragment(),
-        KoreanFoodFragment(),
-        ChineseFoodFragment(),
-        WesternFoodFragment(),
-        FastFoodFragment(),
-        FlourFoodFragment(),
-        DessertFragment()
-    )
+
+    private lateinit var bottomNavigationView: BottomNavigationView
+
+    companion object {
+
+        private val sortingList = listOf(
+            "거리순",
+            "최신순",
+        )
+
+        private val categoryList = arrayOf(
+            "전체",
+            "한식",
+            "중식",
+            "일식",
+            "양식",
+            "패스트푸드",
+            "분식",
+            "디저트",
+            "기타"
+
+        )
+
+        private val categoryFragments = arrayOf(
+            TotalFoodFragment(),
+            KoreanFoodFragment(),
+            ChineseFoodFragment(),
+            JapaneseFoodFragment(),
+            WesternFoodFragment(),
+            FastFoodFragment(),
+            FlourFoodFragment(),
+            DessertFragment(),
+            OtherFoodFragment()
+        )
+    }
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,44 +85,12 @@ class DashBoardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        BottomSheetBehavior.from(binding.bottomSheetSettingAddress).apply {
-            peekHeight = 0
-            state = BottomSheetBehavior.STATE_COLLAPSED
-            addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-                override fun onStateChanged(bottomSheet: View, newState: Int) {
-                    when (newState) {
-                        BottomSheetBehavior.STATE_COLLAPSED -> {
-                            binding.btnRecommend.show()
-                            val bottomNavigationView: BottomNavigationView? =
-                                activity?.findViewById(R.id.bottomNavigationView)
-                            bottomNavigationView?.apply {
-                                show()
-                            }
+        bottomNavigationView = activity?.findViewById(R.id.bottomNavigationView)!!
 
-                        }
-                        else -> {
-                            binding.btnRecommend.hide()
-                            val bottomNavigationView: BottomNavigationView? =
-                                activity?.findViewById(R.id.bottomNavigationView)
-                            bottomNavigationView?.apply {
-                                hide()
-                            }
 
-                        }
-                    }
-                }
 
-                override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 
-            })
 
-        }
-
-        binding.tvCurrentAddress.setOnClickListener {
-            BottomSheetBehavior.from(binding.bottomSheetSettingAddress).apply {
-                state = BottomSheetBehavior.STATE_EXPANDED
-            }
-        }
 
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int = categoryFragments.size
@@ -97,33 +102,51 @@ class DashBoardFragment : Fragment() {
         }
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-
-            when(position) {
-                0-> {
-                    tab.text = "전체"
-                }
-                1-> {
-                    tab.text = "한식"
-                }
-                2-> {
-                    tab.text = "중식"
-                }
-                3-> {
-                    tab.text = "양식"
-                }
-                4-> {
-                    tab.text = "패스트푸드"
-                }
-                5-> {
-                    tab.text = "분식"
-                }
-                6-> {
-                    tab.text = "디저트"
-                }
-            }
+            tab.text = categoryList[position]
         }.attach()
 
 
+
+        val bottomSheetSortingBinding = BottomSheetListSortingBinding.inflate(layoutInflater)
+        val bottomSheetSortingDialog = BottomSheetDialog(requireContext())
+
+        bottomSheetSortingDialog.apply {
+            setContentView(bottomSheetSortingBinding.root)
+        }
+
+        binding.tvSorting.setOnClickListener {
+            bottomSheetSortingDialog.apply {
+                when(behavior.state) {
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                        show()
+                    }
+                    else -> {
+                        hide()
+                    }
+                }
+            }
+        }
+
+        val bottomSheetAddrBinding = BottomSheetSettingAddressBinding.inflate(layoutInflater)
+        val bottomSheetAddrDialog = BottomSheetDialog(requireContext())
+
+        bottomSheetAddrDialog.apply {
+            setContentView(bottomSheetAddrBinding.root)
+
+        }
+
+        binding.tvCurrentAddress.setOnClickListener {
+            bottomSheetAddrDialog.apply {
+                when(behavior.state) {
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                        show()
+                    }
+                    else -> {
+                        hide()
+                    }
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

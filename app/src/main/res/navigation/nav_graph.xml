@@ -28,5 +28,28 @@
         <action
             android:id="@+id/action_fragment_login_to_fragment_home"
             app:destination="@id/fragment_home" />
+        <action
+            android:id="@+id/action_fragment_login_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.capstone.foodtesting.ui.register.RegisterFragment"
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_fragment_login"
+            app:destination="@id/fragment_login" />
+        <action
+            android:id="@+id/action_registerFragment_to_registerFinishedFragment"
+            app:destination="@id/registerFinishedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFinishedFragment"
+        android:name="com.capstone.foodtesting.ui.register.RegisterFinishedFragment"
+        android:label="fragment_register_finished"
+        tools:layout="@layout/fragment_register_finished" >
+        <action
+            android:id="@+id/action_registerFinishedFragment_to_fragment_home"
+            app:destination="@id/fragment_home" />
     </fragment>
 </navigation>
