@@ -6,14 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.capstone.foodtesting.R
-import com.capstone.foodtesting.databinding.FragmentFlourFoodBinding
-import com.capstone.foodtesting.databinding.FragmentKoreanFoodBinding
+import com.capstone.foodtesting.databinding.FragmentCategoryBinding
+
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class KoreanFoodFragment : Fragment() {
 
-    private var _binding: FragmentKoreanFoodBinding? = null
+    private var _binding: FragmentCategoryBinding? = null
     private val binding get() = _binding!!
 
 
@@ -21,9 +21,14 @@ class KoreanFoodFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentKoreanFoodBinding.inflate(inflater, container, false)
+        _binding = FragmentCategoryBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

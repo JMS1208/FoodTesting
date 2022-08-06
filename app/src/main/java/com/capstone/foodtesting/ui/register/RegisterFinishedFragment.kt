@@ -1,29 +1,30 @@
-package com.capstone.foodtesting.ui.dashboard.category
+package com.capstone.foodtesting.ui.register
 
 import android.os.Bundle
+import android.text.Layout
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.capstone.foodtesting.R
-import com.capstone.foodtesting.databinding.FragmentCategoryBinding
+import com.capstone.foodtesting.databinding.FragmentRegisterFinishedBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TotalFoodFragment : Fragment() {
+class RegisterFinishedFragment : Fragment() {
 
-    private var _binding: FragmentCategoryBinding? = null
+    private var _binding: FragmentRegisterFinishedBinding? = null
     private val binding get() = _binding!!
 
-
+    private val viewModel by viewModels<RegisterViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentCategoryBinding.inflate(inflater, container, false)
+    ): View? {
+        _binding = FragmentRegisterFinishedBinding.inflate(inflater,container, false)
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -31,12 +32,17 @@ class TotalFoodFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnFinish.setOnClickListener {
+            val action = RegisterFinishedFragmentDirections.actionRegisterFinishedFragmentToFragmentHome()
+            findNavController().navigate(action)
 
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 
 }
