@@ -16,7 +16,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:gravity="center"
         android:text="주소 설정 가능하게"
-        android:textColor="@color/white"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

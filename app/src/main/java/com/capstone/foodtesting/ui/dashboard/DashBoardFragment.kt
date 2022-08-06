@@ -1,25 +1,18 @@
 package com.capstone.foodtesting.ui.dashboard
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.databinding.BottomSheetListSortingBinding
-import com.capstone.foodtesting.databinding.BottomSheetSettingAddressBinding
 import com.capstone.foodtesting.databinding.FragmentDashBoardBinding
-import com.capstone.foodtesting.databinding.ItemSortedBinding
+import com.capstone.foodtesting.ui.bottomsheet.BSRecommendFragment
+import com.capstone.foodtesting.ui.bottomsheet.BSSetupAddrFragment
 import com.capstone.foodtesting.ui.dashboard.category.*
-import com.capstone.foodtesting.util.hide
-import com.capstone.foodtesting.util.show
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -88,10 +81,6 @@ class DashBoardFragment : Fragment() {
         bottomNavigationView = activity?.findViewById(R.id.bottomNavigationView)!!
 
 
-
-
-
-
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int = categoryFragments.size
 
@@ -108,9 +97,7 @@ class DashBoardFragment : Fragment() {
 
 
         val bottomSheetSortingBinding = BottomSheetListSortingBinding.inflate(layoutInflater)
-        val bottomSheetSortingDialog = BottomSheetDialog(requireContext())
-
-        bottomSheetSortingDialog.apply {
+        val bottomSheetSortingDialog = BottomSheetDialog(requireContext()).apply {
             setContentView(bottomSheetSortingBinding.root)
         }
 
@@ -127,25 +114,16 @@ class DashBoardFragment : Fragment() {
             }
         }
 
-        val bottomSheetAddrBinding = BottomSheetSettingAddressBinding.inflate(layoutInflater)
-        val bottomSheetAddrDialog = BottomSheetDialog(requireContext())
 
-        bottomSheetAddrDialog.apply {
-            setContentView(bottomSheetAddrBinding.root)
-
-        }
 
         binding.tvCurrentAddress.setOnClickListener {
-            bottomSheetAddrDialog.apply {
-                when(behavior.state) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                        show()
-                    }
-                    else -> {
-                        hide()
-                    }
-                }
-            }
+            val bottomSheet = BSSetupAddrFragment()
+            bottomSheet.show(childFragmentManager, bottomSheet.tag)
+        }
+
+        binding.btnRecommend.setOnClickListener {
+            val bottomSheet = BSRecommendFragment()
+            bottomSheet.show(childFragmentManager, bottomSheet.tag)
         }
     }
 
