@@ -4,7 +4,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
     id("androidx.navigation.safeargs.kotlin")
-
+    id 'kotlinx-serialization'
 }
 
 android {
@@ -16,7 +16,7 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
+        buildConfigField("String","UNSPLASH_API_KEY",UNSPLASH_API_KEY)
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -54,6 +54,7 @@ dependencies {
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
 
     //Moshi
     implementation("com.squareup.moshi:moshi:1.13.0")
@@ -102,4 +103,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
+    //CardStackView
+    implementation 'com.github.yuyakaido:cardstackview:2.3.4'
 }

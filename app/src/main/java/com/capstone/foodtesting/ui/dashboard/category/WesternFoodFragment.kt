@@ -1,6 +1,7 @@
 package com.capstone.foodtesting.ui.dashboard.category
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ class WesternFoodFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d("TAG", "양식삭제")
         _binding = null
     }
 }

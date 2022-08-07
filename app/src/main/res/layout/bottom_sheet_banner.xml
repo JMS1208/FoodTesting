@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="@id/tv_close"
         app:layout_constraintBottom_toBottomOf="@id/tv_close"
         android:layout_margin="10dp"
+        android:textSize="20sp"
         android:padding="10dp"
         />
     <TextView
@@ -28,6 +29,8 @@
         android:drawablePadding="10dp"
         android:padding="5dp"
         android:text="닫기"
+        android:textSize="20sp"
+        android:gravity="center"
         app:drawableEndCompat="@drawable/ic_close_18"
         app:drawableTint="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"

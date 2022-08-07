@@ -45,7 +45,7 @@ class BSBannerFragment : BottomSheetDialogFragment() {
                     Glide.with(requireContext())
                         .load(it)
                         .placeholder(circularProgressDrawable)
-                        .transform(CenterCrop(), RoundedCorners(20))
+                        .transform(CenterCrop())
                         .into(itemBinding.ivBanner)
                 }
             }

@@ -92,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/bg_btn_red"
+        android:background="@drawable/bg_btn_rounded_red"
         android:elevation="5dp"
         android:gravity="center"
         android:paddingStart="15dp"
