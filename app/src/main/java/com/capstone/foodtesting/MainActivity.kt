@@ -2,6 +2,7 @@ package com.capstone.foodtesting
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -10,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.capstone.foodtesting.databinding.ActivityMainBinding
 import com.capstone.foodtesting.util.hide
 import com.capstone.foodtesting.util.show
+import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val keyHash= Utility.getKeyHash(this)
+        Log.d("Hash",keyHash)
         setupBottomNavigationView()
     }
 

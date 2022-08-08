@@ -54,6 +54,11 @@
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/list_sorted.xml" value="0.303125" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/spinner_item.xml" value="0.3212962962962963" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/menu/bottom_nav_menu.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/FoodTesting/app/src/main/res/layout/activity_main.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/FoodTesting/app/src/main/res/layout/fragment_home.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/FoodTesting/app/src/main/res/layout/fragment_login.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/FoodTesting/app/src/main/res/layout/fragment_register.xml" value="0.22" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/FoodTesting/app/src/main/res/layout/fragment_register_finished.xml" value="0.2" />
       </map>
     </option>
   </component>
