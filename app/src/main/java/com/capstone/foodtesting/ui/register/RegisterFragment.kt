@@ -1,5 +1,7 @@
 package com.capstone.foodtesting.ui.register
 
+import android.app.DatePickerDialog
+import android.icu.util.Calendar
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -25,6 +27,19 @@ class RegisterFragment : Fragment() {
     ): View {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
+
+        var calendar=java.util.Calendar.getInstance()
+        val year=calendar.get(java.util.Calendar.YEAR)
+        val month=calendar.get(java.util.Calendar.MONTH)
+        val day=calendar.get(java.util.Calendar.DAY_OF_MONTH)
+
+        binding.tvBornDateBtn.setOnClickListener {
+            val datePickerDialog=DatePickerDialog(requireContext(),DatePickerDialog.OnDateSetListener { view, myear, mmonth, mdayOfMonth ->
+                binding.tvBornDate.setText(""+myear+". "+mmonth+". "+mdayOfMonth)
+            },year,month,day)
+            datePickerDialog.datePicker.spinnersShown=true
+            datePickerDialog.show()
+        }
         return binding.root
 
     }

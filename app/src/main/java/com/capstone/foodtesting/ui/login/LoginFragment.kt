@@ -11,8 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.capstone.foodtesting.R
 
 import com.capstone.foodtesting.databinding.FragmentLoginBinding
 import com.capstone.foodtesting.ui.register.RegisterFinishedFragmentDirections
@@ -28,6 +30,12 @@ import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.AuthErrorCause
+import com.kakao.sdk.user.UserApiClient
+import com.navercorp.nid.NaverIdLoginSDK
+import com.navercorp.nid.oauth.NidOAuthLogin
+import com.navercorp.nid.oauth.OAuthLoginCallback
+import com.navercorp.nid.profile.NidProfileCallback
+import com.navercorp.nid.profile.data.NidProfileResponse
 
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -50,11 +58,13 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         auth=FirebaseAuth.getInstance()
+
         // Configure Google SignIn
         val gso=GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("106449633055-13ql64jaephpeemdveuo293q6b98do4n.apps.googleusercontent.com")
             .requestEmail()
             .build()
+
         googleSignInClient= GoogleSignIn.getClient(requireContext(),gso)
         binding.btnLoginGoogle.setOnClickListener {
             signIn()
@@ -67,6 +77,14 @@ class LoginFragment : Fragment() {
             }else{
                 LoginClient.instance.loginWithKakaoAccount(requireContext(),callback=callback)
             }
+        }
+        // Naver Login Module Initialize
+        val naverClientId=getString(R.string.social_login_info_naver_client_id)
+        val naverClientSecret=getString(R.string.social_login_info_naver_client_secret)
+        val naverClientName=getString(R.string.social_login_info_naver_client_name)
+        NaverIdLoginSDK.initialize(requireContext(),naverClientId,naverClientSecret,naverClientName)
+        binding.btnLoginNaver.setOnClickListener {
+            startNaverLogin()
         }
         return binding.root
     }
@@ -104,6 +122,16 @@ class LoginFragment : Fragment() {
                 if (task.isSuccessful) {
                     Log.d("Google_SignIn", "signInWithCredential:success")
                     val user = auth.currentUser
+
+                    // get User Information(Log)
+                    Log.d("GoogleUser","${user!!.displayName}, ${user!!.email}, ${user!!.photoUrl.toString()}")
+
+                    // saveData (ViewModel)
+                    // Google: name, email, photoURL만 지원
+                    viewModel.name= MutableLiveData(user!!.displayName)
+                    viewModel.email=MutableLiveData(user!!.email)
+                    viewModel.photoURL=MutableLiveData(user!!.photoUrl.toString())
+                    viewModel.saveUserData()
                     updateUI(user)
                 } else {
                     Log.w("Google_SignIn", "signInWithCredential:failure", task.exception)
@@ -152,6 +180,20 @@ class LoginFragment : Fragment() {
         }
         else if (token!=null){
             Toast.makeText(context,"로그인에 성공하였습니다.",Toast.LENGTH_SHORT).show()
+            UserApiClient.instance.me { user, error ->
+                // get user info
+                Log.d("KakaoUser","${user?.kakaoAccount?.profile?.nickname}\n${user?.kakaoAccount?.gender}\n${user?.kakaoAccount?.ageRange}\n${user?.kakaoAccount?.birthday}\n${user?.kakaoAccount?.birthyear}")
+
+                // saveData(ViewModel)
+                // KakaoAccount: name, email, photoURL(필수동의) / gender, birthDay, ageRange(선택동의)
+                viewModel.name= MutableLiveData(user?.kakaoAccount?.profile?.nickname)
+                viewModel.email=MutableLiveData(user?.kakaoAccount?.email)
+                viewModel.gender=MutableLiveData(user?.kakaoAccount?.gender.toString())
+                //viewModel.age= MutableLiveData(user?.kakaoAccount?.ageRange.toString())
+                viewModel.birthDay=MutableLiveData(user?.kakaoAccount?.birthday)
+                viewModel.photoURL=MutableLiveData(user?.kakaoAccount?.profile?.profileImageUrl)
+                viewModel.saveUserData()
+            }
             val action = LoginFragmentDirections.actionFragmentLoginToFragmentHome()
             findNavController().navigate(action)
         }
@@ -172,7 +214,57 @@ class LoginFragment : Fragment() {
 
     }
 
+    private fun startNaverLogin(){
+        var naverToken:String?=""
 
+        val profileCallback=object:NidProfileCallback<NidProfileResponse>{
+            override fun onSuccess(response: NidProfileResponse) {
+                // get user info
+                Log.d("NaverUser","${response.profile?.age}\n${response.profile?.nickname}\n${response.profile?.gender}\n${response.profile?.birthday}\n${response.profile?.birthYear}\n${response.profile?.email}")
+
+                // saveData(ViewModel)
+                viewModel.name= MutableLiveData(response.profile?.name)
+                viewModel.email=MutableLiveData(response.profile?.email)
+                viewModel.gender= MutableLiveData(response.profile?.gender)
+                viewModel.birthYear= MutableLiveData(response.profile?.birthYear)
+                viewModel.birthDay=MutableLiveData(response.profile?.birthday)
+                viewModel.photoURL=MutableLiveData(response.profile?.profileImage)
+                viewModel.saveUserData()
+            }
+
+            override fun onFailure(httpStatus: Int, message: String) {
+                val errorCode=NaverIdLoginSDK.getLastErrorCode().code
+                val errorDescription=NaverIdLoginSDK.getLastErrorDescription()
+                Log.d("Naver_Login","errorCode:${errorCode}\nerrorDescription: ${errorDescription}")
+            }
+
+            override fun onError(errorCode: Int, message: String) {
+                onFailure(errorCode,message)
+            }
+        }
+
+        val oauthLoginCallback=object:OAuthLoginCallback{
+            override fun onSuccess() {
+                // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
+                naverToken=NaverIdLoginSDK.getAccessToken()
+                // 로그인 유저 정보 가져오기
+                NidOAuthLogin().callProfileApi(profileCallback)
+                val action = LoginFragmentDirections.actionFragmentLoginToFragmentHome()
+                findNavController().navigate(action)
+
+            }
+            override fun onFailure(httpStatus: Int, message: String) {
+                val errorCode=NaverIdLoginSDK.getLastErrorCode().code
+                val errorDescription=NaverIdLoginSDK.getLastErrorDescription()
+                Log.d("Naver_Login","errorCode:${errorCode}\nerrorDescription: ${errorDescription}")
+            }
+
+            override fun onError(errorCode: Int, message: String) {
+                onFailure(errorCode,message)
+            }
+        }
+        NaverIdLoginSDK.authenticate(requireContext(),oauthLoginCallback)
+    }
 
 
     override fun onDestroyView() {
