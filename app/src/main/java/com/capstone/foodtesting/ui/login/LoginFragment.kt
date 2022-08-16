@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.capstone.foodtesting.R
 
 import com.capstone.foodtesting.databinding.FragmentLoginBinding
 
@@ -44,8 +45,12 @@ class LoginFragment : Fragment() {
         }
 
         binding.btnLogin.setOnClickListener { //테스트용
+            //아래는 홈 화면 들어가는 코드
             val action = LoginFragmentDirections.actionFragmentLoginToFragmentHome()
             findNavController().navigate(action)
+
+            //아래는 글쓰기 화면 들어가는 코드
+            //findNavController().navigate(R.id.fragment_write)
         }
 
     }

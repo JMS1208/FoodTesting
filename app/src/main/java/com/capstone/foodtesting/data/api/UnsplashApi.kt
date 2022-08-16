@@ -3,7 +3,7 @@ package com.capstone.foodtesting.data.api
 
 
 import com.capstone.foodtesting.BuildConfig
-import com.capstone.foodtesting.data.model.UnsplashResponse
+import com.capstone.foodtesting.data.model.unsplash.UnsplashResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -19,5 +19,6 @@ interface UnsplashApi {
         @Query("per_page") per_page: Int,
         @Query("order_by") order_by: String
     ): Response<UnsplashResponse>
+
 
 }

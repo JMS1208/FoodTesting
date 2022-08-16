@@ -7,6 +7,22 @@
     app:layoutDescription="@xml/fragment_dash_board_scene"
     tools:context=".ui.dashboard.DashBoardFragment">
 
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_back_24"
+        app:tint="@color/dark_grey"
+        android:layout_margin="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/ripple_background"
+        />
+
+
     <ImageView
         android:id="@+id/iv_logo"
         android:layout_width="100dp"
@@ -90,56 +106,40 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_recommend"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/bg_btn_rounded_red"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/ripple_bg_red_outlined"
         android:elevation="5dp"
         android:gravity="center"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:text="음식 취향 분석"
-        android:textColor="@color/white"
-        android:textStyle="bold"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="내 입맛 분석"
+        android:textSize="20sp"
+        android:clickable="true"
+        android:focusable="true"
+        android:drawableStart="@drawable/ic_choose_18"
+        android:drawablePadding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_layout"
+    <EditText
+        android:id="@+id/et_search"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        app:boxBackgroundMode="outline"
-        app:endIconCheckable="true"
-        app:endIconDrawable="@android:drawable/ic_menu_close_clear_cancel"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
-        app:boxStrokeErrorColor="@color/grey"
-        app:errorIconDrawable="@null"
-        app:errorTextColor="@color/grey"
-        app:hintTextColor="@color/grey"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintEnd_toStartOf="@id/tv_sorting"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_search_18"
-            android:drawablePadding="10dp"
-            android:inputType="text"
-            android:imeOptions="actionSearch"
-            android:imeActionLabel="검색"
-            android:hint="검색" />
-
-
-    </com.google.android.material.textfield.TextInputLayout>
-
+        app:layout_constraintEnd_toStartOf="@id/tv_sorting"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        android:layout_margin="10dp"
+        android:hint="검색"
+        android:background="@drawable/et_bg_outlined"
+        android:padding="10dp"
+        android:drawableStart="@drawable/ic_search_18"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/dark_grey"
+        android:drawableEnd="@drawable/ic_close_18"
+        android:textCursorDrawable="@drawable/et_cursor_drawable"
+        />
     <TextView
         android:id="@+id/tv_sorting"
         android:layout_width="wrap_content"
@@ -149,10 +149,10 @@
         android:drawableStart="@drawable/ic_sorting_18"
         android:text="거리순"
         android:layout_marginEnd="10dp"
-        app:layout_constraintTop_toTopOf="@id/text_input_layout"
-        app:layout_constraintBottom_toBottomOf="@id/text_input_layout"
+        app:layout_constraintTop_toTopOf="@id/et_search"
+        app:layout_constraintBottom_toBottomOf="@id/et_search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/text_input_layout"
+        app:layout_constraintStart_toEndOf="@id/et_search"
         />
 
     <androidx.viewpager2.widget.ViewPager2
@@ -160,7 +160,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_input_layout"
+        app:layout_constraintTop_toBottomOf="@id/et_search"
 
         />
 

@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.capstone.foodtesting.R
-import com.capstone.foodtesting.data.model.Result
+import com.capstone.foodtesting.data.model.unsplash.Result
 import com.capstone.foodtesting.databinding.ItemNewRestaurantBinding
 
 class NewRestaurantPagingAdapter : PagingDataAdapter<Result, NewRestaurantPagingAdapter.ViewHolder>(

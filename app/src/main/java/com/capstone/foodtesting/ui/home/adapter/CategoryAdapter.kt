@@ -3,10 +3,12 @@ package com.capstone.foodtesting.ui.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.databinding.ItemHomeCategoryBinding
+import com.capstone.foodtesting.ui.home.HomeFragmentDirections
 
 //카테고리 목록(이미지포함) 이것도 될 수 있으면 백에서 받아오게 하는게 좋음
 //카테고리 클래스 따로 만들어서
@@ -47,6 +49,11 @@ class CategoryAdapter(val items: List<String>): RecyclerView.Adapter<CategoryAda
                 .into(itemBinding.ivCategory)
 
             itemBinding.tvCategory.text = category
+
+            itemBinding.ivCategory.setOnClickListener{
+                val action = HomeFragmentDirections.actionFragmentHomeToFragmentDashBoard(category)
+                itemView.findNavController().navigate(action)
+            }
         }
     }
 

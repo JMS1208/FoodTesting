@@ -1,14 +1,23 @@
 package com.capstone.foodtesting.ui.home
 
+import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
+import android.text.Layout
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -27,6 +36,9 @@ import kotlinx.coroutines.*
 import com.capstone.foodtesting.ui.home.adapter.CategoryAdapter
 import com.capstone.foodtesting.ui.home.adapter.NewRestaurantPagingAdapter
 import com.capstone.foodtesting.ui.home.adapter.ViewPagerAdapter
+import com.capstone.foodtesting.util.CommonFunc.showTooltip
+import it.sephiroth.android.library.xtooltip.ClosePolicy
+import it.sephiroth.android.library.xtooltip.Tooltip
 import kotlinx.coroutines.flow.collectLatest
 
 
@@ -46,6 +58,7 @@ class HomeFragment : Fragment() {
     private lateinit var imageList: MutableList<String>
 
     private lateinit var newFoodSearchAdapter: NewRestaurantPagingAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,7 +93,6 @@ class HomeFragment : Fragment() {
         }
 
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -169,6 +181,36 @@ class HomeFragment : Fragment() {
 
         viewModel.searchFoodsPaging("Korean Food")
 
+        binding.tvShowAll.setOnClickListener {
+            val action = HomeFragmentDirections.actionFragmentHomeToFragmentDashBoard()
+            findNavController().navigate(action)
+        }
+
+        binding.btnQrScanner.setOnClickListener {
+            val action = HomeFragmentDirections.actionFragmentHomeToCodeScanFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.btnInfo.setOnClickListener {
+            val action = HomeFragmentDirections.actionFragmentHomeToFragmentInfo()
+            findNavController().navigate(action)
+        }
+
+        binding.ivTooltipCategory.setOnClickListener {
+            showTooltip(requireContext(), it, "카테고리 설명 추가")
+        }
+
+        binding.ivTooltipExisting.setOnClickListener {
+            showTooltip(requireContext(), it,"신메뉴 설명 추가")
+        }
+
+        binding.ivTooltipHash1.setOnClickListener {
+            showTooltip(requireContext(), it,"해시태그1 설명 추가")
+        }
+
+        binding.ivTooltipHash2.setOnClickListener {
+            showTooltip(requireContext(), it, "해시태그2 설명 추가")
+        }
 
     }
 

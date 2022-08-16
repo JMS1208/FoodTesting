@@ -3,7 +3,9 @@ package com.capstone.foodtesting.data.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.capstone.foodtesting.data.api.UnsplashApi
-import com.capstone.foodtesting.data.model.Result
+import com.capstone.foodtesting.data.model.unsplash.Result
+import com.capstone.foodtesting.util.Constants.PAGING_SIZE
+import com.capstone.foodtesting.util.Constants.STARTING_PAGE_INDEX
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -11,7 +13,7 @@ class NewRestaurantPagingSource (
     private val api: UnsplashApi,
     private val query: String,
     private val order_by: String
-        ): PagingSource<Int, Result >() {
+        ): PagingSource<Int, Result>() {
     override fun getRefreshKey(state: PagingState<Int, Result>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1) // 그주위의 페이지를 읽어오는 역할
@@ -46,8 +48,4 @@ class NewRestaurantPagingSource (
         }
     }
 
-    companion object {
-        const val  STARTING_PAGE_INDEX = 1
-        const val PAGING_SIZE = 15
-    }
 }

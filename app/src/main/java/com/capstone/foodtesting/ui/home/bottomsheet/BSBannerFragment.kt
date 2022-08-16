@@ -1,11 +1,14 @@
 package com.capstone.foodtesting.ui.home.bottomsheet
 
 import android.app.Dialog
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -15,6 +18,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.databinding.BottomSheetBannerBinding
 import com.capstone.foodtesting.databinding.ItemBannerAllBinding
+import com.capstone.foodtesting.ui.home.adapter.BannerAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -29,42 +33,7 @@ class BSBannerFragment : BottomSheetDialogFragment() {
 
     private lateinit var bannerAdapter: BannerAdapter
 
-    private inner class BannerAdapter(val items: List<String>): RecyclerView.Adapter<BannerAdapter.ViewHolder>() {
-        inner class ViewHolder(val itemBinding: ItemBannerAllBinding): RecyclerView.ViewHolder(itemBinding.root) {
-
-            fun bind(url: String?) {
-                val circularProgressDrawable = CircularProgressDrawable(requireContext())
-                circularProgressDrawable.apply {
-                    strokeWidth = 10f
-                    centerRadius = 40f
-                    setTint(resources.getColor(R.color.bright_grey))
-                    start()
-                }
-
-                url?.let {
-                    Glide.with(requireContext())
-                        .load(it)
-                        .placeholder(circularProgressDrawable)
-                        .transform(CenterCrop())
-                        .into(itemBinding.ivBanner)
-                }
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val itemBinding = ItemBannerAllBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            return ViewHolder(itemBinding)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = items[position]
-            holder.bind(item)
-        }
-
-        override fun getItemCount(): Int = items.size
-
-
-    }
+    private var peekHeight: Int? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
@@ -78,9 +47,22 @@ class BSBannerFragment : BottomSheetDialogFragment() {
                 val behaviour = BottomSheetBehavior.from(it)
                 setupFullHeight(it)
                 behaviour.state = BottomSheetBehavior.STATE_EXPANDED
-                behaviour.peekHeight = BottomSheetBehavior.PEEK_HEIGHT_AUTO
+                behaviour.peekHeight = 0
+                peekHeight = behaviour.peekHeight
                 behaviour.isHideable = true
                 behaviour.isDraggable = true
+                behaviour.addBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback(){
+                    override fun onStateChanged(bottomSheet: View, newState: Int) {
+                        if(newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                            dismiss()
+                        }
+                    }
+
+                    override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                    }
+
+                })
+
             }
         }
         return dialog
@@ -91,6 +73,8 @@ class BSBannerFragment : BottomSheetDialogFragment() {
         layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
         bottomSheet.layoutParams = layoutParams
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -126,6 +110,10 @@ class BSBannerFragment : BottomSheetDialogFragment() {
 
         binding.tvClose.setOnClickListener {
             this.dismiss()
+        }
+
+        binding.tvShowAll.setOnClickListener {
+            Toast.makeText(requireContext(), "$peekHeight", Toast.LENGTH_SHORT).show()
         }
     }
 }

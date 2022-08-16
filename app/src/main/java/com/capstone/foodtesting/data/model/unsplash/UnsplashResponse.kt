@@ -1,4 +1,4 @@
-package com.capstone.foodtesting.data.model
+package com.capstone.foodtesting.data.model.unsplash
 
 
 import com.squareup.moshi.Json

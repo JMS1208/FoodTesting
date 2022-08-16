@@ -45,7 +45,6 @@ class CardStackAdapter(
                 start()
             }
 
-            Log.d("TAG", "url: $url")
             url?.let {
 
                 Glide.with(itemView.context)

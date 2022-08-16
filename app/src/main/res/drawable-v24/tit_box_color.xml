@@ -5,6 +5,14 @@
         />
     <item
         android:state_focused="false"
-        android:color="@color/main_color_2"/>
+        android:color="@color/grey"/>
 
+    <item
+        android:state_selected="false"
+        android:color="@color/grey"
+        />
+    <item
+        android:state_selected="true"
+        android:color="@color/main_color_2"
+        />
 </selector>
