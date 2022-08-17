@@ -58,7 +58,8 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         auth=FirebaseAuth.getInstance()
-
+        
+        // TODO("로그인 상태 유지 버튼 활성화 & 로그인 값 !=null : 바로 홈 화면 넘어가기")
         // Configure Google SignIn
         val gso=GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("106449633055-13ql64jaephpeemdveuo293q6b98do4n.apps.googleusercontent.com")
@@ -106,11 +107,11 @@ class LoginFragment : Fragment() {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
-                Log.d("Google_SignIn", "firebaseAuthWithGoogle:" + account.id)
+                // Log.d("Google_SignIn", "firebaseAuthWithGoogle:" + account.id)
                 firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                Log.w("Google_SignIn", "Google sign in failed", e)
+                // Log.w("Google_SignIn", "Google sign in failed", e)
                 // ...
             }
         }
@@ -120,11 +121,11 @@ class LoginFragment : Fragment() {
         auth!!.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    Log.d("Google_SignIn", "signInWithCredential:success")
+                    //Log.d("Google_SignIn", "signInWithCredential:success")
                     val user = auth.currentUser
 
                     // get User Information(Log)
-                    Log.d("GoogleUser","${user!!.displayName}, ${user!!.email}, ${user!!.photoUrl.toString()}")
+                    //Log.d("GoogleUser","${user!!.displayName}, ${user!!.email}, ${user!!.photoUrl.toString()}")
 
                     // saveData (ViewModel)
                     // Google: name, email, photoURL만 지원
@@ -133,8 +134,10 @@ class LoginFragment : Fragment() {
                     viewModel.photoURL=MutableLiveData(user!!.photoUrl.toString())
                     viewModel.saveUserData()
                     updateUI(user)
+                    // TODO("Send User Info to BE")
+                    
                 } else {
-                    Log.w("Google_SignIn", "signInWithCredential:failure", task.exception)
+                    //Log.w("Google_SignIn", "signInWithCredential:failure", task.exception)
                     updateUI(null)
                 }
             }
@@ -193,6 +196,7 @@ class LoginFragment : Fragment() {
                 viewModel.birthDay=MutableLiveData(user?.kakaoAccount?.birthday)
                 viewModel.photoURL=MutableLiveData(user?.kakaoAccount?.profile?.profileImageUrl)
                 viewModel.saveUserData()
+                // TODO("Send User Info to BE")
             }
             val action = LoginFragmentDirections.actionFragmentLoginToFragmentHome()
             findNavController().navigate(action)
@@ -209,6 +213,7 @@ class LoginFragment : Fragment() {
 
         binding.btnLogin.setOnClickListener { //테스트용
             val action = LoginFragmentDirections.actionFragmentLoginToFragmentHome()
+            // TODO("email,pw로 BE에서 정보 맞는지 확인")
             findNavController().navigate(action)
         }
 
@@ -230,6 +235,7 @@ class LoginFragment : Fragment() {
                 viewModel.birthDay=MutableLiveData(response.profile?.birthday)
                 viewModel.photoURL=MutableLiveData(response.profile?.profileImage)
                 viewModel.saveUserData()
+                // TODO("Send User Info to BE")
             }
 
             override fun onFailure(httpStatus: Int, message: String) {

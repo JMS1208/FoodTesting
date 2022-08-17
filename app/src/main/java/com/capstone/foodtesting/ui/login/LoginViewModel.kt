@@ -49,8 +49,8 @@ class LoginViewModel @Inject constructor(
             )
         }
         // Data saving Test
-        Log.d("ViewModel","${name.value!!}")
-        Log.d("ViewModel","Save User Data")
+        // Log.d("ViewModel","${name.value!!}")
+        // Log.d("ViewModel","Save User Data")
     }
     fun retrieveUserData(){
         viewModelScope.launch(Dispatchers.IO) {
