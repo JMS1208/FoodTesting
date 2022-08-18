@@ -28,7 +28,7 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintStart_toEndOf="@id/btn_back"
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp" />
         <Constraint
