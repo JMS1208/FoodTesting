@@ -6,18 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.capstone.foodtesting.R
 import com.capstone.foodtesting.databinding.BottomSheetListSortingBinding
 import com.capstone.foodtesting.databinding.FragmentDashBoardBinding
 import com.capstone.foodtesting.ui.bottomsheet.BSRecommendFragment
-import com.capstone.foodtesting.ui.bottomsheet.BSSetupAddrFragment
+import com.capstone.foodtesting.ui.bottomsheet.setaddress.BSSetupAddrFragment
 import com.capstone.foodtesting.ui.dashboard.category.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DashBoardFragment : Fragment() {
@@ -28,8 +34,7 @@ class DashBoardFragment : Fragment() {
     private val viewModel by viewModels<DashBoardViewModel>()
 
 
-
-    private lateinit var bottomNavigationView: BottomNavigationView
+    private val args by navArgs<DashBoardFragmentArgs>()
 
     companion object {
 
@@ -78,7 +83,6 @@ class DashBoardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bottomNavigationView = activity?.findViewById(R.id.bottomNavigationView)!!
 
 
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {
@@ -125,7 +129,47 @@ class DashBoardFragment : Fragment() {
             val bottomSheet = BSRecommendFragment()
             bottomSheet.show(childFragmentManager, bottomSheet.tag)
         }
+
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.latestAddressInfo.collectLatest { addressInfo ->
+
+                    binding.tvCurrentAddress.text = addressInfo?.address?.addressFullName ?: "주소 설정하러 가기"
+
+                }
+            }
+        }
+
+
+
+        setupCategory(args.category)
     }
+
+    private fun setupCategory(category: String?){
+
+        if(category == null) {
+            binding.tabLayout.selectTab(binding.tabLayout.getTabAt(0))
+        } else {
+            val index = when(category){
+                "한식"-> binding.tabLayout.getTabAt(1)
+                "중식"-> binding.tabLayout.getTabAt(2)
+                "일식"-> binding.tabLayout.getTabAt(3)
+                "양식"-> binding.tabLayout.getTabAt(4)
+                "패스트푸드"->binding.tabLayout.getTabAt(5)
+                "분식"->binding.tabLayout.getTabAt(6)
+                "디저트"->binding.tabLayout.getTabAt(7)
+                "기타"-> binding.tabLayout.getTabAt(8)
+                else->binding.tabLayout.getTabAt(0)
+            }
+            binding.tabLayout.selectTab(index)
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

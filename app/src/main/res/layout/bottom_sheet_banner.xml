@@ -9,6 +9,7 @@
 
 
     <TextView
+        android:id="@+id/tv_show_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="모두 보기"
@@ -18,6 +19,7 @@
         app:layout_constraintTop_toTopOf="@id/tv_close"
         app:layout_constraintBottom_toBottomOf="@id/tv_close"
         android:layout_margin="10dp"
+        android:textSize="20sp"
         android:padding="10dp"
         />
     <TextView
@@ -28,6 +30,8 @@
         android:drawablePadding="10dp"
         android:padding="5dp"
         android:text="닫기"
+        android:textSize="20sp"
+        android:gravity="center"
         app:drawableEndCompat="@drawable/ic_close_18"
         app:drawableTint="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,6 +43,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:clipToPadding="true"
+        android:layoutAnimation="@anim/rv_animation_sticking_on_top"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_close" />
 </androidx.constraintlayout.widget.ConstraintLayout>

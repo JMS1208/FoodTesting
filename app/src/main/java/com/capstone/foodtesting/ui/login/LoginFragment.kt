@@ -212,9 +212,13 @@ class LoginFragment : Fragment() {
         }
 
         binding.btnLogin.setOnClickListener { //테스트용
+            //아래는 홈 화면 들어가는 코드
             val action = LoginFragmentDirections.actionFragmentLoginToFragmentHome()
             // TODO("email,pw로 BE에서 정보 맞는지 확인")
             findNavController().navigate(action)
+
+            //아래는 글쓰기 화면 들어가는 코드
+            //findNavController().navigate(R.id.fragment_write)
         }
 
     }

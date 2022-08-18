@@ -25,17 +25,19 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="30dp"
         app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/grey"
         app:endIconCheckable="true"
         app:endIconDrawable="@drawable/ic_close_18"
         app:endIconMode="clear_text"
         app:errorEnabled="true"
+        app:hintTextColor="@color/grey"
         app:layout_constraintTop_toBottomOf="@id/iv_logo">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_email"
-
+            android:textCursorDrawable="@drawable/et_cursor_drawable"
             android:drawablePadding="15dp"
             android:drawableTint="@color/dark_grey"
             android:hint="E-mail" />
@@ -51,9 +53,10 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
         app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/grey"
         app:layout_constraintTop_toBottomOf="@id/til_email"
         app:passwordToggleEnabled="true"
-
+        app:hintTextColor="@color/grey"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -63,6 +66,7 @@
             android:drawablePadding="15dp"
             android:drawableTint="@color/dark_grey"
             android:hint="PassWord"
+            android:textCursorDrawable="@drawable/et_cursor_drawable"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 

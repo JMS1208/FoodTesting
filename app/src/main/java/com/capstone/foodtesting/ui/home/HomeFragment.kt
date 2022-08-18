@@ -1,12 +1,24 @@
 package com.capstone.foodtesting.ui.home
 
+import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
+import android.text.Layout
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import androidx.viewpager2.widget.ViewPager2
@@ -15,10 +27,20 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.databinding.FragmentHomeBinding
 import com.capstone.foodtesting.databinding.ItemBannerBinding
+import com.capstone.foodtesting.databinding.ItemHomeCategoryBinding
 import com.capstone.foodtesting.ui.home.bottomsheet.BSBannerFragment
 import com.capstone.foodtesting.util.Constants.HOME_BANNER_DURATION
+import com.capstone.foodtesting.util.Constants.categoryList
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import com.capstone.foodtesting.ui.home.adapter.CategoryAdapter
+import com.capstone.foodtesting.ui.home.adapter.NewRestaurantPagingAdapter
+import com.capstone.foodtesting.ui.home.adapter.ViewPagerAdapter
+import com.capstone.foodtesting.util.CommonFunc.showTooltip
+import it.sephiroth.android.library.xtooltip.ClosePolicy
+import it.sephiroth.android.library.xtooltip.Tooltip
+import kotlinx.coroutines.flow.collectLatest
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -32,7 +54,11 @@ class HomeFragment : Fragment() {
 
     private lateinit var viewPagerAdapter: ViewPagerAdapter
 
+    private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var imageList: MutableList<String>
+
+    private lateinit var newFoodSearchAdapter: NewRestaurantPagingAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,52 +92,6 @@ class HomeFragment : Fragment() {
 
         }
 
-    }
-
-
-    private inner class ViewPagerAdapter(
-        private val items: MutableList<String>,
-        private val itemSize: Int
-    ) :
-        RecyclerView.Adapter<ViewPagerAdapter.ViewHolder>() {
-        inner class ViewHolder(val itemBinding: ItemBannerBinding) :
-            RecyclerView.ViewHolder(itemBinding.root) {
-
-            fun bind(url: String?) {
-
-                val circularProgressDrawable = CircularProgressDrawable(requireContext())
-                circularProgressDrawable.apply {
-                    strokeWidth = 10f
-                    centerRadius = 40f
-                    setTint(resources.getColor(R.color.bright_grey))
-                    start()
-                }
-
-                url?.let {
-                    Glide.with(requireContext())
-                        .load(it)
-                        .placeholder(circularProgressDrawable)
-                        .transform(CenterCrop())
-                        .into(itemBinding.ivBannerHome)
-                }
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val itemBinding =
-                ItemBannerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            return ViewHolder(itemBinding)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-            val newPosition = position % itemSize
-            val item = items[newPosition]
-            holder.bind(item)
-            // TODO {나중에 시간되면, 요기요처럼 바꾸기}
-        }
-
-        override fun getItemCount(): Int = Int.MAX_VALUE
     }
 
 
@@ -168,6 +148,68 @@ class HomeFragment : Fragment() {
             bottomSheet.show(childFragmentManager, bottomSheet.tag)
 
 
+        }
+
+
+
+        categoryAdapter = CategoryAdapter(categoryList)
+
+        binding.rvCategory.apply {
+            adapter = categoryAdapter
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        }
+
+
+        newFoodSearchAdapter = NewRestaurantPagingAdapter()
+
+        binding.rvNewRestaurant.apply {
+            setHasFixedSize(true)
+            adapter = newFoodSearchAdapter
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+
+
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.searchPagingResult.collectLatest {
+                    newFoodSearchAdapter.submitData(it)
+                }
+            }
+        }
+
+
+        viewModel.searchFoodsPaging("Korean Food")
+
+        binding.tvShowAll.setOnClickListener {
+            val action = HomeFragmentDirections.actionFragmentHomeToFragmentDashBoard()
+            findNavController().navigate(action)
+        }
+
+        binding.btnQrScanner.setOnClickListener {
+            val action = HomeFragmentDirections.actionFragmentHomeToCodeScanFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.btnInfo.setOnClickListener {
+            val action = HomeFragmentDirections.actionFragmentHomeToFragmentInfo()
+            findNavController().navigate(action)
+        }
+
+        binding.ivTooltipCategory.setOnClickListener {
+            showTooltip(requireContext(), it, "카테고리 설명 추가")
+        }
+
+        binding.ivTooltipExisting.setOnClickListener {
+            showTooltip(requireContext(), it,"신메뉴 설명 추가")
+        }
+
+        binding.ivTooltipHash1.setOnClickListener {
+            showTooltip(requireContext(), it,"해시태그1 설명 추가")
+        }
+
+        binding.ivTooltipHash2.setOnClickListener {
+            showTooltip(requireContext(), it, "해시태그2 설명 추가")
         }
 
     }

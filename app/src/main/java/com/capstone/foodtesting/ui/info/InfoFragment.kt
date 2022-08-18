@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.databinding.FragmentInfoBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +26,16 @@ class InfoFragment : Fragment() {
     ): View {
         _binding = FragmentInfoBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.toolbar.apply {
+            setNavigationIcon(R.drawable.ic_back_24)
+            setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
     }
 
     override fun onDestroyView() {
