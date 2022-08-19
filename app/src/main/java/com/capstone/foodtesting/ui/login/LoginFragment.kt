@@ -18,6 +18,7 @@ import com.capstone.foodtesting.R
 
 import com.capstone.foodtesting.databinding.FragmentLoginBinding
 import com.capstone.foodtesting.ui.register.RegisterFinishedFragmentDirections
+import com.capstone.foodtesting.util.Constants.RC_SIGN_IN
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -58,35 +59,7 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         auth=FirebaseAuth.getInstance()
-        
-        // TODO("로그인 상태 유지 버튼 활성화 & 로그인 값 !=null : 바로 홈 화면 넘어가기")
-        // Configure Google SignIn
-        val gso=GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("106449633055-13ql64jaephpeemdveuo293q6b98do4n.apps.googleusercontent.com")
-            .requestEmail()
-            .build()
 
-        googleSignInClient= GoogleSignIn.getClient(requireContext(),gso)
-        binding.btnLoginGoogle.setOnClickListener {
-            signIn()
-        }
-        // Kakao Login
-        KakaoSdk.init(requireContext(),"6ac939611554342426f6ee480a13f8ec")
-        binding.btnLoginKakao.setOnClickListener {
-            if (LoginClient.instance.isKakaoTalkLoginAvailable(requireContext())){
-                LoginClient.instance.loginWithKakaoTalk(requireContext(), callback = callback)
-            }else{
-                LoginClient.instance.loginWithKakaoAccount(requireContext(),callback=callback)
-            }
-        }
-        // Naver Login Module Initialize
-        val naverClientId=getString(R.string.social_login_info_naver_client_id)
-        val naverClientSecret=getString(R.string.social_login_info_naver_client_secret)
-        val naverClientName=getString(R.string.social_login_info_naver_client_name)
-        NaverIdLoginSDK.initialize(requireContext(),naverClientId,naverClientSecret,naverClientName)
-        binding.btnLoginNaver.setOnClickListener {
-            startNaverLogin()
-        }
         return binding.root
     }
 
@@ -94,10 +67,7 @@ class LoginFragment : Fragment() {
         val signInIntent=googleSignInClient.signInIntent
         startActivityForResult(signInIntent,RC_SIGN_IN)
     }
-    companion object{
-        const val RC_SIGN_IN=1001
-        const val EXTRA_NAME="EXTRA NAME"
-    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -149,7 +119,7 @@ class LoginFragment : Fragment() {
             findNavController().navigate(action)
         }
     }
-    val callback:(OAuthToken?,Throwable?)->Unit={token,error->
+    private val callback:(OAuthToken?,Throwable?)->Unit={token,error->
         if (error!=null){
             when{
                 error.toString()== AuthErrorCause.AccessDenied.toString()->{
@@ -177,7 +147,7 @@ class LoginFragment : Fragment() {
                     Toast.makeText(context,"앱이 요청 권한이 없음",Toast.LENGTH_SHORT).show()
                 }
                 else->{
-                    Toast.makeText(context,"기타 에러",Toast.LENGTH_SHORT).show()
+                    // Toast.makeText(context,"기타 에러",Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -205,7 +175,34 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // TODO("로그인 상태 유지 버튼 활성화 & 로그인 값 !=null : 바로 홈 화면 넘어가기")
+        // Configure Google SignIn
+        val gso=GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("106449633055-13ql64jaephpeemdveuo293q6b98do4n.apps.googleusercontent.com")
+            .requestEmail()
+            .build()
 
+        googleSignInClient= GoogleSignIn.getClient(requireContext(),gso)
+        binding.btnLoginGoogle.setOnClickListener {
+            signIn()
+        }
+        // Kakao Login
+        KakaoSdk.init(requireContext(),"6ac939611554342426f6ee480a13f8ec")
+        binding.btnLoginKakao.setOnClickListener {
+            if (LoginClient.instance.isKakaoTalkLoginAvailable(requireContext())){
+                LoginClient.instance.loginWithKakaoTalk(requireContext(), callback = callback)
+            }else{
+                LoginClient.instance.loginWithKakaoAccount(requireContext(),callback=callback)
+            }
+        }
+        // Naver Login Module Initialize
+        val naverClientId=getString(R.string.social_login_info_naver_client_id)
+        val naverClientSecret=getString(R.string.social_login_info_naver_client_secret)
+        val naverClientName=getString(R.string.social_login_info_naver_client_name)
+        NaverIdLoginSDK.initialize(requireContext(),naverClientId,naverClientSecret,naverClientName)
+        binding.btnLoginNaver.setOnClickListener {
+            startNaverLogin()
+        }
         binding.tvRegister.setOnClickListener {
             val action = LoginFragmentDirections.actionFragmentLoginToRegisterFragment()
             findNavController().navigate(action)

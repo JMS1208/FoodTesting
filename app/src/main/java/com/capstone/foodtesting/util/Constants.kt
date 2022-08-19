@@ -34,4 +34,7 @@ object Constants {
 
     //주소검색 딜레이 타임
     const val SEARCH_ADDRESS_DELAY_TIME: Long = 100L
+
+    // google Login
+    const val RC_SIGN_IN=1001
 }
