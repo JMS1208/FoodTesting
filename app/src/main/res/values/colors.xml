@@ -16,4 +16,5 @@
     <color name="middle_grey">#777777</color>
     <color name="dark_grey">#5A5A5A</color>
     <color name="red">#DF2E2E</color>
+    <color name="bg_grey">#F8F8F8</color>
 </resources>

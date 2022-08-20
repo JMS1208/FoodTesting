@@ -7,10 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.capstone.foodtesting.R
+import com.capstone.foodtesting.data.model.member.Member
 import com.capstone.foodtesting.databinding.FragmentInfoBinding
+import com.capstone.foodtesting.ui.bottomsheet.setaddress.BSSetupAddrFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class InfoFragment : Fragment() {
@@ -30,10 +37,39 @@ class InfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.apply {
-            setNavigationIcon(R.drawable.ic_back_24)
-            setNavigationOnClickListener {
-                findNavController().popBackStack()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.latestAddressInfo.collectLatest { addressInfo->
+                    binding.tvAddress.text = addressInfo?.address?.addressFullName ?: "주소 설정하러 가기"
+                }
+
+            }
+        }
+
+        binding.btnBack.setOnClickListener{
+            findNavController().popBackStack()
+        }
+
+        binding.tvAddress.setOnClickListener {
+            val bottomSheet = BSSetupAddrFragment()
+            bottomSheet.show(childFragmentManager, bottomSheet.tag)
+        }
+
+        binding.tvManagePosting.setOnClickListener {
+
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.getMemberInfo.collectLatest { memberInfo->
+                    memberInfo?.let {
+                        val nickAndType = "${it.nickName}(${ if(it.type == Member.TYPE_TESTER) "테스터" else "사장님" })"
+                        binding.tvNickName.text = nickAndType
+                        binding.tvEmail.text = it.email
+                    }
+
+                }
             }
         }
     }

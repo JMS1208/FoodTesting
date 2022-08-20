@@ -21,6 +21,7 @@ import com.capstone.foodtesting.data.model.kakao.local.AddressInfo
 import com.capstone.foodtesting.data.model.kakao.local.KakaoLocalResponse
 import com.capstone.foodtesting.data.model.kakao.search.address.AddressSearchResponse
 import com.capstone.foodtesting.data.model.kakao.search.address.Document
+import com.capstone.foodtesting.data.model.member.Member
 import com.capstone.foodtesting.data.model.unsplash.Result
 import com.capstone.foodtesting.data.model.unsplash.UnsplashResponse
 import com.capstone.foodtesting.data.paging.AddressSearchPagingSource
@@ -37,15 +38,14 @@ import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
-const val DATASTORE_NAME="USER_INFO"
-val Context.datastore:DataStore<Preferences> by preferencesDataStore(name= DATASTORE_NAME)
+//const val DATASTORE_NAME="USER_INFO"
+//val Context.datastore:DataStore<Preferences> by preferencesDataStore(name= DATASTORE_NAME)
 @Singleton
 class MainRepositoryImpl @Inject constructor(
     private val dataStore: DataStore<Preferences>,
     @AppModule.unsplashApi private val unsplashApi: UnsplashApi,
     @AppModule.kakaoApi private val kakaoLocalApi: KakaoLocalApi,
     @AppModule.kakaoApi private val kakaoAddressSearchApi: KakaoAddressSearchApi,
-    @ApplicationContext private val context : Context,
     private val db: FoodTestingDatabase
 ): MainRepository{
 
@@ -207,7 +207,7 @@ class MainRepositoryImpl @Inject constructor(
     }
 
 
-    //Room
+    //Room - AddressInfo
 
     override fun getAllAddressInfo(): Flow<List<AddressInfo>> {
         return db.locationDao().getAllAddressInfo()
@@ -227,6 +227,19 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun deleteAllAddressInfo() {
         db.locationDao().deleteAllAddressInfo()
+    }
+
+    //Room - Member
+    override fun getMember(): Flow<Member?> {
+        return db.memberDao().getMember()
+    }
+
+    override suspend fun insertMember(member: Member) {
+        db.memberDao().insertMember(member)
+    }
+
+    override suspend fun deleteAllMember() {
+        db.memberDao().deleteAllMember()
     }
 
 

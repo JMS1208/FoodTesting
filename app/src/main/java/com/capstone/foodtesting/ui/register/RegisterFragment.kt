@@ -13,12 +13,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.capstone.foodtesting.R
+import com.capstone.foodtesting.data.model.member.Member
 import dagger.hilt.android.AndroidEntryPoint
 import com.capstone.foodtesting.databinding.FragmentRegisterBinding
 import org.intellij.lang.annotations.JdkConstants
 import java.time.Month
 import java.time.MonthDay
 import java.time.Year
+import java.util.*
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
@@ -98,6 +100,22 @@ class RegisterFragment : Fragment() {
         //성별 체크박스
 
 
+
+        binding.ivLogo.setOnClickListener {
+            val member = Member(
+                age = 28,
+                birthDate = Date(System.currentTimeMillis()),
+                email = "",
+                gender = Member.MALE,
+                name = "John",
+                nickName = "John_NickName",
+                phoneNumber = "010-1234-5678",
+                profile ="url",
+                social_member = Member.FOOD_TESTING_MEMBER
+            )
+
+            viewModel.insertMember(member)
+        }
     }
 
     override fun onDestroyView() {

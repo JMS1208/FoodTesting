@@ -2,10 +2,13 @@ package com.capstone.foodtesting.data.repository
 
 import com.capstone.foodtesting.data.datastore.UserInfo
 import androidx.paging.PagingData
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import com.capstone.foodtesting.data.model.kakao.local.AddressInfo
 import com.capstone.foodtesting.data.model.kakao.local.KakaoLocalResponse
 import com.capstone.foodtesting.data.model.kakao.search.address.AddressSearchResponse
 import com.capstone.foodtesting.data.model.kakao.search.address.Document
+import com.capstone.foodtesting.data.model.member.Member
 import com.capstone.foodtesting.data.model.unsplash.Result
 import com.capstone.foodtesting.data.model.unsplash.UnsplashResponse
 import kotlinx.coroutines.flow.Flow
@@ -55,7 +58,7 @@ interface MainRepository {
     suspend fun saveCurrentAddressInfoUUID(uuid: String)
 
 
-    //Room
+    //Room - AddressInfo
     fun getAllAddressInfo(): Flow<List<AddressInfo>>
 
     fun getLatestAddressInfo(): Flow<AddressInfo>
@@ -65,6 +68,15 @@ interface MainRepository {
     suspend fun deleteAddressInfo(addressInfo: AddressInfo)
 
     suspend fun deleteAllAddressInfo()
+
+    //Room - Member
+    fun getMember(): Flow<Member?>
+
+    suspend fun insertMember(member: Member)
+
+    suspend fun deleteAllMember()
+
+
 
 
 }
