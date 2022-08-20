@@ -39,7 +39,11 @@
         android:id="@+id/fragment_info"
         android:name="com.capstone.foodtesting.ui.info.InfoFragment"
         android:label="fragment_info"
-        tools:layout="@layout/fragment_info" />
+        tools:layout="@layout/fragment_info" >
+        <action
+            android:id="@+id/action_fragment_info_to_codeGenerateFragment"
+            app:destination="@id/codeGenerateFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_login"
         android:name="com.capstone.foodtesting.ui.login.LoginFragment"
@@ -82,4 +86,13 @@
         android:name="com.capstone.foodtesting.ui.write.WriteFragment"
         android:label="fragment_write"
         tools:layout="@layout/fragment_write" />
+    <fragment
+        android:id="@+id/codeGenerateFragment"
+        android:name="com.capstone.foodtesting.ui.qr.CodeGenerateFragment"
+        android:label="fragment_code_generate"
+        tools:layout="@layout/fragment_code_generate" >
+        <argument
+            android:name="uuid"
+            app:argType="java.util.UUID" />
+    </fragment>
 </navigation>
