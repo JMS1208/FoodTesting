@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_fragment_info_to_codeGenerateFragment"
             app:destination="@id/codeGenerateFragment" />
+        <action
+            android:id="@+id/action_fragment_info_to_postingFragment"
+            app:destination="@id/postingFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_login"
@@ -95,4 +98,9 @@
             android:name="uuid"
             app:argType="java.util.UUID" />
     </fragment>
+    <fragment
+        android:id="@+id/postingFragment"
+        android:name="com.capstone.foodtesting.ui.posting.PostingFragment"
+        android:label="fragment_posting"
+        tools:layout="@layout/fragment_posting" />
 </navigation>

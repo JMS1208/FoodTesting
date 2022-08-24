@@ -52,9 +52,13 @@ class InfoFragment : Fragment() {
             }
         }
 
-        binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()
+        binding.toolbar.apply {
+            setNavigationIcon(R.drawable.ic_back_24)
+            setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
         }
+
 
         binding.tvAddress.setOnClickListener {
             val bottomSheet = BSSetupAddrFragment()
@@ -98,6 +102,11 @@ class InfoFragment : Fragment() {
 
         binding.ivQrTooltip.setOnClickListener {
             showTooltip(requireContext(), it, "테스터가 리뷰 작성을 위해 필요한 QR 코드입니다<br />캡처하여 매장에 비치해주세요")
+        }
+
+        binding.tvManagePosting.setOnClickListener {
+            val action = InfoFragmentDirections.actionFragmentInfoToPostingFragment()
+            findNavController().navigate(action)
         }
     }
 
