@@ -1,11 +1,9 @@
 package com.capstone.foodtesting.data.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.capstone.foodtesting.data.model.member.Member
 import kotlinx.coroutines.flow.Flow
+import java.util.*
 
 @Dao
 interface MemberDao {
@@ -19,4 +17,6 @@ interface MemberDao {
     @Query("SELECT * FROM member ORDER BY loginTime DESC LIMIT 1")
     fun getMember(): Flow<Member?>
 
+    @Query("UPDATE member SET nickName= :nickname, gender= :gender, birthDate= :birthDate")
+    fun updateMember(nickname:String,gender:Int,birthDate:Date)
 }

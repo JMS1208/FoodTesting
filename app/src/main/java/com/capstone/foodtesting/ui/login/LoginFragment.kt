@@ -125,7 +125,7 @@ class LoginFragment : Fragment() {
 
                      */
                     viewModel.insertMember(member)
-
+                    viewModel.saveLogInState(LogInStateOptions.GOOGLE_SOCIAL_LOGGED_IN.value)
                     updateUI(user)
                     // TODO("Send User Info to BE")
 
@@ -205,7 +205,7 @@ class LoginFragment : Fragment() {
 
                  */
                 viewModel.insertMember(member)
-
+                viewModel.saveLogInState(LogInStateOptions.KAKAO_SOCIAL_LOGGED_IN.value)
                 // TODO("Send User Info to BE")
             }
             val action = LoginFragmentDirections.actionFragmentLoginToFragmentHome()

@@ -21,34 +21,6 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(
     private val repository: MainRepository
 ) : ViewModel() {
-    var name = MutableLiveData("")
-    var email = MutableLiveData("")
-    var pw = MutableLiveData("")
-    var gender = MutableLiveData("")
-    var birthYear = MutableLiveData("")
-    var birthDay = MutableLiveData("")
-
-
-    //DataStore
-    fun saveUserData() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.saveUserInfo(
-                UserInfo(
-                    name = name.value!!,
-                    email = email.value!!,
-                    pw = pw.value ?: "",
-                    gender = gender.value ?: "",
-                    age = Calendar.YEAR - (birthYear.value?.toInt() ?: Calendar.YEAR),
-                    birthYear = birthYear.value ?: "",
-                    birthDay = birthDay.value ?: "",
-                    photoURL = ""
-                )
-            )
-        }
-        // Data saving Test
-        // Log.d("ViewModel","${name.value!!}")
-        // Log.d("ViewModel","Save User Data")
-    }
 
     // Room - Member
     fun insertMember(member: Member) = viewModelScope.launch(Dispatchers.IO) {

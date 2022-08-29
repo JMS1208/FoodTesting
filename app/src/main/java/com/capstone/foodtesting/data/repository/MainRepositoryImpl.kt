@@ -35,6 +35,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
 import retrofit2.Response
 import java.io.IOException
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -48,46 +49,6 @@ class MainRepositoryImpl @Inject constructor(
     @AppModule.kakaoApi private val kakaoAddressSearchApi: KakaoAddressSearchApi,
     private val db: FoodTestingDatabase
 ): MainRepository{
-
-    companion object{
-        val NAME= stringPreferencesKey("NAME")
-        val EMAIL= stringPreferencesKey("EMAIL")
-        val PW= stringPreferencesKey("PW")
-        val GENDER= stringPreferencesKey("GENDER")
-        val AGE= intPreferencesKey("AGE")
-        val BIRTH_YEAR= stringPreferencesKey("BIRTH_YEAR")
-        val BIRTH_DAY= stringPreferencesKey("BIRTH_DAY")
-        val PHOTO_URL= stringPreferencesKey("PHOTO_URL")
-    }
-
-    override suspend fun saveUserInfo(userInfo: UserInfo) {
-        dataStore.edit { info->
-            info[NAME]=userInfo.name
-            info[EMAIL]=userInfo.email
-            info[PW]=userInfo.pw?:""
-            info[GENDER]=userInfo.gender?:""
-            info[AGE]=userInfo.age?:-1
-            info[BIRTH_YEAR]=userInfo.birthYear?:""
-            info[BIRTH_DAY]=userInfo.birthDay?:""
-            info[PHOTO_URL]=userInfo.photoURL?:""
-        }
-    }
-
-    override suspend fun getUserInfo():Flow<UserInfo> {
-        return dataStore.data.map{info->
-            UserInfo(
-                name = info[NAME]!!,
-                email = info[EMAIL]!!,
-                pw=info[PW]?:"",
-                gender = info[GENDER]?:"",
-                age = info[AGE]?:-1,
-                birthYear = info[BIRTH_YEAR]?:"",
-                birthDay = info[BIRTH_DAY]?:"",
-                photoURL = info[PHOTO_URL]?:""
-            )
-        }
-    }
-
 
     //Rest API
     override suspend fun searchFoods(
@@ -241,6 +202,10 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun deleteAllMember() {
         db.memberDao().deleteAllMember()
+    }
+
+    override suspend fun updateMember(nickname: String, gender: Int, birthDate: Date) {
+        db.memberDao().updateMember(nickname,gender,birthDate)
     }
 
 

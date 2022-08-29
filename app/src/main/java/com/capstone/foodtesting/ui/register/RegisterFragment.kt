@@ -75,9 +75,9 @@ class RegisterFragment : Fragment() {
         }
         binding.tvBornDateBtn.setOnClickListener {
             val datePickerDialog=DatePickerDialog(requireContext(),DatePickerDialog.OnDateSetListener { view, myear, mmonth, mdayOfMonth ->
-                binding.tvBornDate.setText(""+myear+". "+mmonth+". "+mdayOfMonth)
+                binding.tvBornDate.setText(""+myear+". "+(mmonth+1)+". "+mdayOfMonth)
                 uYear=myear
-                uMonth=mmonth
+                uMonth=mmonth+1
                 uDay=mdayOfMonth
             },year,month,day)
             datePickerDialog.datePicker.spinnersShown=true
