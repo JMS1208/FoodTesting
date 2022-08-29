@@ -1,5 +1,6 @@
 package com.capstone.foodtesting.di
 
+import android.content.ContentResolver
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
@@ -130,5 +131,12 @@ object AppModule {
         ).build()
     }
 
+
+    //Content Resolver
+    @Singleton
+    @Provides
+    fun provideContentResolver(@ApplicationContext context: Context): ContentResolver {
+        return context.contentResolver
+    }
 
 }

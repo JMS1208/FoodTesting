@@ -120,7 +120,7 @@ class HomeFragment : Fragment() {
                 super.onPageSelected(position)
 
                 val progressText =
-                    "${position % itemSize + 1} / $itemSize 모두보기" // 현재 배너 페이지 표시
+                    "${position % itemSize + 1} / $itemSize" // 현재 배너 페이지 표시
                 binding.btnBanner.text = progressText
 
             }
@@ -159,7 +159,6 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         }
 
-
         newFoodSearchAdapter = NewRestaurantPagingAdapter()
 
         binding.rvNewRestaurant.apply {
@@ -169,6 +168,7 @@ class HomeFragment : Fragment() {
 
 
         }
+
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {

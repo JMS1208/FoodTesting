@@ -92,6 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="5dp"
         android:text="로그인 상태 유지"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/cb_login_state"
         app:layout_constraintEnd_toStartOf="@id/cb_login_state"
         app:layout_constraintTop_toTopOf="@id/cb_login_state" />
@@ -109,6 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:textSize="18sp"
         android:text="처음 이용하시는 건가요?"
         app:layout_constraintStart_toStartOf="@id/btn_login"
         app:layout_constraintTop_toBottomOf="@id/btn_login" />
@@ -119,6 +121,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="회원가입"
+        android:textSize="18sp"
         android:textColor="@color/main_color_2"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/tv_register_comment"
@@ -132,6 +135,7 @@
         android:layout_marginEnd="30dp"
         android:text="소셜 로그인"
         android:textStyle="bold"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_register"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -169,6 +173,7 @@
             android:adjustViewBounds="true"
             android:padding="5dp"
             android:text="네이버"
+            android:textSize="18sp"
             android:layout_margin="5dp"
             android:drawableStart="@drawable/ic_login_naver_18"
             android:textColor="@color/white"
@@ -181,6 +186,7 @@
             android:adjustViewBounds="true"
             android:padding="5dp"
             android:text="카카오"
+            android:textSize="18sp"
             android:layout_margin="5dp"
             android:drawableStart="@drawable/ic_login_kakao_18"
             android:background="@drawable/bg_login_kakao" />
@@ -192,6 +198,7 @@
             android:adjustViewBounds="true"
             android:padding="5dp"
             android:text="구글"
+            android:textSize="18sp"
             android:layout_margin="5dp"
             android:drawableStart="@drawable/ic_login_google_18"
             android:background="@drawable/bg_login_google" />

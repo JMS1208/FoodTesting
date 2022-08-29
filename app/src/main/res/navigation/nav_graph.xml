@@ -42,10 +42,10 @@
         tools:layout="@layout/fragment_info" >
         <action
             android:id="@+id/action_fragment_info_to_codeGenerateFragment"
-            app:destination="@id/codeGenerateFragment" />
+            app:destination="@id/fragment_code_generate" />
         <action
             android:id="@+id/action_fragment_info_to_postingFragment"
-            app:destination="@id/postingFragment" />
+            app:destination="@id/fragment_posting" />
     </fragment>
     <fragment
         android:id="@+id/fragment_login"
@@ -88,9 +88,14 @@
         android:id="@+id/fragment_write"
         android:name="com.capstone.foodtesting.ui.write.WriteFragment"
         android:label="fragment_write"
-        tools:layout="@layout/fragment_write" />
+        tools:layout="@layout/fragment_write" >
+
+        <action
+            android:id="@+id/action_fragment_write_to_writeDateTimeDialogFragment"
+            app:destination="@id/writeDateTimeDialogFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/codeGenerateFragment"
+        android:id="@+id/fragment_code_generate"
         android:name="com.capstone.foodtesting.ui.qr.CodeGenerateFragment"
         android:label="fragment_code_generate"
         tools:layout="@layout/fragment_code_generate" >
@@ -99,8 +104,20 @@
             app:argType="java.util.UUID" />
     </fragment>
     <fragment
-        android:id="@+id/postingFragment"
+        android:id="@+id/fragment_posting"
         android:name="com.capstone.foodtesting.ui.posting.PostingFragment"
         android:label="fragment_posting"
-        tools:layout="@layout/fragment_posting" />
+        tools:layout="@layout/fragment_posting" >
+        <action
+            android:id="@+id/action_postingFragment_to_fragment_write"
+            app:destination="@id/fragment_write" />
+    </fragment>
+    <dialog
+        android:id="@+id/writeDateTimeDialogFragment"
+        android:name="com.capstone.foodtesting.ui.write.WriteDateTimeDialogFragment"
+        android:label="WriteDateTimeDialogFragment" >
+        <argument
+            android:name="datetime"
+            app:argType="com.capstone.foodtesting.data.model.date.DateTime" />
+    </dialog>
 </navigation>

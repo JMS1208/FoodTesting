@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/main_color_3" >
+
+    <item
+        android:id="@+id/background"
+        android:drawable="@drawable/bg_btn_rounded_outlined_blue"
+        />
+</ripple>

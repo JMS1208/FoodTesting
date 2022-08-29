@@ -90,7 +90,7 @@
                 android:paddingTop="5dp"
                 android:paddingEnd="10dp"
                 android:paddingBottom="5dp"
-                android:text="1 / 5 모두보기"
+                android:text="1 / 5"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@id/cv_banner"
                 app:layout_constraintEnd_toEndOf="@id/cv_banner" />
@@ -114,7 +114,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="카테고리"
-                        android:textSize="20sp"
+                        android:textSize="22sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -144,6 +144,7 @@
                         android:gravity="center"
                         android:text="전체보기"
                         android:textStyle="bold"
+                        android:textSize="18sp"
                         app:drawableEndCompat="@drawable/ic_right_arrow_24"
                         app:drawableTint="@color/dark_grey"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -156,6 +157,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:clipToPadding="true"
+                        android:layoutAnimation="@anim/rv_animation_sticking_on_right"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_category" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -179,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="신규 등록 식당"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -222,7 +224,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="신메뉴 출시"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -265,7 +267,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="# 해시태그 문구1"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -308,7 +310,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="# 해시태그 문구2"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

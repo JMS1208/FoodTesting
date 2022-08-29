@@ -1,5 +1,7 @@
 package com.capstone.foodtesting.ui.home.adapter
 
+import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -7,8 +9,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.data.model.unsplash.Result
 import com.capstone.foodtesting.databinding.ItemNewRestaurantBinding
@@ -41,8 +48,6 @@ class NewRestaurantPagingAdapter : PagingDataAdapter<Result, NewRestaurantPaging
         fun bind(item: Result) {
             val url = item.urls?.small
             val userName = item.user?.name
-
-
             val circularProgressDrawable = CircularProgressDrawable(itemView.context)
             circularProgressDrawable.apply {
                 strokeWidth = 10f
@@ -50,6 +55,7 @@ class NewRestaurantPagingAdapter : PagingDataAdapter<Result, NewRestaurantPaging
                 setTint(itemView.context.resources.getColor(R.color.bright_grey))
                 start()
             }
+
 
 
             Glide.with(itemView.context)

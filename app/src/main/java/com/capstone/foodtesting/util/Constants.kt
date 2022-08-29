@@ -31,10 +31,16 @@ object Constants {
     //Paging
     const val  STARTING_PAGE_INDEX = 1
     const val PAGING_SIZE = 10
+    const val GALLERY_PAGING_SIZE = 30
 
     //주소검색 딜레이 타임
     const val SEARCH_ADDRESS_DELAY_TIME: Long = 100L
 
     // google Login
     const val RC_SIGN_IN=1001
+
+    //DateTime
+    const val SELECT_DATE_TIME = "select date time"
+    const val DATE_TIME_KEY = "date time key"
+    const val DATE_TIME_FORMAT = "yyyy.MM.dd (E) hh:mm"
 }

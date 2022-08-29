@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bar="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,7 +10,6 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         >
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -95,18 +95,17 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="15dp">
+                    >
 
                     <TextView
                         android:id="@+id/tv_restaurant_info"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_arrow_down_24"
-                        android:drawablePadding="10dp"
                         android:gravity="center_vertical"
-                        android:textSize="20sp"
+                        android:textSize="28sp"
                         android:text="우리 떡볶이 역삼역 (분식)"
                         android:textStyle="bold"
+                        android:layout_margin="15dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -114,12 +113,31 @@
                         android:id="@+id/tv_restaurant_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:textSize="16sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:textSize="18sp"
                         android:text="주소: 서울 강남구 테헤란로 152 강남파이낸스센터"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_restaurant_info" />
 
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/ripple_background"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:layout_marginEnd="15dp"
+                        android:text="찜"
+                        android:autoSizeTextType="uniform"
+                        android:drawablePadding="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_restaurant_info"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_restaurant_info"
+                        android:gravity="center_vertical"
+                        android:drawableEnd="@drawable/ic_star_24" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -138,7 +156,8 @@
                     app:tabIndicatorColor="@color/red"
                     app:tabIndicatorFullWidth="true"
                     app:tabIndicatorHeight="3dp"
-                    app:tabMode="scrollable"
+                    app:tabMode="auto"
+                    app:tabGravity="fill"
                     app:tabSelectedTextColor="@color/red"
                     app:tabTextAppearance="@style/TabLayoutTextStyle">
 
@@ -244,6 +263,8 @@
                     android:id="@+id/rv_hash_tag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     app:layout_constraintTop_toBottomOf="@id/tv_hash_title"
                     android:layout_marginTop="10dp"
                     />
@@ -356,22 +377,40 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     />
+
+                <com.taufiqrahman.reviewratings.RatingReviews
+                    android:id="@+id/ratingReviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_review_title"
+                    android:layout_marginTop="20dp"
+                    bar:animation="true"
+                    bar:max_value="100"
+                    bar:show_label="true"
+                    bar:spaces="12dp"
+                    android:foregroundGravity="center_vertical"
+                    bar:text_size="16dp"
+                    bar:text_color="@color/grey"
+                    bar:width="15dp"
+                    bar:rounded="true"
+                    />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_review"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/tv_review_title"
-                    android:layout_marginTop="10dp"
-                    />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dummy_text"
-                    app:layout_constraintTop_toBottomOf="@id/rv_review"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/ratingReviews"
+                    android:layoutAnimation="@anim/rv_animation_sticking_on_top"
                     />
 
+
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -380,15 +419,5 @@
 
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:backgroundTint="@color/white"
-        android:src="@drawable/ic_pencil"
-        android:tint="@color/white"
-        android:visibility="gone"
-        app:layout_anchor="@id/app_bar_layout"
-        app:layout_anchorGravity="bottom|end|right"
-        app:maxImageSize="28dp" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

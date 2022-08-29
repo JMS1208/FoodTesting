@@ -1,5 +1,6 @@
 package com.capstone.foodtesting.data.repository
 
+import android.content.ContentResolver
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
@@ -29,6 +30,7 @@ import com.capstone.foodtesting.data.paging.NewRestaurantPagingSource
 import com.capstone.foodtesting.data.repository.MainRepositoryImpl.PreferencesKeys.CURRENT_LOCATION
 import com.capstone.foodtesting.data.repository.MainRepositoryImpl.PreferencesKeys.LOGIN_STATE
 import com.capstone.foodtesting.di.AppModule
+import com.capstone.foodtesting.util.Constants.GALLERY_PAGING_SIZE
 import com.capstone.foodtesting.util.Constants.PAGING_SIZE
 
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -46,7 +48,8 @@ class MainRepositoryImpl @Inject constructor(
     @AppModule.unsplashApi private val unsplashApi: UnsplashApi,
     @AppModule.kakaoApi private val kakaoLocalApi: KakaoLocalApi,
     @AppModule.kakaoApi private val kakaoAddressSearchApi: KakaoAddressSearchApi,
-    private val db: FoodTestingDatabase
+    private val db: FoodTestingDatabase,
+    private val contentResolver: ContentResolver
 ): MainRepository{
 
     companion object{
@@ -146,6 +149,11 @@ class MainRepositoryImpl @Inject constructor(
             pagingSourceFactory = pagingSourceFactory
         ).flow
     }
+
+
+
+
+
 
 
     //DataStore

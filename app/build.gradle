@@ -6,6 +6,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id 'com.google.gms.google-services'
     id 'kotlinx-serialization'
+    id("kotlin-parcelize")
 }
 
 android {
@@ -17,9 +18,9 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-        buildConfigField("String","UNSPLASH_API_KEY",UNSPLASH_API_KEY)
-        buildConfigField("String","KAKAO_LOCAL_API_KEY",KAKAO_LOCAL_API_KEY)
-        buildConfigField("String","LOGIN_KAKAO_API_KEY",LOGIN_KAKAO_API_KEY)
+        buildConfigField("String", "UNSPLASH_API_KEY", UNSPLASH_API_KEY)
+        buildConfigField("String", "KAKAO_LOCAL_API_KEY", KAKAO_LOCAL_API_KEY)
+        buildConfigField("String", "LOGIN_KAKAO_API_KEY", LOGIN_KAKAO_API_KEY)
         manifestPlaceholders = [LOGIN_KAKAO_API_KEY: LOGIN_KAKAO_API_KEY]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,9 +38,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 }
 
@@ -105,7 +106,7 @@ dependencies {
     // DataStore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     implementation("androidx.datastore:datastore:1.0.0")
-    implementation  "androidx.datastore:datastore-core:1.0.0"
+    implementation "androidx.datastore:datastore-core:1.0.0"
 
     //Hilt
     implementation("com.google.dagger:hilt-android:2.42")
@@ -142,4 +143,13 @@ dependencies {
 
     //StickyScrollView
     implementation 'com.github.amarjain07:StickyScrollView:1.0.3'
+
+    //PhotoView
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    //Rating
+    implementation ('com.github.Inconnu08:android-ratingreviews:1.2.0') { exclude group: 'org.jetbrains', module: 'annotations-java5' }
+
+    //ImagePicker
+    implementation ('io.github.ParkSangGwon:tedimagepicker:1.2.8')
 }
