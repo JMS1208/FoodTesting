@@ -4,6 +4,7 @@ import com.capstone.foodtesting.data.datastore.UserInfo
 import androidx.paging.PagingData
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
+import com.capstone.foodtesting.data.datastore.LogInStateOptions
 import com.capstone.foodtesting.data.model.kakao.local.AddressInfo
 import com.capstone.foodtesting.data.model.kakao.local.KakaoLocalResponse
 import com.capstone.foodtesting.data.model.kakao.search.address.AddressSearchResponse

@@ -43,6 +43,15 @@
         <action
             android:id="@+id/action_fragment_info_to_codeGenerateFragment"
             app:destination="@id/codeGenerateFragment" />
+        <action
+            android:id="@+id/action_fragment_info_to_fragment_login"
+            app:destination="@id/fragment_login" />
+        <action
+            android:id="@+id/action_fragment_info_self"
+            app:destination="@id/fragment_info" />
+        <action
+            android:id="@+id/action_fragment_info_to_infoRevFragment2"
+            app:destination="@id/infoRevFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_login"
@@ -94,5 +103,13 @@
         <argument
             android:name="uuid"
             app:argType="java.util.UUID" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoRevFragment"
+        android:name="com.capstone.foodtesting.ui.infoRev.InfoRevFragment"
+        android:label="InfoRevFragment" >
+        <action
+            android:id="@+id/action_infoRevFragment2_to_fragment_info"
+            app:destination="@id/fragment_info" />
     </fragment>
 </navigation>

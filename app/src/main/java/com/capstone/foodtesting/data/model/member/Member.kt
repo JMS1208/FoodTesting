@@ -27,6 +27,7 @@ data class Member(
 ) {
 
     companion object {
+        const val UNKNOWN=0
         const val MALE = 1
         const val FEMALE = 2
 

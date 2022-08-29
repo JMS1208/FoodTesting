@@ -88,6 +88,7 @@ class MainRepositoryImpl @Inject constructor(
         }
     }
 
+
     //Rest API
     override suspend fun searchFoods(
         query: String,

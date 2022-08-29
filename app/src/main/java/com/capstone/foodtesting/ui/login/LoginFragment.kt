@@ -11,10 +11,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.capstone.foodtesting.R
+import com.capstone.foodtesting.data.datastore.LogInStateOptions
+import com.capstone.foodtesting.data.model.member.Member
 
 import com.capstone.foodtesting.databinding.FragmentLoginBinding
 import com.capstone.foodtesting.ui.register.RegisterFinishedFragmentDirections
@@ -39,7 +43,8 @@ import com.navercorp.nid.profile.NidProfileCallback
 import com.navercorp.nid.profile.data.NidProfileResponse
 
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import java.util.*
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -97,15 +102,33 @@ class LoginFragment : Fragment() {
                     // get User Information(Log)
                     //Log.d("GoogleUser","${user!!.displayName}, ${user!!.email}, ${user!!.photoUrl.toString()}")
 
-                    // saveData (ViewModel)
+                    // saveData (ROOM)
                     // Google: name, email, photoURL만 지원
-                    viewModel.name= MutableLiveData(user!!.displayName)
-                    viewModel.email=MutableLiveData(user!!.email)
-                    viewModel.photoURL=MutableLiveData(user!!.photoUrl.toString())
-                    viewModel.saveUserData()
+
+                    val member=Member(
+                        name = user!!.displayName?:"someone",
+                        age = 0,
+                        birthDate = Date(System.currentTimeMillis()),
+                        email = user!!.email?:"",
+                        gender = Member.UNKNOWN,
+                        nickName = user!!.displayName?:"someone",
+                        phoneNumber = "",
+                        profile =user!!.photoUrl.toString(),
+                        social_member = Member.GOOGLE_MEMBER
+                    )
+                    /*
+                    viewLifecycleOwner.lifecycleScope.launch{
+                        viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+                            viewModel.saveLogInState(LogInStateOptions.GOOGLE_SOCIAL_LOGGED_IN.value)
+                        }
+                    }
+
+                     */
+                    viewModel.insertMember(member)
+
                     updateUI(user)
                     // TODO("Send User Info to BE")
-                    
+
                 } else {
                     //Log.w("Google_SignIn", "signInWithCredential:failure", task.exception)
                     updateUI(null)
@@ -155,17 +178,34 @@ class LoginFragment : Fragment() {
             Toast.makeText(context,"로그인에 성공하였습니다.",Toast.LENGTH_SHORT).show()
             UserApiClient.instance.me { user, error ->
                 // get user info
-                Log.d("KakaoUser","${user?.kakaoAccount?.profile?.nickname}\n${user?.kakaoAccount?.gender}\n${user?.kakaoAccount?.ageRange}\n${user?.kakaoAccount?.birthday}\n${user?.kakaoAccount?.birthyear}")
+                Log.d("KakaoUser","${user?.kakaoAccount?.profile?.nickname}\n${user?.kakaoAccount?.gender}\n${user?.kakaoAccount?.ageRange}\n${user?.kakaoAccount?.birthday}\n")
 
                 // saveData(ViewModel)
-                // KakaoAccount: name, email, photoURL(필수동의) / gender, birthDay, ageRange(선택동의)
-                viewModel.name= MutableLiveData(user?.kakaoAccount?.profile?.nickname)
-                viewModel.email=MutableLiveData(user?.kakaoAccount?.email)
-                viewModel.gender=MutableLiveData(user?.kakaoAccount?.gender.toString())
-                //viewModel.age= MutableLiveData(user?.kakaoAccount?.ageRange.toString())
-                viewModel.birthDay=MutableLiveData(user?.kakaoAccount?.birthday)
-                viewModel.photoURL=MutableLiveData(user?.kakaoAccount?.profile?.profileImageUrl)
-                viewModel.saveUserData()
+                // KakaoAccount: name, email, photoURL(필수동의) / gender, birthDay(MM-DD), ageRange(선택동의)
+                val ageRangeArr=user?.kakaoAccount?.ageRange.toString().split("_")
+                val userAge=ageRangeArr[1].toInt()
+                val member=Member(
+                    age = userAge,
+                    birthDate = Date(System.currentTimeMillis()),
+                    email = user?.kakaoAccount?.email?:"",
+                    gender = if (user?.kakaoAccount?.gender.toString()=="FEMALE") Member.FEMALE else Member.MALE,
+                    name = user?.kakaoAccount?.profile?.nickname?:"someone",
+                    nickName = user?.kakaoAccount?.profile?.nickname?:"someone",
+                    phoneNumber = null,
+                    profile =user?.kakaoAccount?.profile?.profileImageUrl,
+                    social_member = Member.KAKAO_MEMBER
+                )
+
+                /*
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+                        viewModel.saveLogInState(LogInStateOptions.KAKAO_SOCIAL_LOGGED_IN.value)
+                    }
+                }
+
+                 */
+                viewModel.insertMember(member)
+
                 // TODO("Send User Info to BE")
             }
             val action = LoginFragmentDirections.actionFragmentLoginToFragmentHome()
@@ -195,6 +235,7 @@ class LoginFragment : Fragment() {
                 LoginClient.instance.loginWithKakaoAccount(requireContext(),callback=callback)
             }
         }
+
         // Naver Login Module Initialize
         val naverClientId=getString(R.string.social_login_info_naver_client_id)
         val naverClientSecret=getString(R.string.social_login_info_naver_client_secret)
@@ -218,6 +259,7 @@ class LoginFragment : Fragment() {
             //findNavController().navigate(R.id.fragment_write)
         }
 
+
     }
 
     private fun startNaverLogin(){
@@ -228,15 +270,30 @@ class LoginFragment : Fragment() {
                 // get user info
                 Log.d("NaverUser","${response.profile?.age}\n${response.profile?.nickname}\n${response.profile?.gender}\n${response.profile?.birthday}\n${response.profile?.birthYear}\n${response.profile?.email}")
 
-                // saveData(ViewModel)
-                viewModel.name= MutableLiveData(response.profile?.name)
-                viewModel.email=MutableLiveData(response.profile?.email)
-                viewModel.gender= MutableLiveData(response.profile?.gender)
-                viewModel.birthYear= MutableLiveData(response.profile?.birthYear)
-                viewModel.birthDay=MutableLiveData(response.profile?.birthday)
-                viewModel.photoURL=MutableLiveData(response.profile?.profileImage)
-                viewModel.saveUserData()
                 // TODO("Send User Info to BE")
+                val birthdayArr=response.profile?.birthday!!.split("-")
+                val birthdayMonth=birthdayArr[0].toInt()
+                val birthdayDate=birthdayArr[1].toInt()
+                val member=Member(
+                    age = Date().year-response.profile?.birthYear!!.toInt()+1,
+                    birthDate = Date(response.profile?.birthYear!!.toInt(),birthdayMonth,birthdayDate),
+                    email = response.profile?.email?:"",
+                    gender = if (response.profile?.gender=="F") Member.FEMALE else Member.MALE,
+                    name = response.profile?.name?:"someone",
+                    nickName = response.profile?.name?:"someone",
+                    phoneNumber = "",
+                    profile =response.profile?.profileImage,
+                    social_member = Member.NAVER_MEMBER
+                )
+                /*
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+                        viewModel.saveLogInState(LogInStateOptions.NAVER_SOCIAL_LOGGED_IN.value)
+                    }
+                }
+                */
+                viewModel.saveLogInState(LogInStateOptions.NAVER_SOCIAL_LOGGED_IN.value)
+                viewModel.insertMember(member)
             }
 
             override fun onFailure(httpStatus: Int, message: String) {
