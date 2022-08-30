@@ -70,13 +70,11 @@ class InfoRevFragment: Fragment(){
             val birthDate= Date(uYear,uMonth,uDay)
             viewModel.updateMemeber(nickName,gender,birthDate)
             // TODO(수정된 멤버 정보 BE로 보내기)
-            val action=InfoRevFragmentDirections.actionInfoRevFragment2ToFragmentInfo()
-            findNavController().navigate(action)
+            findNavController().popBackStack()
         }
 
         binding.btnClose.setOnClickListener {
-            val action=InfoRevFragmentDirections.actionInfoRevFragment2ToFragmentInfo()
-            findNavController().navigate(action)
+            findNavController().popBackStack()
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
