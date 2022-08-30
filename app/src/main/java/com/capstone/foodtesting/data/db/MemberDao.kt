@@ -18,5 +18,5 @@ interface MemberDao {
     fun getMember(): Flow<Member?>
 
     @Query("UPDATE member SET nickName= :nickname, gender= :gender, birthDate= :birthDate")
-    fun updateMember(nickname:String,gender:Int,birthDate:Date)
+    suspend fun updateMember(nickname:String,gender:Int,birthDate:Date)
 }
