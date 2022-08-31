@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_fragment_info_to_postingFragment"
             app:destination="@id/fragment_posting" />
+        <action
+        android:id="@+id/action_fragment_info_to_infoRevFragment2"
+        app:destination="@id/fragment_info" />
     </fragment>
     <fragment
         android:id="@+id/fragment_login"
@@ -111,6 +114,14 @@
         <action
             android:id="@+id/action_postingFragment_to_fragment_write"
             app:destination="@id/fragment_write" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_info_rev"
+        android:name="com.capstone.foodtesting.ui.infoRev.InfoRevFragment"
+        android:label="fragment_info_rev" >
+        <action
+            android:id="@+id/action_infoRevFragment2_to_fragment_info"
+            app:destination="@id/fragment_info" />
     </fragment>
     <dialog
         android:id="@+id/writeDateTimeDialogFragment"

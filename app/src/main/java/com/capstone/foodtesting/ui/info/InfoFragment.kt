@@ -96,8 +96,7 @@ class InfoFragment : Fragment() {
 //                    Toast.makeText(requireContext(), "등록된 매장이 없습니다", Toast.LENGTH_SHORT).show()
 //                }
 
-                val action =
-                    InfoFragmentDirections.actionFragmentInfoToCodeGenerateFragment(it.uuid)
+                val action = InfoFragmentDirections.actionFragmentInfoToCodeGenerateFragment(it.uuid)
                 findNavController().navigate(action)
             }
 
@@ -121,8 +120,7 @@ class InfoFragment : Fragment() {
                         viewModel.saveLogInState(LogInStateOptions.LOGGED_OUT.value)
                     }
                 }
-                val action=InfoFragmentDirections.actionFragmentInfoToFragmentLogin()
-                findNavController().navigate(action)
+                findNavController().popBackStack()
             }
             builder.show()
         }

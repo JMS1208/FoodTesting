@@ -126,6 +126,17 @@ class MainRepositoryImpl @Inject constructor(
 
     }
 
+//    override suspend fun saveUserInfo(userInfo: UserInfo) {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override suspend fun getUserInfo(): Flow<UserInfo> {
+//        TODO("Not yet implemented")
+//    }
+
+    //Room - AddressInfo
+
+
     override suspend fun saveLogInState(state: String) {
         dataStore.edit { prefs->
             prefs[LOGIN_STATE] = state

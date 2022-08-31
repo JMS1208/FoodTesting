@@ -11,10 +11,11 @@ import com.capstone.foodtesting.data.model.unsplash.Result
 import com.capstone.foodtesting.data.model.unsplash.UnsplashResponse
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
+import java.util.*
 
 interface MainRepository {
-    suspend fun saveUserInfo(userInfo: UserInfo)
-    suspend fun getUserInfo():Flow<UserInfo>
+//    suspend fun saveUserInfo(userInfo: UserInfo)
+//    suspend fun getUserInfo():Flow<UserInfo>
 
     suspend fun saveLogInState(state: String)
 
@@ -72,7 +73,7 @@ interface MainRepository {
 
     suspend fun deleteAllMember()
 
-
+    suspend fun updateMember(nickname:String,gender:Int,birthDate:Date)
 
 
 }
