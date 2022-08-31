@@ -30,6 +30,22 @@ class RegisterFragment : Fragment() {
 
     private val viewModel by viewModels<RegisterViewModel>()
 
+    private fun validateEmail():Boolean{
+        val value:String=binding.etEmail.text.toString()
+        val emailPattern="[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+
+        return if (value.isEmpty()){
+            binding.etEmail.error="이메일을 입력해주세요"
+            false
+        }else if (!value.matches(emailPattern.toRegex())){
+            binding.etEmail.error="이메일 형식이 잘못되었습니다"
+            false
+        }else{
+            binding.etEmail.error=null
+            true
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,15 +68,16 @@ class RegisterFragment : Fragment() {
         var uMonth=Calendar.MONTH
         var uDay=Calendar.DAY_OF_MONTH
 
+
         binding.btnClose.setOnClickListener{
             val action = RegisterFragmentDirections.actionRegisterFragmentToFragmentLogin()
             findNavController().navigate(action)
         }
         binding.tvBornDateBtn.setOnClickListener {
             val datePickerDialog=DatePickerDialog(requireContext(),DatePickerDialog.OnDateSetListener { view, myear, mmonth, mdayOfMonth ->
-                binding.tvBornDate.setText(""+myear+". "+mmonth+". "+mdayOfMonth)
+                binding.tvBornDate.setText(""+myear+". "+(mmonth+1)+". "+mdayOfMonth)
                 uYear=myear
-                uMonth=mmonth
+                uMonth=mmonth+1
                 uDay=mdayOfMonth
             },year,month,day)
             datePickerDialog.datePicker.spinnersShown=true
@@ -68,6 +85,9 @@ class RegisterFragment : Fragment() {
         }
         binding.btnNext.setOnClickListener {
             val action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFinishedFragment()
+            if (!validateEmail()){
+                return@setOnClickListener
+            }
             if (binding.etName.text.isNullOrBlank()){
                 Toast.makeText(context,"이름을 입력해주세요",Toast.LENGTH_SHORT).show()
             }
@@ -82,7 +102,8 @@ class RegisterFragment : Fragment() {
             }
             else{
                 // TODO("BE로 회원가입 정보 등록 요청")
-                // 앱 내에 데이터 저장
+                // 앱 내에 데이터 저장 (LiveData)
+                /*
                 viewModel.name= MutableLiveData(binding.etName.text.toString())
                 viewModel.email=MutableLiveData(binding.etEmail.text.toString())
                 viewModel.pw= MutableLiveData(binding.etPassword.text.toString())
@@ -90,6 +111,19 @@ class RegisterFragment : Fragment() {
                 viewModel.birthYear=MutableLiveData(uYear.toString())
                 viewModel.birthDay=MutableLiveData(uMonth.toString()+uDay.toString())
                 viewModel.saveUserData()
+                 */
+                val member=Member(
+                    age = Date().year-uYear+1,
+                    birthDate = Date(uYear,uMonth,uDay),
+                    email = binding.etEmail.text.toString(),
+                    gender = if (binding.cbFemale.isChecked) Member.FEMALE else Member.MALE,
+                    name = binding.etName.text.toString(),
+                    nickName = binding.etName.text.toString(),
+                    phoneNumber = null,
+                    profile =null,
+                    social_member = Member.FOOD_TESTING_MEMBER
+                )
+                viewModel.insertMember(member)
                 findNavController().navigate(action)
             }
 

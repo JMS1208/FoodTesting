@@ -1,7 +1,9 @@
 package com.capstone.foodtesting.ui.info
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.capstone.foodtesting.R
+import com.capstone.foodtesting.data.datastore.LogInStateOptions
 import com.capstone.foodtesting.data.model.member.Member
 import com.capstone.foodtesting.databinding.FragmentInfoBinding
 import com.capstone.foodtesting.ui.bottomsheet.setaddress.BSSetupAddrFragment
@@ -99,7 +102,30 @@ class InfoFragment : Fragment() {
             }
 
         }
+        binding.tvModifyMember.setOnClickListener {
+            val action=InfoFragmentDirections.actionFragmentInfoToInfoRevFragment2()
+            findNavController().navigate(action)
+        }
+        binding.tvLogOut.setOnClickListener {
+            val builder=AlertDialog.Builder(requireContext())
+            builder.setTitle("Alert")
+            builder.setMessage("로그아웃 하시겠습니까?")
+            builder.setNegativeButton("NO"){dialog,which->
 
+            }
+            builder.setPositiveButton("YES"){dialog,which->
+                viewModel.deleteMemeberInfo()
+                Toast.makeText(requireContext(),"로그아웃 되었습니다",Toast.LENGTH_SHORT).show()
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+                        viewModel.saveLogInState(LogInStateOptions.LOGGED_OUT.value)
+                    }
+                }
+                val action=InfoFragmentDirections.actionFragmentInfoToFragmentLogin()
+                findNavController().navigate(action)
+            }
+            builder.show()
+        }
         binding.ivQrTooltip.setOnClickListener {
             showTooltip(requireContext(), it, "테스터가 리뷰 작성을 위해 필요한 QR 코드입니다<br />캡처하여 매장에 비치해주세요")
         }
