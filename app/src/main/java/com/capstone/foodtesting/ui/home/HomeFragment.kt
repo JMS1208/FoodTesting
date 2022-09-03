@@ -1,22 +1,23 @@
 package com.capstone.foodtesting.ui.home
 
+import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.text.Layout
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.ViewTreeObserver
+import android.view.animation.AnimationUtils
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,7 +36,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import com.capstone.foodtesting.ui.home.adapter.CategoryAdapter
 import com.capstone.foodtesting.ui.home.adapter.NewRestaurantPagingAdapter
-import com.capstone.foodtesting.ui.home.adapter.ViewPagerAdapter
 import com.capstone.foodtesting.util.CommonFunc.showTooltip
 import it.sephiroth.android.library.xtooltip.ClosePolicy
 import it.sephiroth.android.library.xtooltip.Tooltip
@@ -55,10 +55,72 @@ class HomeFragment : Fragment() {
     private lateinit var viewPagerAdapter: ViewPagerAdapter
 
     private lateinit var categoryAdapter: CategoryAdapter
-    private lateinit var imageList: MutableList<String>
+
 
     private lateinit var newFoodSearchAdapter: NewRestaurantPagingAdapter
 
+    private val colorList = listOf(
+        R.drawable.gradient_color_1,
+        R.drawable.gradient_color_2,
+        R.drawable.gradient_color_3,
+        R.drawable.gradient_color_4,
+        R.drawable.gradient_color_5
+    )
+    private val bannerImageList = listOf(
+        R.drawable.banner_image1,
+        R.drawable.banner_image2,
+        R.drawable.banner_image3,
+        R.drawable.banner_image4,
+        R.drawable.banner_image5
+    )
+
+    private val bannerTitleList = listOf(
+            "맛있는 가츠동 !",
+        "칼칼한 낙지탕",
+        "리얼 딸기 케익",
+        "수제 돈까스 도시락 !",
+        "알싸하게 매운 낚지볶음"
+
+    )
+
+    private val bannerContentList = listOf(
+        "따뜻하고 든든하게",
+        "바다의 산삼 낙지로\n겨울철 따뜻하게\n보내세요!",
+        "상큼한 요거트와 딸기가 가득!",
+        "육즙 가득 돈까스 드셔보세요",
+        "중독성 있는 매운맛"
+    )
+
+    private var scrollState = 0
+    private var targetPage = 0
+    private var previousPage = 0
+
+
+    inner class ViewPagerAdapter(private val colorList: List<Int>) :
+        RecyclerView.Adapter<ViewPagerAdapter.ViewHolder>() {
+
+        inner class ViewHolder(private val itemBinding: ItemBannerBinding) :
+            RecyclerView.ViewHolder(itemBinding.root) {
+
+            fun bind(colorId: Int) {
+                itemBinding.bgColor.background =
+                    ResourcesCompat.getDrawable(resources, colorId, null)
+            }
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            val itemBinding =
+                ItemBannerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            return ViewHolder(itemBinding)
+        }
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            val colorId = colorList[position]
+            holder.bind(colorId)
+        }
+
+        override fun getItemCount(): Int = colorList.size
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -87,7 +149,7 @@ class HomeFragment : Fragment() {
 
             delay(HOME_BANNER_DURATION)
             val position = binding.viewPager.currentItem
-            val newPosition = (position + 1) % imageList.size
+            val newPosition = (position + 1) % bannerImageList.size
             binding.viewPager.setCurrentItem(newPosition, true)
 
         }
@@ -99,18 +161,10 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        imageList = mutableListOf(
-            "https://images.unsplash.com/photo-1590301157890-4810ed352733?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1336&q=80",
-            "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
-            "https://images.unsplash.com/photo-1609501677070-800d6d157367?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1336&q=80",
-            "https://images.unsplash.com/photo-1590301157890-4810ed352733?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1336&q=80",
-            "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-        ) // 원래 백에서 이미지 리스트 받아와야함
+        setupInitialText()
 
-        val itemSize = imageList.size // 맨 처음 받아왔을때 원래 사이즈
+        viewPagerAdapter = ViewPagerAdapter(colorList)
 
-
-        viewPagerAdapter = ViewPagerAdapter(imageList, itemSize)
 
         binding.viewPager.adapter = viewPagerAdapter
         binding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -119,10 +173,64 @@ class HomeFragment : Fragment() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
+                val itemSize = bannerImageList.size
                 val progressText =
                     "${position % itemSize + 1} / $itemSize" // 현재 배너 페이지 표시
                 binding.btnBanner.text = progressText
 
+                targetPage = position
+
+                val imageId = bannerImageList[position]
+                binding.ivBannerItem.apply {
+                    setImageResource(imageId)
+                }
+
+                val title = bannerTitleList[position]
+                binding.tvBannerItemTitle.text = title
+
+                val content = bannerContentList[position]
+                binding.tvBannerItemContent.text = content
+
+                if (previousPage < targetPage) {
+                    binding.ivBannerItem.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            requireContext(),
+                            R.anim.sticking_on_right
+                        )
+                    )
+                    binding.tvBannerItemTitle.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            requireContext(),
+                            R.anim.sticking_on_right
+                        )
+                    )
+                    binding.tvBannerItemContent.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            requireContext(),
+                            R.anim.sticking_on_right
+                        )
+                    )
+
+                } else {
+                    binding.ivBannerItem.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            requireContext(),
+                            R.anim.sticking_on_left
+                        )
+                    )
+                    binding.tvBannerItemTitle.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            requireContext(),
+                            R.anim.sticking_on_left
+                        )
+                    )
+                    binding.tvBannerItemContent.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            requireContext(),
+                            R.anim.sticking_on_left
+                        )
+                    )
+                }
             }
 
             override fun onPageScrollStateChanged(state: Int) {
@@ -133,14 +241,20 @@ class HomeFragment : Fragment() {
                     ViewPager2.SCROLL_STATE_DRAGGING -> {
                         job.cancel()
                     }
+                    ViewPager2.SCROLL_STATE_SETTLING -> {
+                        previousPage = targetPage
+                    }
                     else -> {
                         if (!job.isActive) {
                             scrollJobCreate()
+                            scrollState = state
                         }
                     }
                 }
             }
         })
+
+
 
         binding.btnBanner.setOnClickListener {
 
@@ -152,12 +266,12 @@ class HomeFragment : Fragment() {
 
 
 
-        categoryAdapter = CategoryAdapter(categoryList)
+//        categoryAdapter = CategoryAdapter(categoryList)
 
-        binding.rvCategory.apply {
-            adapter = categoryAdapter
-            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        }
+//        binding.rvCategory.apply {
+//            adapter = categoryAdapter
+//            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+//        }
 
         newFoodSearchAdapter = NewRestaurantPagingAdapter()
 
@@ -212,6 +326,177 @@ class HomeFragment : Fragment() {
             showTooltip(requireContext(), it, "해시태그2 설명 추가")
         }
 
+
+        setupCategoryBtnTouchListener()
+
+
+
+    }
+
+    private fun setupInitialText() {
+        binding.tvBannerItemTitle.text = bannerTitleList[0]
+        binding.tvBannerItemContent.text = bannerContentList[0]
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setupCategoryBtnTouchListener() {
+        binding.pvCategoryHansik.apply {
+            setScaleLevels(1f,1.1f,1.2f)
+            setOnTouchListener { _, motionEvent ->
+                when(motionEvent.action) {
+                    MotionEvent.ACTION_DOWN ->{
+                        setScale(1.2f, true)
+                    }
+                    MotionEvent.ACTION_UP-> {
+                        //여기서 처리
+                        navigateFragment("한식")
+                    }
+                    MotionEvent.ACTION_MOVE-> Unit
+                    else-> {
+                        setScale(1f, true)
+                    }
+                }
+                true
+            }
+        }
+        binding.pvCategoryIlsik.apply {
+            setScaleLevels(1f,1.1f,1.2f)
+            setOnTouchListener { _, motionEvent ->
+                when(motionEvent.action) {
+                    MotionEvent.ACTION_DOWN ->{
+                        setScale(1.2f, true)
+                    }
+                    MotionEvent.ACTION_UP-> {
+                        //여기서 처리
+                        navigateFragment("일식")
+                    }
+                    MotionEvent.ACTION_MOVE-> Unit
+                    else-> {
+                        setScale(1f, true)
+                    }
+                }
+                true
+            }
+        }
+        binding.pvCategoryJungsik.apply {
+            setScaleLevels(1f,1.1f,1.2f)
+            setOnTouchListener { _, motionEvent ->
+                when(motionEvent.action) {
+                    MotionEvent.ACTION_DOWN ->{
+                        setScale(1.2f, true)
+                    }
+                    MotionEvent.ACTION_UP-> {
+                        //여기서 처리
+                        navigateFragment("중식")
+                    }
+                    MotionEvent.ACTION_MOVE-> Unit
+                    else-> {
+                        setScale(1f, true)
+                    }
+                }
+                true
+            }
+        }
+        binding.pvCategoryFastfood.apply {
+            setScaleLevels(1f,1.1f,1.2f)
+            setOnTouchListener { _, motionEvent ->
+                when(motionEvent.action) {
+                    MotionEvent.ACTION_DOWN ->{
+                        setScale(1.2f, true)
+                    }
+                    MotionEvent.ACTION_UP-> {
+                        //여기서 처리
+                        navigateFragment("패스트푸드")
+                    }
+                    MotionEvent.ACTION_MOVE-> Unit
+                    else-> {
+                        setScale(1f, true)
+                    }
+                }
+                true
+            }
+        }
+        binding.pvCategoryYangsik.apply {
+            setScaleLevels(1f,1.1f,1.2f)
+            setOnTouchListener { _, motionEvent ->
+                when(motionEvent.action) {
+                    MotionEvent.ACTION_DOWN ->{
+                        setScale(1.2f, true)
+                    }
+                    MotionEvent.ACTION_UP-> {
+                        //여기서 처리
+                        navigateFragment("양식")
+                    }
+                    MotionEvent.ACTION_MOVE-> Unit
+                    else-> {
+                        setScale(1f, true)
+                    }
+                }
+                true
+            }
+        }
+        binding.pvCategoryBunsik.apply {
+            setScaleLevels(1f,1.1f,1.2f)
+            setOnTouchListener { _, motionEvent ->
+                when(motionEvent.action) {
+                    MotionEvent.ACTION_DOWN ->{
+                        setScale(1.2f, true)
+                    }
+                    MotionEvent.ACTION_UP-> {
+                        //여기서 처리
+                        navigateFragment("분식")
+                    }
+                    MotionEvent.ACTION_MOVE-> Unit
+                    else-> {
+                        setScale(1f, true)
+                    }
+                }
+                true
+            }
+        }
+        binding.pvCategoryDessert.apply {
+            setScaleLevels(1f,1.1f,1.2f)
+            setOnTouchListener { _, motionEvent ->
+                when(motionEvent.action) {
+                    MotionEvent.ACTION_DOWN ->{
+                        setScale(1.2f, true)
+                    }
+                    MotionEvent.ACTION_UP-> {
+                        //여기서 처리
+                        navigateFragment("디저트")
+                    }
+                    MotionEvent.ACTION_MOVE-> Unit
+                    else-> {
+                        setScale(1f, true)
+                    }
+                }
+                true
+            }
+        }
+        binding.pvCategoryOthers.apply {
+            setScaleLevels(1f,1.1f,1.2f)
+            setOnTouchListener { _, motionEvent ->
+                when(motionEvent.action) {
+                    MotionEvent.ACTION_DOWN ->{
+                        setScale(1.2f, true)
+                    }
+                    MotionEvent.ACTION_UP-> {
+                        //여기서 처리
+                        navigateFragment("기타")
+                    }
+                    MotionEvent.ACTION_MOVE-> Unit
+                    else-> {
+                        setScale(1f, true)
+                    }
+                }
+                true
+            }
+        }
+    }
+
+    private fun navigateFragment(category: String) {
+        val action = HomeFragmentDirections.actionFragmentHomeToFragmentDashBoard(category)
+        findNavController().navigate(action)
     }
 
 

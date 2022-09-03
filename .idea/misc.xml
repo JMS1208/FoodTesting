@@ -7,6 +7,7 @@
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable-v24/ic_close_svg.xml" value="0.1795" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable-v24/tit_box_color.xml" value="0.132" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_below_rounded.xml" value="0.117" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_below_rounded_20.xml" value="0.1085" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_bottom_sheet.xml" value="0.3655" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_btn_grey.xml" value="0.1505" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_btn_red.xml" value="0.1425" />
@@ -19,10 +20,13 @@
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_login_google.xml" value="0.274" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_login_kakao.xml" value="0.274" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_login_naver.xml" value="0.274" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_rounded_black_10.xml" value="0.1085" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_rounded_btn_blue.xml" value="0.2765" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_rounded_grey.xml" value="0.3125" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_rounded_outlined_btn_blue.xml" value="0.181" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_rounded_white.xml" value="0.117" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_rounded_white_10.xml" value="0.151" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_search_view.xml" value="0.1535" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_shadow.xml" value="0.1425" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_shadow_upper.xml" value="0.298" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bs_bar.xml" value="0.2895" />
@@ -31,6 +35,11 @@
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/et_bg_outlined.xml" value="0.184" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/et_cursor_drawable.xml" value="0.2485" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/gradient_bs.xml" value="0.1" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/gradient_color_1.xml" value="0.158" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/gradient_color_2.xml" value="0.19" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/gradient_color_3.xml" value="0.19" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/gradient_color_4.xml" value="0.19" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/gradient_color_5.xml" value="0.19" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/ic_arrow_down_24.xml" value="0.1545" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/ic_back_24.xml" value="0.2425" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/ic_back_white_24.xml" value="0.122" />
@@ -44,6 +53,7 @@
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/ic_email_24.xml" value="0.23" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/ic_eraser_18.xml" value="0.117" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/ic_google_18.xml" value="0.274" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/ic_home_24.xml" value="0.1535" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/ic_login_kakao_18.xml" value="0.274" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/ic_login_naver_18.xml" value="0.274" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/ic_menu_24.xml" value="0.1" />
@@ -72,6 +82,7 @@
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/font/noto_sans_kr_bold_font_family.xml" value="0.1259259259259259" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/font/noto_sans_kr_medium_font_family.xml" value="0.1259259259259259" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/font/noto_sans_kr_regular_font_family.xml" value="0.1259259259259259" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout-v23/fragment_home.xml" value="0.2861111111111111" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/activity_main.xml" value="0.105" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/bottom_sheet_banner.xml" value="0.1515625" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/bottom_sheet_banner_list.xml" value="0.25" />
@@ -91,7 +102,7 @@
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_code_scan.xml" value="0.18143459915611815" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_dash_board.xml" value="0.22" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_gallery.xml" value="0.2" />
-        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_home.xml" value="0.27406969875959836" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_info.xml" value="0.18" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_posting.xml" value="0.1814814814814815" />
