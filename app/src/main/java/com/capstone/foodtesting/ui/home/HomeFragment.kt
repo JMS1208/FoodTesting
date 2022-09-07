@@ -37,6 +37,8 @@ import kotlinx.coroutines.*
 import com.capstone.foodtesting.ui.home.adapter.CategoryAdapter
 import com.capstone.foodtesting.ui.home.adapter.NewRestaurantPagingAdapter
 import com.capstone.foodtesting.util.CommonFunc.showTooltip
+import com.capstone.foodtesting.util.Constants.CODE_SCAN_BUNDLE_KEY
+import com.capstone.foodtesting.util.Constants.CODE_SCAN_REQUEST_KEY
 import it.sephiroth.android.library.xtooltip.ClosePolicy
 import it.sephiroth.android.library.xtooltip.Tooltip
 import kotlinx.coroutines.flow.collectLatest
@@ -329,8 +331,24 @@ class HomeFragment : Fragment() {
 
         setupCategoryBtnTouchListener()
 
+        setupFragmentResultListener()
 
+    }
 
+    private fun setupFragmentResultListener() {
+        requireActivity().supportFragmentManager.setFragmentResultListener(CODE_SCAN_REQUEST_KEY,viewLifecycleOwner) {
+            _, bundle ->
+
+            //정보를 꺼내와서
+            val result: String? = bundle.getString(CODE_SCAN_BUNDLE_KEY)
+
+            result?.let {
+                //TODO 일단은 매장명 전달하는걸로 함 나중에 바꿀것
+                val action = HomeFragmentDirections.actionFragmentHomeToFragmentReview(it)
+                findNavController().navigate(action)
+
+            }
+        }
     }
 
     private fun setupInitialText() {

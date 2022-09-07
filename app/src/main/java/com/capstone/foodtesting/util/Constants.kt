@@ -43,4 +43,8 @@ object Constants {
     const val SELECT_DATE_TIME = "select date time"
     const val DATE_TIME_KEY = "date time key"
     const val DATE_TIME_FORMAT = "yyyy.MM.dd (E) hh:mm"
+
+    //FragmentResultKey
+    const val CODE_SCAN_REQUEST_KEY = "code scan request key"
+    const val CODE_SCAN_BUNDLE_KEY = "code scan bundle key"
 }

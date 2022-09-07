@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/nestedScrollView"
+    tools:context=".ui.review.ReviewFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/tv_review_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/noto_sans_kr_bold_font_family"
+            android:includeFontPadding="false"
+            android:text="리뷰 남기기"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/iv_menu_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:background="@color/grey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_review_title" />
+
+        <TextView
+            android:id="@+id/tv_restaurant_name_and_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/noto_sans_kr_black_font_family"
+            android:includeFontPadding="false"
+            android:text="이곳에 가게 이름 (카테고리)"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/iv_menu_image"
+            app:layout_constraintTop_toTopOf="@id/iv_menu_image" />
+
+        <TextView
+            android:id="@+id/tv_menu_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+            android:includeFontPadding="false"
+            android:text="이곳에 메뉴 이름"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/iv_menu_image"
+            app:layout_constraintTop_toBottomOf="@id/tv_restaurant_name_and_category" />
+
+        <View
+            android:id="@+id/v_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/browser_actions_divider_color"
+            app:layout_constraintTop_toBottomOf="@id/iv_menu_image" />
+
+        <TextView
+            android:id="@+id/tv_review_comment_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/noto_sans_kr_black_font_family"
+            android:gravity="center_horizontal"
+            android:includeFontPadding="false"
+            android:text="시식하신 음식은 어떠셨나요?"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/v_divider" />
+
+        <TextView
+            android:id="@+id/tv_review_comment_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+            android:gravity="center_horizontal"
+            android:includeFontPadding="false"
+            android:maxLines="3"
+            android:text="방문하신 매장과 음식에 대한 전체적인 평점과 리뷰를 남겨주세요!"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_review_comment_1" />
+
+        <RatingBar
+            android:id="@+id/rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:rating="0"
+            android:stepSize="1"
+            android:progressTint="@color/ratingColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_review_comment_2"
+            />
+
+
+        <EditText
+            android:id="@+id/et_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/bg_rounded_stroke_grey_10"
+            android:gravity="top"
+            android:isScrollContainer="true"
+            android:maxHeight="200dp"
+            android:minHeight="150dp"
+            android:overScrollMode="always"
+            android:padding="10dp"
+            android:bufferType="spannable"
+            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+            android:includeFontPadding="false"
+            app:layout_constraintTop_toBottomOf="@id/rating_bar" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_hash_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:layout_constraintTop_toBottomOf="@id/et_review" />
+        <TextView
+            android:id="@+id/tv_hash_tag_explains"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="리뷰에 해시태그를 추가해보세요 !"
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:includeFontPadding="false"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/rv_hash_tag"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            />
+
+        <ImageView
+            android:id="@+id/iv_hash_tag_explains"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            app:srcCompat="@drawable/ic_question_mark_18"
+            app:tint="@color/grey"
+            app:layout_constraintTop_toTopOf="@id/tv_hash_tag_explains"
+            app:layout_constraintStart_toEndOf="@id/tv_hash_tag_explains"
+            app:layout_constraintBottom_toBottomOf="@id/tv_hash_tag_explains"
+            android:layout_marginStart="10dp"
+            />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            app:layout_constraintTop_toBottomOf="@id/iv_hash_tag_explains"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

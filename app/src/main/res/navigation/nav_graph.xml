@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_fragment_home_to_fragment_info"
             app:destination="@id/fragment_info" />
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_review"
+            app:destination="@id/fragment_review" />
     </fragment>
     <fragment
         android:id="@+id/fragment_info"
@@ -131,4 +134,13 @@
             android:name="datetime"
             app:argType="com.capstone.foodtesting.data.model.date.DateTime" />
     </dialog>
+    <fragment
+        android:id="@+id/fragment_review"
+        android:name="com.capstone.foodtesting.ui.review.ReviewFragment"
+        android:label="fragment_review"
+        tools:layout="@layout/fragment_review" >
+        <argument
+            android:name="restaurant_name"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -37,7 +37,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/iv_logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/iv_logo"
-                app:tint="@color/dark_grey" />
+                 />
 
             <ImageView
                 android:id="@+id/iv_logo"
@@ -73,8 +73,6 @@
                 android:paddingEnd="20dp"
                 android:paddingBottom="10dp"
                 app:drawableEndCompat="@drawable/ic_down_arrow_single_18"
-                app:drawableStartCompat="@drawable/ic_home_20"
-
                 app:layout_constraintTop_toBottomOf="@id/iv_logo" />
 
             <ImageView
@@ -137,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp"
-                android:background="@drawable/bg_btn_grey"
+                android:background="@drawable/bg_btn_black"
                 android:elevation="3dp"
                 android:fontFamily="@font/noto_sans_kr_medium_font_family"
                 android:gravity="center_vertical"
@@ -147,7 +145,6 @@
                 android:paddingEnd="10dp"
                 android:paddingBottom="5dp"
                 android:text="1 / 5"
-
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:drawableEndCompat="@drawable/ic_right_arrow_24"

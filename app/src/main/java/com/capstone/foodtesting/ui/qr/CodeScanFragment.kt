@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
@@ -26,6 +27,8 @@ import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.databinding.FragmentCodeScanBinding
+import com.capstone.foodtesting.util.Constants.CODE_SCAN_BUNDLE_KEY
+import com.capstone.foodtesting.util.Constants.CODE_SCAN_REQUEST_KEY
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -131,6 +134,13 @@ class CodeScanFragment : Fragment() {
                 Toast.makeText(requireContext(), "Scan Result: ${it.text}", Toast.LENGTH_SHORT)
                     .show()
 
+                requireActivity().supportFragmentManager.setFragmentResult(CODE_SCAN_REQUEST_KEY,
+                    Bundle().apply {
+                        putString(CODE_SCAN_BUNDLE_KEY, "아무 매장명이나 전달")
+                    }
+                    )
+
+                findNavController().popBackStack()
             }
         }
         codeScanner.errorCallback = ErrorCallback {
