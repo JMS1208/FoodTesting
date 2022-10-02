@@ -1,119 +1,100 @@
 package com.capstone.foodtesting.ui.review
 
-import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
-import android.text.Spannable
-import android.text.Spanned
-import android.text.TextWatcher
-import android.text.style.ForegroundColorSpan
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.capstone.foodtesting.R
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.capstone.foodtesting.databinding.FragmentReviewBinding
-import com.capstone.foodtesting.util.CommonFunc.showTooltip
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ReviewFragment : Fragment() {
 
     private var _binding: FragmentReviewBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var hashTagReviewAdapter: HashTagReviewAdapter
+    private val args by navArgs<ReviewFragmentArgs>()
+
+    //임시로 만든거
+    private val fragmentList = arrayOf(
+        ReviewLineFragment(),
+        ReviewLineFragment(),
+        ReviewLineFragment(),
+        ReviewLineFragment(),
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentReviewBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
         return binding.root
     }
 
-//  private var hashTagList: List<String> = emptyList<String>()
-    private var hashTagList: HashSet<String> = hashSetOf()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.ratingBar.solidColor
-        hashTagReviewAdapter = HashTagReviewAdapter()
-        binding.rvHashTag.apply {
-            adapter = hashTagReviewAdapter
-            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        }
+        //뷰모델에 args 전달해서 요청하면 나오게
 
-        binding.ivHashTagExplains.setOnClickListener {
-            showTooltip(requireContext(), it,"#를 이용하여 해시태그를 추가할 수 있어요!")
-        }
+        binding.viewPager2.adapter = object : FragmentStateAdapter(this) {
+            override fun getItemCount(): Int = fragmentList.size
 
-        binding.etReview.apply {
-            setOnFocusChangeListener { _, hasFocused ->
-                if(hasFocused) {
-                    val x = binding.tvHashTagExplains.x
-                    val y = binding.tvHashTagExplains.y+binding.tvHashTagExplains.height
-                    binding.nestedScrollView.scrollTo(x.toInt(), y.toInt())
-
-                }
-
+            override fun createFragment(position: Int): Fragment {
+                return fragmentList[position]
             }
-            addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        }
+        binding.viewPager2.isUserInputEnabled = false
 
-                override fun onTextChanged(inputText: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    val extractedHashTagList = hashSetOf<String>()
-
-                    if (inputText?.contains("#") == true) {
-
-                        try {
-
-                            val tmpText= "$inputText "
-
-                            tmpText.split(" ").filter {
-                                it.contains("#") && it != "#"
-                            }.map {
-                                val selectedText = if(it.indexOf("#") != 0) {
-                                    it.removeRange(0, it.indexOf("#"))
-                                } else {
-                                    it
-                                }
-                                val startIndex = tmpText.indexOf(selectedText)
-                                val endIndex = startIndex + selectedText.length
-                                val span: Spannable = binding.etReview.text as Spannable
-                                span.setSpan(
-                                    ForegroundColorSpan(resources.getColor(R.color.main_color_1)),
-                                    startIndex,
-                                    endIndex,
-                                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-                                )
-                                extractedHashTagList.add(selectedText)
-
-                            }
-
-
-                        } catch (E: Exception) {
-                            Log.d("TAG", "리뷰 EditText 예외 ${E.message}")
-
-                        }
-
+        binding.viewPager2.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                when(position) {
+                    0 -> {
+                        binding.tvLeft.text = "취소"
+                        binding.tvRight.text = "(${position+1} / ${fragmentList.size}) 다음"
+                    }
+                    fragmentList.size-1 -> {
+                        binding.tvLeft.text = "이전"
+                        binding.tvRight.text = "작성완료"
+                    }
+                    else -> {
+                        binding.tvLeft.text = "이전"
+                        binding.tvRight.text = "(${position+1} / ${fragmentList.size}) 다음"
                     }
 
-                    hashTagList = extractedHashTagList
-                    hashTagReviewAdapter.submitList(hashTagList.toList())
-
-
                 }
+            }
+        })
 
-                override fun afterTextChanged(p0: Editable?) = Unit
+        binding.tvLeft.setOnClickListener {
+            if(binding.viewPager2.currentItem > 0) {
+                binding.viewPager2.currentItem -= 1
+            } else {
+                findNavController().popBackStack()
+            }
 
-            })
+        }
+
+        binding.tvRight.setOnClickListener {
+            if (binding.viewPager2.currentItem < fragmentList.lastIndex) {
+                binding.viewPager2.currentItem += 1
+            } else {
+                findNavController().popBackStack()
+            }
+
+
+
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

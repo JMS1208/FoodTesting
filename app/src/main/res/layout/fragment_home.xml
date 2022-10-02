@@ -651,7 +651,7 @@
                 android:layout_marginStart="20dp"
                 android:fontFamily="@font/noto_sans_kr_bold_font_family"
                 android:includeFontPadding="false"
-                android:text="따끈따끈 신규 식당 !"
+                android:text="따끈따끈 가오픈 식당 !"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -677,7 +677,7 @@
                 android:layout_marginTop="60dp"
                 android:fontFamily="@font/noto_sans_kr_bold_font_family"
                 android:includeFontPadding="false"
-                android:text="신메뉴 출시"
+                android:text="오늘의 개발 메뉴"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -706,80 +706,6 @@
                 />
 
 
-            <TextView
-                android:id="@+id/tv_hash_restaurant1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="60dp"
-                android:fontFamily="@font/noto_sans_kr_bold_font_family"
-                android:includeFontPadding="false"
-                android:text="# 해시태그 문구1"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_existing_restaurant" />
-
-            <ImageView
-                android:id="@+id/iv_tooltip_hash1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                app:layout_constraintBottom_toBottomOf="@id/tv_hash_restaurant1"
-                app:layout_constraintStart_toEndOf="@id/tv_hash_restaurant1"
-                app:layout_constraintTop_toTopOf="@id/tv_hash_restaurant1"
-                app:srcCompat="@drawable/ic_question_mark_18"
-                app:tint="@color/grey" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_hash_restaurant1"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"
-                android:clipToPadding="true"
-                app:layout_constraintTop_toBottomOf="@id/tv_hash_restaurant1"
-
-                />
-
-
-            <TextView
-                android:id="@+id/tv_hash_restaurant2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="60dp"
-                android:fontFamily="@font/noto_sans_kr_bold_font_family"
-                android:includeFontPadding="false"
-                android:text="# 해시태그 문구2"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_hash_restaurant1" />
-
-            <ImageView
-                android:id="@+id/iv_tooltip_hash2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                app:layout_constraintBottom_toBottomOf="@id/tv_hash_restaurant2"
-                app:layout_constraintStart_toEndOf="@id/tv_hash_restaurant2"
-                app:layout_constraintTop_toTopOf="@id/tv_hash_restaurant2"
-                app:srcCompat="@drawable/ic_question_mark_18"
-                app:tint="@color/grey" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_hash_restaurant2"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"
-                android:clipToPadding="true"
-                app:layout_constraintTop_toBottomOf="@id/tv_hash_restaurant2"
-
-                />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -797,6 +723,8 @@
         android:paddingEnd="20dp"
         android:text="매장 QR 스캔"
         android:textSize="20sp"
+        android:fontFamily="@font/noto_sans_kr_bold_font_family"
+        android:includeFontPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

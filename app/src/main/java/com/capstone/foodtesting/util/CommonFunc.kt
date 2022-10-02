@@ -5,7 +5,11 @@ import android.graphics.Typeface
 import android.util.Log
 import android.view.View
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
 import com.capstone.foodtesting.R
+import com.skydoves.balloon.*
 import dagger.hilt.android.qualifiers.ApplicationContext
 import it.sephiroth.android.library.xtooltip.ClosePolicy
 import it.sephiroth.android.library.xtooltip.Tooltip
@@ -13,27 +17,40 @@ import javax.inject.Inject
 
 object CommonFunc {
 
+
     fun showTooltip(context: Context,
                     view: View,
                     text: String,
-                    arrowShowing: Boolean = true,
-                    styleId: Int? = R.style.ToolTipAltStyle,
-                    floatingAnimation: Tooltip.Animation? = null
+                    lifecycleOwner: LifecycleOwner? = null,
+                    backgroundColorId: Int = R.color.personal_color2
+
     ) {
         try {
-            val tooltip = Tooltip.Builder(context)
-                .anchor(view, 0, 0, true)
-                .text(text)
-                .typeface(Typeface.DEFAULT)
-                .arrow(arrowShowing)
-                .closePolicy(ClosePolicy.TOUCH_OUTSIDE_CONSUME)
-                .styleId(styleId)
-                .floatingAnimation(floatingAnimation)
-                .showDuration(10000L)
-                .overlay(false)
-                .create()
 
-            tooltip.show(view, Tooltip.Gravity.TOP, true)
+            val iconForm = IconForm.Builder(context)
+                .setDrawable(ContextCompat.getDrawable(context, R.drawable.ic_info))
+                .setIconColor(ContextCompat.getColor(context, R.color.white))
+                .setIconSize(50)
+                .build()
+
+            val balloon = Balloon.Builder(context)
+                .setWidth(BalloonSizeSpec.WRAP)
+                .setHeight(BalloonSizeSpec.WRAP)
+                .setText(text)
+                .setTextColorResource(R.color.white)
+                .setTextSize(20f)
+                .setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
+                .setArrowSize(10)
+                .setArrowPosition(0.5f)
+                .setPadding(12)
+                .setIconForm(iconForm)
+                .setCornerRadius(8f)
+                .setBackgroundColorResource(backgroundColorId)
+                .setBalloonAnimation(BalloonAnimation.ELASTIC)
+                .setTextTypeface(Typeface.SANS_SERIF)
+                .setLifecycleOwner(lifecycleOwner)
+                .build()
+            balloon.showAlignTop(view)
         } catch(E: Exception) {
             Log.d("TAG", "showTooltip ${E.message}")
         }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ripple_black_stroke_5"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:fontFamily="@font/noto_sans_kr_medium_font_family"
+    android:includeFontPadding="false"
+    android:textSize="20sp"
+    android:text="음식의 향은 어떠셨나요"
+    android:gravity="center"
+    android:textColor="@color/black"
+    android:focusable="true"
+    android:clickable="true"
+    android:id="@+id/tv_query"
+    >
+</TextView>

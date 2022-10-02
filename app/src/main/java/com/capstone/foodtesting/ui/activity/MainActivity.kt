@@ -1,6 +1,7 @@
 package com.capstone.foodtesting.ui.activity
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.location.Location
@@ -12,13 +13,16 @@ import android.util.Base64
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.view.WindowCompat
 import androidx.core.view.setPadding
+import androidx.databinding.adapters.ViewBindingAdapter.setPadding
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -30,6 +34,8 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.capstone.foodtesting.databinding.ActivityMainBinding
 import com.capstone.foodtesting.util.Constants
+import com.capstone.foodtesting.util.navigationHeight
+import com.capstone.foodtesting.util.statusBarHeight
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
@@ -52,8 +58,24 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
+        if(Build.VERSION.SDK_INT >= 30) {	// API 30 에 적용
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+        }
+
+
+        Log.d("TAG", "크기: ${applicationContext.statusBarHeight()}, ${applicationContext.navigationHeight()}")
+        binding.activityContainer.setPadding(
+            0,
+            applicationContext.statusBarHeight(),
+            0,
+            0
+        )
     }
+
 
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

@@ -5,6 +5,14 @@ import com.capstone.foodtesting.ui.dashboard.category.*
 
 object Constants {
 
+    const val MAX_QUERY_COUNT = 8
+
+    const val IS_ALREADY_EXISTED = 0
+    const val IS_TOO_MUCH_COUNT = 1
+    const val IS_SUCCESS = 2
+
+
+
     const val PERMISSION_REQUEST_CODE = 2001
 
     const val NEED_TO_LOGIN = "need_to_login"

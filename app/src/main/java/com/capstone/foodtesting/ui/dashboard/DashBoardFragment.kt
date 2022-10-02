@@ -17,9 +17,12 @@ import com.capstone.foodtesting.databinding.FragmentDashBoardBinding
 import com.capstone.foodtesting.ui.bottomsheet.BSRecommendFragment
 import com.capstone.foodtesting.ui.bottomsheet.setaddress.BSSetupAddrFragment
 import com.capstone.foodtesting.ui.dashboard.category.*
+import com.capstone.foodtesting.util.statusBarHeight
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayoutMediator
+import com.navercorp.nid.NaverIdLoginSDK
+import com.navercorp.nid.NaverIdLoginSDK.applicationContext
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -82,7 +85,12 @@ class DashBoardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.root.setPadding(
+            0,
+            applicationContext.statusBarHeight(),
+            0,
+            0
+        )
 
 
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {

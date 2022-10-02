@@ -1,7 +1,5 @@
 package com.capstone.foodtesting.ui.login
 
-import android.app.ProgressDialog.show
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,17 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.data.datastore.LogInStateOptions
 import com.capstone.foodtesting.data.model.member.Member
 
 import com.capstone.foodtesting.databinding.FragmentLoginBinding
-import com.capstone.foodtesting.ui.register.RegisterFinishedFragmentDirections
 import com.capstone.foodtesting.util.Constants.RC_SIGN_IN
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -43,7 +36,6 @@ import com.navercorp.nid.profile.NidProfileCallback
 import com.navercorp.nid.profile.data.NidProfileResponse
 
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
 import java.util.*
 
 @AndroidEntryPoint
@@ -257,6 +249,8 @@ class LoginFragment : Fragment() {
 
             //아래는 글쓰기 화면 들어가는 코드
             //findNavController().navigate(R.id.fragment_write)
+
+
         }
 
 

@@ -49,15 +49,19 @@
         <action
             android:id="@+id/action_fragment_info_to_postingFragment"
             app:destination="@id/fragment_posting" />
+
         <action
-        android:id="@+id/action_fragment_info_to_infoRevFragment2"
-        app:destination="@id/fragment_info" />
+            android:id="@+id/action_fragment_info_to_fragment_survey"
+            app:destination="@id/fragment_survey" />
+        <action
+            android:id="@+id/action_fragment_info_to_fragment_info_rev"
+            app:destination="@id/fragment_info_rev" />
     </fragment>
     <fragment
         android:id="@+id/fragment_login"
         android:name="com.capstone.foodtesting.ui.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login2" >
         <action
             android:id="@+id/action_fragment_login_to_fragment_home"
             app:destination="@id/fragment_home" />
@@ -143,4 +147,19 @@
             android:name="restaurant_name"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_survey"
+        android:name="com.capstone.foodtesting.ui.survey.survey.SurveyFragment"
+        android:label="fragment_survey"
+        tools:layout="@layout/fragment_survey" >
+        <action
+            android:id="@+id/action_fragment_survey_to_fragment_info"
+            app:destination="@id/fragment_info" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_query_add"
+        android:name="com.capstone.foodtesting.ui.survey.add.QueryAddFragment"
+        android:label="fragment_query_add"
+        tools:layout="@layout/fragment_query_add" />
+
 </navigation>

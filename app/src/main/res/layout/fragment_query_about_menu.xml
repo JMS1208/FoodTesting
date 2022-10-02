@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.survey.menu.QueryAboutMenuFragment">
+
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/ic_cutlery"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        />
+    <TextView
+        android:id="@+id/tv_title_restaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="개발 메뉴 관련 빠른 질문 추가 (선택)"
+        android:fontFamily="@font/noto_sans_kr_bold_font_family"
+        android:includeFontPadding="false"
+        android:textSize="23sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/iv_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        />
+    <TextView
+        android:id="@+id/tv_explains"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="버튼을 클릭하면 해당 질문이 추가됩니다"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_restaurant"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/noto_sans_kr_medium_font_family"
+        android:includeFontPadding="false"
+        android:textSize="18sp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_menu_query"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_explains"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="80dp"
+        android:layoutAnimation="@anim/rv_animation_sticking_on_top"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

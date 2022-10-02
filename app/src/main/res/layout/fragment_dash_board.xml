@@ -117,6 +117,8 @@
         android:textSize="20sp"
         android:clickable="true"
         android:focusable="true"
+        android:fontFamily="@font/noto_sans_kr_bold_font_family"
+        android:includeFontPadding="false"
         android:drawableStart="@drawable/ic_choose_18"
         android:drawablePadding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"

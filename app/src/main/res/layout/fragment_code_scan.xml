@@ -35,6 +35,8 @@
         android:gravity="center_horizontal"
         android:text="화면을 터치하여\n매장의 QR 코드를 스캔해주세요"
         android:textSize="20sp"
+        android:fontFamily="@font/noto_sans_kr_bold_font_family"
+        android:includeFontPadding="false"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

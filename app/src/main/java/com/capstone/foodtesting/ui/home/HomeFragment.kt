@@ -268,13 +268,6 @@ class HomeFragment : Fragment() {
 
 
 
-//        categoryAdapter = CategoryAdapter(categoryList)
-
-//        binding.rvCategory.apply {
-//            adapter = categoryAdapter
-//            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-//        }
-
         newFoodSearchAdapter = NewRestaurantPagingAdapter()
 
         binding.rvNewRestaurant.apply {
@@ -303,8 +296,10 @@ class HomeFragment : Fragment() {
         }
 
         binding.btnQrScanner.setOnClickListener {
-            val action = HomeFragmentDirections.actionFragmentHomeToCodeScanFragment()
-            findNavController().navigate(action)
+//            val action = HomeFragmentDirections.actionFragmentHomeToCodeScanFragment()
+//            findNavController().navigate(action)
+
+            findNavController().navigate(R.id.fragment_review)
         }
 
         binding.btnInfo.setOnClickListener {
@@ -313,20 +308,13 @@ class HomeFragment : Fragment() {
         }
 
         binding.ivTooltipCategory.setOnClickListener {
-            showTooltip(requireContext(), it, "카테고리 설명 추가")
+            showTooltip(requireContext(), it, "카테고리 설명 추가", viewLifecycleOwner)
         }
 
         binding.ivTooltipExisting.setOnClickListener {
-            showTooltip(requireContext(), it,"신메뉴 설명 추가")
+            showTooltip(requireContext(), it,"신메뉴 설명 추가", viewLifecycleOwner)
         }
 
-        binding.ivTooltipHash1.setOnClickListener {
-            showTooltip(requireContext(), it,"해시태그1 설명 추가")
-        }
-
-        binding.ivTooltipHash2.setOnClickListener {
-            showTooltip(requireContext(), it, "해시태그2 설명 추가")
-        }
 
 
         setupCategoryBtnTouchListener()

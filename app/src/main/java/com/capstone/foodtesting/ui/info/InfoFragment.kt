@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.adapters.ViewBindingAdapter.setPadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +21,8 @@ import com.capstone.foodtesting.data.model.member.Member
 import com.capstone.foodtesting.databinding.FragmentInfoBinding
 import com.capstone.foodtesting.ui.bottomsheet.setaddress.BSSetupAddrFragment
 import com.capstone.foodtesting.util.CommonFunc.showTooltip
+import com.capstone.foodtesting.util.statusBarHeight
+import com.navercorp.nid.NaverIdLoginSDK.applicationContext
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -45,6 +48,13 @@ class InfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.clFragmentContainer.setPadding(
+            0,
+            applicationContext.statusBarHeight(),
+            0,
+            0
+        )
 
         viewLifecycleOwner.lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -102,7 +112,7 @@ class InfoFragment : Fragment() {
 
         }
         binding.tvModifyMember.setOnClickListener {
-            val action=InfoFragmentDirections.actionFragmentInfoToInfoRevFragment2()
+            val action=InfoFragmentDirections.actionFragmentInfoToFragmentInfoRev()
             findNavController().navigate(action)
         }
         binding.tvLogOut.setOnClickListener {
@@ -125,11 +135,16 @@ class InfoFragment : Fragment() {
             builder.show()
         }
         binding.ivQrTooltip.setOnClickListener {
-            showTooltip(requireContext(), it, "테스터가 리뷰 작성을 위해 필요한 QR 코드입니다<br />캡처하여 매장에 비치해주세요")
+            showTooltip(requireContext(), it, "테스터가 리뷰 작성을 위해 필요한 QR 코드입니다\n캡처하여 매장에 비치해주세요", viewLifecycleOwner)
         }
 
         binding.tvManagePosting.setOnClickListener {
             val action = InfoFragmentDirections.actionFragmentInfoToPostingFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.tvCreateSurvey.setOnClickListener {
+            val action = InfoFragmentDirections.actionFragmentInfoToFragmentSurvey()
             findNavController().navigate(action)
         }
     }
