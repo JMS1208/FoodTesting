@@ -8,13 +8,8 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.animation.AnimationUtils
-import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.view.get
 import androidx.core.view.isVisible
-import androidx.fragment.app.findFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -36,7 +31,6 @@ import com.capstone.foodtesting.util.Constants.IS_ALREADY_EXISTED
 import com.capstone.foodtesting.util.Constants.IS_SUCCESS
 import com.capstone.foodtesting.util.Constants.IS_TOO_MUCH_COUNT
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.snackbar.Snackbar
 import com.skydoves.balloon.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.min
@@ -295,20 +289,20 @@ class SurveyFragment : Fragment() {
                         leftBtnText = "취소"
                         rightBtnText = "만들러가기"
 
-                        val titleOfZero =
-                            binding.viewPager2[0].findViewById<TextView?>(R.id.tv_title)
-
-                        titleOfZero?.viewTreeObserver?.addOnGlobalLayoutListener(object :
-                            ViewTreeObserver.OnGlobalLayoutListener {
-                            override fun onGlobalLayout() {
-                                if (currentPage == 0) {
-                                    createBalloon("화면을 터치해보세요 !", titleOfZero)
-                                }
-
-                                titleOfZero.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                            }
-
-                        })
+//                        val titleOfZero =
+//                            binding.viewPager2[0].findViewById<TextView?>(R.id.tv_title)
+//
+//                        titleOfZero?.viewTreeObserver?.addOnGlobalLayoutListener(object :
+//                            ViewTreeObserver.OnGlobalLayoutListener {
+//                            override fun onGlobalLayout() {
+//                                if (currentPage == 0) {
+//                                    createBalloon("화면을 터치해보세요 !", titleOfZero)
+//                                }
+//
+//                                titleOfZero.viewTreeObserver.removeOnGlobalLayoutListener(this)
+//                            }
+//
+//                        })
 
 
                     }
@@ -458,7 +452,7 @@ class SurveyFragment : Fragment() {
                     .setArrowPosition(0.5f)
                     .setPadding(12)
                     .setCornerRadius(8f)
-                    .setBackgroundColorResource(R.color.personal_color2)
+                    .setBackgroundColorResource(R.color.base_blue)
                     .setBalloonAnimation(BalloonAnimation.ELASTIC)
                     .setTextTypeface(Typeface.SANS_SERIF)
                     .setLifecycleOwner(viewLifecycleOwner)
@@ -522,7 +516,7 @@ class SurveyFragment : Fragment() {
                     .setArrowPosition(0.5f)
                     .setPadding(12)
                     .setCornerRadius(8f)
-                    .setBackgroundColorResource(R.color.personal_color)
+                    .setBackgroundColorResource(R.color.point_red)
                     .setBalloonAnimation(BalloonAnimation.ELASTIC)
                     .setTextTypeface(Typeface.SANS_SERIF)
                     .setLifecycleOwner(viewLifecycleOwner)
@@ -547,7 +541,7 @@ class SurveyFragment : Fragment() {
                         .setArrowPosition(0.5f)
                         .setPadding(12)
                         .setCornerRadius(8f)
-                        .setBackgroundColorResource(R.color.personal_color)
+                        .setBackgroundColorResource(R.color.point_red)
                         .setBalloonAnimation(BalloonAnimation.ELASTIC)
                         .setTextTypeface(Typeface.SANS_SERIF)
                         .setLifecycleOwner(viewLifecycleOwner)
@@ -598,7 +592,7 @@ class SurveyFragment : Fragment() {
                             .setPadding(12)
                             .setLayout(R.layout.balloon_questionnaire_added)
                             .setCornerRadius(8f)
-                            .setBackgroundColorResource(R.color.personal_color2)
+                            .setBackgroundColorResource(R.color.base_blue)
                             .setBalloonAnimation(BalloonAnimation.ELASTIC)
                             .setTextTypeface(Typeface.SANS_SERIF)
                             .setLifecycleOwner(viewLifecycleOwner)
@@ -620,7 +614,7 @@ class SurveyFragment : Fragment() {
                     .setPadding(12)
                     .setLayout(R.layout.balloon_questionnaire_is_already_existed)
                     .setCornerRadius(8f)
-                    .setBackgroundColorResource(R.color.personal_color)
+                    .setBackgroundColorResource(R.color.point_red)
                     .setBalloonAnimation(BalloonAnimation.ELASTIC)
                     .setTextTypeface(Typeface.SANS_SERIF)
                     .setLifecycleOwner(viewLifecycleOwner)
@@ -638,7 +632,7 @@ class SurveyFragment : Fragment() {
                     .setPadding(12)
                     .setLayout(R.layout.balloon_questionnaire_too_much)
                     .setCornerRadius(8f)
-                    .setBackgroundColorResource(R.color.personal_color)
+                    .setBackgroundColorResource(R.color.point_red)
                     .setBalloonAnimation(BalloonAnimation.ELASTIC)
                     .setTextTypeface(Typeface.SANS_SERIF)
                     .setLifecycleOwner(viewLifecycleOwner)
@@ -667,7 +661,7 @@ class SurveyFragment : Fragment() {
             .setArrowPosition(0.5f)
             .setPadding(12)
             .setCornerRadius(4f)
-            .setBackgroundColorResource(R.color.personal_color2)
+            .setBackgroundColorResource(R.color.base_blue)
             .setBalloonAnimation(BalloonAnimation.ELASTIC)
             .setLifecycleOwner(viewLifecycleOwner)
             .build()

@@ -149,13 +149,15 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
     //Rating
-    implementation ('com.github.Inconnu08:android-ratingreviews:1.2.0') { exclude group: 'org.jetbrains', module: 'annotations-java5' }
+    implementation('com.github.Inconnu08:android-ratingreviews:1.2.0') { exclude group: 'org.jetbrains', module: 'annotations-java5' }
 
     //ImagePicker
-    implementation ('io.github.ParkSangGwon:tedimagepicker:1.2.8')
+    implementation('io.github.ParkSangGwon:tedimagepicker:1.2.8')
 
     //Spinner
     implementation "com.github.skydoves:powerspinner:1.2.4"
 
+    //Ken Burns View
+    implementation 'com.flaviofaria:kenburnsview:1.0.7'
 
 }

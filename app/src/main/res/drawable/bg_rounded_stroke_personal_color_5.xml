@@ -12,7 +12,7 @@
         />
 
     <stroke
-        android:color="@color/personal_color"
+        android:color="@color/point_red"
         android:width="1dp"
         />
 </shape>

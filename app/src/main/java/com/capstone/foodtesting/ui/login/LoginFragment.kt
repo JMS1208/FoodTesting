@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.data.datastore.LogInStateOptions
 import com.capstone.foodtesting.data.model.member.Member
@@ -252,6 +253,9 @@ class LoginFragment : Fragment() {
 
 
         }
+
+
+
 
 
     }

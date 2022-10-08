@@ -58,22 +58,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
-        if(Build.VERSION.SDK_INT >= 30) {	// API 30 에 적용
-            WindowCompat.setDecorFitsSystemWindows(window, false)
-        }
-
-
-        Log.d("TAG", "크기: ${applicationContext.statusBarHeight()}, ${applicationContext.navigationHeight()}")
-        binding.activityContainer.setPadding(
-            0,
-            applicationContext.statusBarHeight(),
-            0,
-            0
-        )
     }
 
 

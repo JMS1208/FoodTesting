@@ -42,7 +42,7 @@
         android:id="@+id/fragment_info"
         android:name="com.capstone.foodtesting.ui.info.InfoFragment"
         android:label="fragment_info"
-        tools:layout="@layout/fragment_info" >
+        tools:layout="@layout/fragment_info2" >
         <action
             android:id="@+id/action_fragment_info_to_codeGenerateFragment"
             app:destination="@id/fragment_code_generate" />

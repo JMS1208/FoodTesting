@@ -85,12 +85,7 @@ class DashBoardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.root.setPadding(
-            0,
-            applicationContext.statusBarHeight(),
-            0,
-            0
-        )
+
 
 
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {

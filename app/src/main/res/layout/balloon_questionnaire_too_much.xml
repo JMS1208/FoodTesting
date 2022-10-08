@@ -7,7 +7,7 @@
     android:paddingBottom="10dp"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
-    android:background="@color/personal_color">
+    android:background="@color/point_red">
     <LinearLayout
         android:id="@+id/ll_title"
         android:layout_width="wrap_content"

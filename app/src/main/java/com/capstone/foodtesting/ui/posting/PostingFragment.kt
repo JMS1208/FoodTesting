@@ -1,32 +1,22 @@
 package com.capstone.foodtesting.ui.posting
 
-import android.graphics.Color
 import android.graphics.Typeface
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.databinding.FragmentPostingBinding
-import com.capstone.foodtesting.ui.posting.adapter.HashTagAdapter
 import com.capstone.foodtesting.ui.posting.adapter.MenuAdapter
-import com.capstone.foodtesting.ui.posting.adapter.ReviewAdapter
 import com.capstone.foodtesting.util.*
-import com.google.android.material.tabs.TabLayout
 import com.skydoves.balloon.*
-import com.taufiqrahman.reviewratings.Bar
-import com.taufiqrahman.reviewratings.BarLabels
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import kotlin.math.abs
 
 
 @AndroidEntryPoint
@@ -77,7 +67,7 @@ class PostingFragment : Fragment() {
                 .setPadding(12)
                 .setIconForm(iconForm)
                 .setCornerRadius(8f)
-                .setBackgroundColorResource(R.color.personal_color2)
+                .setBackgroundColorResource(R.color.base_blue)
                 .setBalloonAnimation(BalloonAnimation.ELASTIC)
                 .setLifecycleOwner(viewLifecycleOwner)
                 .setTextTypeface(Typeface.SANS_SERIF)

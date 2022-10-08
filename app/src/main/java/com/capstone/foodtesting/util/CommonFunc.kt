@@ -4,16 +4,10 @@ import android.content.Context
 import android.graphics.Typeface
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import com.capstone.foodtesting.R
 import com.skydoves.balloon.*
-import dagger.hilt.android.qualifiers.ApplicationContext
-import it.sephiroth.android.library.xtooltip.ClosePolicy
-import it.sephiroth.android.library.xtooltip.Tooltip
-import javax.inject.Inject
 
 object CommonFunc {
 
@@ -22,7 +16,7 @@ object CommonFunc {
                     view: View,
                     text: String,
                     lifecycleOwner: LifecycleOwner? = null,
-                    backgroundColorId: Int = R.color.personal_color2
+                    backgroundColorId: Int = R.color.base_blue
 
     ) {
         try {

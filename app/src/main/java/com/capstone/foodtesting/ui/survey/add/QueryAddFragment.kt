@@ -1,15 +1,12 @@
 package com.capstone.foodtesting.ui.survey.add
 
 import android.graphics.Typeface
-import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -145,7 +142,7 @@ class QueryAddFragment : Fragment() {
                         .setArrowPosition(0.5f)
                         .setPadding(12)
                         .setCornerRadius(8f)
-                        .setBackgroundColorResource(R.color.personal_color2)
+                        .setBackgroundColorResource(R.color.base_blue)
                         .setBalloonAnimation(BalloonAnimation.ELASTIC)
                         .setTextTypeface(Typeface.SANS_SERIF)
                         .setLifecycleOwner(viewLifecycleOwner)

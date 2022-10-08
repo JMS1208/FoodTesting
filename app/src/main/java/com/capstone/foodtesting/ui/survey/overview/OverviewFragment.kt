@@ -30,6 +30,7 @@ class OverviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.ivLogo.startAnimation(AnimationUtils.loadAnimation(requireContext(),R.anim.sticking_on_downward))
 
         binding.llContainer.setOnClickListener {
             when (count) {
@@ -52,7 +53,7 @@ class OverviewFragment : Fragment() {
                             )
                         )
                     }
-
+                    binding.tvExplains.visibility = View.GONE
 
                 }
                 1 -> {

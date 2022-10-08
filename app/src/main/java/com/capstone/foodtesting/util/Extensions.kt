@@ -1,10 +1,14 @@
 package com.capstone.foodtesting.util
 
 import android.app.Activity
+import android.app.Dialog
+import androidx.fragment.app.DialogFragment
 import android.content.Context
+import android.graphics.Point
 import android.os.Build
 import android.view.View
 import android.view.WindowManager
+import androidx.annotation.RequiresApi
 import androidx.core.view.WindowCompat
 import com.amar.library.ui.StickyScrollView
 
@@ -29,4 +33,63 @@ fun Context.navigationHeight(): Int {
 
     return if (resourceId > 0) resources.getDimensionPixelSize(resourceId)
     else 0
+}
+
+
+
+fun Context.dialogFragmentResize(dialogFragment: DialogFragment, width: Float, height: Float) {
+    val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
+    if (Build.VERSION.SDK_INT < 30) {
+
+        val display = windowManager.defaultDisplay
+        val size = Point()
+
+        display.getSize(size)
+
+        val window = dialogFragment.dialog?.window
+
+        val x = (size.x * width).toInt()
+        val y = (size.y * height).toInt()
+        window?.setLayout(x, y)
+
+    } else {
+
+        val rect = windowManager.currentWindowMetrics.bounds
+
+        val window = dialogFragment.dialog?.window
+
+        val x = (rect.width() * width).toInt()
+        val y = (rect.height() * height).toInt()
+
+        window?.setLayout(x, y)
+    }
+}
+
+fun Context.dialogResize(dialog: Dialog, width: Float, height: Float){
+    val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
+    if (Build.VERSION.SDK_INT < 30){
+        val display = windowManager.defaultDisplay
+        val size = Point()
+
+        display.getSize(size)
+
+        val window = dialog.window
+
+        val x = (size.x * width).toInt()
+        val y = (size.y * height).toInt()
+
+        window?.setLayout(x, y)
+
+    }else{
+        val rect = windowManager.currentWindowMetrics.bounds
+
+        val window = dialog.window
+        val x = (rect.width() * width).toInt()
+        val y = (rect.height() * height).toInt()
+
+        window?.setLayout(x, y)
+    }
+
 }

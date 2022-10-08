@@ -21,8 +21,9 @@
     <color name="gray_600">#FF757575</color>
     <color name="ratingColor">#FFA622</color>
     <color name="hash_tag">#2A8AFF</color>
-    <color name="blue">#2E73FD</color>
-    <color name="personal_color">#D60000</color>
-    <color name="personal_color2">#92C8F3</color>
-    <color name="personal_color3">#83CD55</color>
+    <color name="blue">#008BDB</color>
+    <color name="point_red">#FB3434</color>
+    <color name="base_blue">#92C8F3</color>
+    <color name="bright_green">#83CD55</color>
+    <color name="base_pink">#FFDBDB</color>
 </resources>
