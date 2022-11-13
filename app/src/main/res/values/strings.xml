@@ -19,4 +19,7 @@
         In pulvinar odio nisi, eget semper leo lacinia vel. Etiam rhoncus est eu nunc posuere bibendum. Donec laoreet diam mi, ac sollicitudin tortor dapibus vitae. Curabitur viverra, augue sollicitudin fringilla volutpat, est sem fermentum mauris, euismod scelerisque enim lorem ac massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus porttitor id sapien at facilisis. Mauris porta ante a sollicitudin eleifend. In hac habitasse platea dictumst. Praesent semper tempor tortor sit amet ornare. Nam eu ligula et diam ultricies tincidunt vel tincidunt nisi. Pellentesque auctor, augue eget ornare convallis, justo dui bibendum massa, eget euismod nibh urna eu justo. Nullam nisl mi, interdum sit amet tempus a, faucibus a elit. Nullam bibendum sem quis odio ornare ultrices.
     </string>
     <string name="dummy_text2">ㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ</string>
+    <string name="title_activity_item_detail_host">ItemDetailHostActivity</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
 </resources>

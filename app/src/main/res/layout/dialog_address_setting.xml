@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="5dp">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="주소 설정"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/et_search_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn_white_stroke_red2_5"
+                android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                android:includeFontPadding="false"
+                android:layout_marginTop="30dp"
+                android:textSize="18sp"
+                android:padding="10dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                android:gravity="start"
+                android:includeFontPadding="false"
+                android:text="검색 결과"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_search_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHeight_max="200dp"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                android:gravity="start"
+                android:includeFontPadding="false"
+                android:text="선택한 주소"
+                android:layout_marginTop="20dp"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_selected_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                android:gravity="start"
+                android:includeFontPadding="false"
+                android:text="선택한 주소의 지번 주소"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_selected_road_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                android:gravity="start"
+                android:includeFontPadding="false"
+                android:text="[선택한 주소의 도로명 주소]"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/blue"
+                android:textSize="15sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                >
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_close"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="10dp"
+                    android:text="취소"
+                    android:background="@drawable/bg_btn_white_stroke_red2_5"
+                    app:backgroundTint="@null"
+                    android:textColor="@color/point_red"
+                    android:fontFamily="@font/noto_sans_kr_bold_font_family"
+                    android:includeFontPadding="false"
+                    app:cornerRadius="5dp"
+                    app:rippleColor="@color/black"
+                    app:elevation="5dp"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_select"
+
+                    />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_select"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:text="선택"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/bg_btn_gradient_5"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/noto_sans_kr_bold_font_family"
+                    android:includeFontPadding="false"
+                    app:cornerRadius="5dp"
+                    app:rippleColor="@color/black"
+                    app:elevation="5dp"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btn_close"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.cardview.widget.CardView>

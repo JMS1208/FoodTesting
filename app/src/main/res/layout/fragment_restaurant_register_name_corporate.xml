@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.restaurant.register.CorporateFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ll_contents"
+        android:gravity="center"
+        android:padding="30dp"
+        >
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_logo"
+            android:adjustViewBounds="true"
+            android:layout_marginEnd="20dp"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="매장을 등록하고\n개발 메뉴를 소개해보세요!"
+            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+            android:includeFontPadding="false"
+            android:gravity="start"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="상호명 &amp; 사업자 등록번호"
+            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="start"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="상호명과 사업자 등록번호를 입력해주세요"
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:includeFontPadding="false"
+            android:textSize="18sp"
+            android:gravity="start"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="상호명"
+            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="start"
+            android:layout_marginTop="20dp"
+            />
+        <EditText
+            android:id="@+id/et_restaurant_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_stroke_black_5"
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:includeFontPadding="false"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:padding="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="사업자 등록번호"
+            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="start"
+            android:layout_marginTop="20dp"
+            />
+        <EditText
+            android:id="@+id/et_corporate_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_stroke_black_5"
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:includeFontPadding="false"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:inputType="numberDecimal"
+            android:hint="000-00-00000 (하이픈 포함)"
+            />
+        <TextView
+            android:id="@+id/tv_check_result"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="해당 사업자 등록번호를 사용하실 수 있습니다"
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:includeFontPadding="false"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            android:gravity="start"
+            android:layout_marginTop="5dp"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_check_reg_num_is_usable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_bold_font_family"
+            android:includeFontPadding="false"
+            app:layout_constraintTop_toBottomOf="@id/rv_keyword"
+            android:text="사업자등록번호 중복 확인"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="15dp"
+            app:backgroundTint="@null"
+            android:background="@drawable/bg_btn_gradient2_5"
+            android:elevation="5dp"
+            app:icon="@drawable/ic_check_"
+            app:iconTint="@color/white"
+            app:iconGravity="textStart"
+            app:iconSize="24dp"
+            app:iconPadding="10dp"
+            app:rippleColor="@color/white"
+            app:elevation="5dp"
+            />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

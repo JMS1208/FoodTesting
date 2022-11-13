@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragment_login">
+    app:startDestination="@id/fragment_common_login">
 
     <fragment
-        android:id="@+id/fragment_dash_board"
-        android:name="com.capstone.foodtesting.ui.dashboard.DashBoardFragment"
+        android:id="@+id/fragment_common_dash_board"
+        android:name="com.capstone.foodtesting.ui.common.dashboard.CommonDashBoardFragment"
         android:label="fragment_dash_board"
-        tools:layout="@layout/fragment_dash_board" >
+        tools:layout="@layout/fragment_common_dash_board" >
         <argument
             android:name="category"
             android:defaultValue="전체"
@@ -17,149 +17,190 @@
             app:nullable="true" />
     </fragment>
     <fragment
-        android:id="@+id/fragment_home"
-        android:name="com.capstone.foodtesting.ui.home.HomeFragment"
+        android:id="@+id/fragment_common_home"
+        android:name="com.capstone.foodtesting.ui.common.home.CommonHomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_common_home4" >
         <action
-            android:id="@+id/action_fragment_home_to_fragment_dash_board"
-            app:destination="@id/fragment_dash_board"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            android:id="@+id/action_fragment_common_home_to_fragment_common_dash_board"
+            app:destination="@id/fragment_common_dash_board"
+            />
         <action
-            android:id="@+id/action_fragment_home_to_codeScanFragment"
-            app:destination="@id/fragment_code_scan" />
+            android:id="@+id/action_fragment_common_home_to_fragment_common_code_scan"
+            app:destination="@id/fragment_common_code_scan" />
         <action
-            android:id="@+id/action_fragment_home_to_fragment_info"
-            app:destination="@id/fragment_info" />
+            android:id="@+id/action_fragment_common_home_to_fragment_common_manage"
+            app:destination="@id/fragment_common_manage" />
         <action
-            android:id="@+id/action_fragment_home_to_fragment_review"
-            app:destination="@id/fragment_review" />
+            android:id="@+id/action_fragment_common_home_to_fragment_member_review"
+            app:destination="@id/fragment_member_review" />
+
     </fragment>
     <fragment
-        android:id="@+id/fragment_info"
-        android:name="com.capstone.foodtesting.ui.info.InfoFragment"
+        android:id="@+id/fragment_common_manage"
+        android:name="com.capstone.foodtesting.ui.common.info.CommonManageFragment"
         android:label="fragment_info"
-        tools:layout="@layout/fragment_info2" >
+        tools:layout="@layout/fragment_common_manage3" >
         <action
-            android:id="@+id/action_fragment_info_to_codeGenerateFragment"
-            app:destination="@id/fragment_code_generate" />
+            android:id="@+id/action_fragment_common_manage_to_fragment_common_code_generate"
+            app:destination="@id/fragment_common_code_generate" />
         <action
-            android:id="@+id/action_fragment_info_to_postingFragment"
-            app:destination="@id/fragment_posting" />
+            android:id="@+id/action_fragment_common_manage_to_fragment_restaurant_room"
+            app:destination="@id/fragment_restaurant_room" />
 
         <action
-            android:id="@+id/action_fragment_info_to_fragment_survey"
-            app:destination="@id/fragment_survey" />
-        <action
-            android:id="@+id/action_fragment_info_to_fragment_info_rev"
-            app:destination="@id/fragment_info_rev" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragment_login"
-        android:name="com.capstone.foodtesting.ui.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login2" >
-        <action
-            android:id="@+id/action_fragment_login_to_fragment_home"
-            app:destination="@id/fragment_home" />
-        <action
-            android:id="@+id/action_fragment_login_to_registerFragment"
-            app:destination="@id/fragment_register" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragment_register"
-        android:name="com.capstone.foodtesting.ui.register.RegisterFragment"
-        android:label="fragment_register" >
-        <action
-            android:id="@+id/action_registerFragment_to_fragment_login"
-            app:destination="@id/fragment_login" />
-        <action
-            android:id="@+id/action_registerFragment_to_registerFinishedFragment"
-            app:destination="@id/fragment_register_finished" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragment_register_finished"
-        android:name="com.capstone.foodtesting.ui.register.RegisterFinishedFragment"
-        android:label="fragment_register_finished"
-        tools:layout="@layout/fragment_register_finished" >
-        <action
-            android:id="@+id/action_registerFinishedFragment_to_fragment_home"
-            app:destination="@id/fragment_home" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragment_code_scan"
-        android:name="com.capstone.foodtesting.ui.qr.CodeScanFragment"
-        android:label="fragment_code_scan"
-        tools:layout="@layout/fragment_code_scan" />
-    <fragment
-        android:id="@+id/fragment_write"
-        android:name="com.capstone.foodtesting.ui.write.WriteFragment"
-        android:label="fragment_write"
-        tools:layout="@layout/fragment_write" >
+            android:id="@+id/action_fragment_common_manage_to_fragment_restaurant_query_register"
+            app:destination="@id/fragment_restaurant_query_register" />
 
         <action
-            android:id="@+id/action_fragment_write_to_writeDateTimeDialogFragment"
-            app:destination="@id/writeDateTimeDialogFragment" />
+            android:id="@+id/action_fragment_common_manage_to_fragment_restaurant_register"
+            app:destination="@id/fragment_restaurant_register" />
+        <action
+            android:id="@+id/action_fragment_common_manage_to_fragment_common_code_scan"
+            app:destination="@id/fragment_common_code_scan" />
+        <action
+            android:id="@+id/action_fragment_common_manage_to_fragment_member_review"
+            app:destination="@id/fragment_member_review" />
+        <action
+            android:id="@+id/action_fragment_common_manage_to_fragment_member_info_modify"
+            app:destination="@id/fragment_member_info_modify" />
+        <action
+            android:id="@+id/action_fragment_common_manage_to_fragment_restaurant_add_menu"
+            app:destination="@id/fragment_restaurant_add_menu" />
+        <action
+            android:id="@+id/action_fragment_common_manage_to_fragment_common_login"
+            app:destination="@id/fragment_common_login" />
+        <action
+            android:id="@+id/action_fragment_common_manage_to_fragment_restaurant_info_modify"
+            app:destination="@id/fragment_restaurant_info_modify" />
+
     </fragment>
     <fragment
-        android:id="@+id/fragment_code_generate"
-        android:name="com.capstone.foodtesting.ui.qr.CodeGenerateFragment"
-        android:label="fragment_code_generate"
-        tools:layout="@layout/fragment_code_generate" >
+        android:id="@+id/fragment_common_login"
+        android:name="com.capstone.foodtesting.ui.common.login.CommonLoginFragment"
+        android:label="fragment_common_login"
+        tools:layout="@layout/fragment_common_login" >
+        <action
+            android:id="@+id/action_fragment_common_login_to_fragment_common_home"
+            app:destination="@id/fragment_common_home" />
+        <action
+            android:id="@+id/action_fragment_common_login_to_fragment_member_sign_up_completed"
+            app:destination="@id/fragment_member_sign_up_completed" />
+        <action
+            android:id="@+id/action_fragment_common_login_to_fragment_member_sign_up"
+            app:destination="@id/fragment_member_sign_up" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_member_sign_up"
+        android:name="com.capstone.foodtesting.ui.member.signup.MemberSignUpFragment"
+        android:label="fragment_member_sign_up"
+        tools:layout="@layout/fragment_member_sign_up"
+        />
+    <fragment
+        android:id="@+id/fragment_member_sign_up_completed"
+        android:name="com.capstone.foodtesting.ui.member.signup.MemberSignUpCompletedFragment"
+        android:label="fragment_member_sign_up_completed"
+        tools:layout="@layout/fragment_member_sign_up_completed" >
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_common_code_scan"
+        android:name="com.capstone.foodtesting.ui.common.qr.CommonCodeScanFragment"
+        android:label="fragment_common_code_scan"
+        tools:layout="@layout/fragment_common_code_scan" />
+    <fragment
+        android:id="@+id/fragment_restaurant_add_menu"
+        android:name="com.capstone.foodtesting.ui.restaurant.menu.RestaurantAddMenuFragment"
+        android:label="fragment_restaurant_add_menu"
+        tools:layout="@layout/fragment_restaurant_add_menu" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_common_code_generate"
+        android:name="com.capstone.foodtesting.ui.common.qr.CommonCodeGenerateFragment"
+        android:label="fragment_common_code_generate"
+        tools:layout="@layout/fragment_common_code_generate" >
         <argument
             android:name="uuid"
             app:argType="java.util.UUID" />
     </fragment>
     <fragment
-        android:id="@+id/fragment_posting"
-        android:name="com.capstone.foodtesting.ui.posting.PostingFragment"
-        android:label="fragment_posting"
-        tools:layout="@layout/fragment_posting" >
+        android:id="@+id/fragment_restaurant_room"
+        android:name="com.capstone.foodtesting.ui.restaurant.room.RestaurantRoomFragment"
+        android:label="fragment_restaurant_room"
+        tools:layout="@layout/fragment_restaurant_room" >
         <action
-            android:id="@+id/action_postingFragment_to_fragment_write"
-            app:destination="@id/fragment_write" />
+            android:id="@+id/action_fragment_restaurant_room_to_menuDetailDialogFragment"
+            app:destination="@id/menuDetailDialogFragment" />
+        <argument
+            android:name="reg_num"
+            app:argType="string" />
     </fragment>
-    <fragment
-        android:id="@+id/fragment_info_rev"
-        android:name="com.capstone.foodtesting.ui.infoRev.InfoRevFragment"
-        android:label="fragment_info_rev" >
-        <action
-            android:id="@+id/action_infoRevFragment2_to_fragment_info"
-            app:destination="@id/fragment_info" />
-    </fragment>
+
     <dialog
-        android:id="@+id/writeDateTimeDialogFragment"
-        android:name="com.capstone.foodtesting.ui.write.WriteDateTimeDialogFragment"
-        android:label="WriteDateTimeDialogFragment" >
+        android:id="@+id/OperatingTimeDialogFragment"
+        android:name="com.capstone.foodtesting.ui.restaurant.dialog.OperatingTimeDialogFragment"
+        android:label="OperatingTimeDialogFragment" >
         <argument
             android:name="datetime"
             app:argType="com.capstone.foodtesting.data.model.date.DateTime" />
     </dialog>
     <fragment
-        android:id="@+id/fragment_review"
-        android:name="com.capstone.foodtesting.ui.review.ReviewFragment"
-        android:label="fragment_review"
-        tools:layout="@layout/fragment_review" >
+        android:id="@+id/fragment_member_review"
+        android:name="com.capstone.foodtesting.ui.member.review.MemberReviewFragment"
+        android:label="fragment_member_review"
+        tools:layout="@layout/fragment_member_review" >
         <argument
-            android:name="restaurant_name"
+            android:name="reg_num"
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/fragment_survey"
-        android:name="com.capstone.foodtesting.ui.survey.survey.SurveyFragment"
-        android:label="fragment_survey"
-        tools:layout="@layout/fragment_survey" >
+        android:id="@+id/fragment_restaurant_query_register"
+        android:name="com.capstone.foodtesting.ui.restaurant.questionnaire.survey.RestaurantQueryRegisterFragment"
+        android:label="fragment_restaurant_query_register"
+        tools:layout="@layout/fragment_restaurant_query_register" >
         <action
-            android:id="@+id/action_fragment_survey_to_fragment_info"
-            app:destination="@id/fragment_info" />
+            android:id="@+id/action_fragment_restaurant_query_register_to_fragment_common_manage"
+            app:destination="@id/fragment_common_manage" />
     </fragment>
     <fragment
-        android:id="@+id/fragment_query_add"
-        android:name="com.capstone.foodtesting.ui.survey.add.QueryAddFragment"
-        android:label="fragment_query_add"
-        tools:layout="@layout/fragment_query_add" />
+        android:id="@+id/fragment_restaurant_query_register_add_personally"
+        android:name="com.capstone.foodtesting.ui.restaurant.questionnaire.add.RestaurantQueryRegisterAddPersonallyFragment"
+        android:label="fragment_restaurant_query_register_add_personally"
+        tools:layout="@layout/fragment_restaurant_query_register_add_personally" />
+    <fragment
+        android:id="@+id/fragment_restaurant_register"
+        android:name="com.capstone.foodtesting.ui.restaurant.register.RestaurantRegisterFragment"
+        android:label="fragment_restaurant_register" />
+    <fragment
+        android:id="@+id/fragment_restaurant_info_modify"
+        android:name="com.capstone.foodtesting.ui.restaurant.modify.RestaurantInfoModifyFragment"
+        android:label="fragment_restaurant_info_modify"
+        tools:layout="@layout/fragment_restaurant_info_modify" >
+        <argument
+            android:name="restaurant"
+            app:argType="com.capstone.foodtesting.data.model.restaurant.Restaurant" />
+    </fragment>
+    <dialog
+        android:id="@+id/bottom_sheet_select_menu_manage"
+        android:name="com.capstone.foodtesting.ui.restaurant.dialog.SelectMenuManageDialogFragment"
+        android:label="bottom_sheet_select_menu_manage"
+        tools:layout="@layout/bottom_sheet_select_menu_manage" >
+        <action
+            android:id="@+id/action_bottom_sheet_select_menu_manage_to_fragment_restaurant_add_menu"
+            app:destination="@id/fragment_restaurant_add_menu" />
+    </dialog>
+    <fragment
+        android:id="@+id/fragment_member_info_modify"
+        android:name="com.capstone.foodtesting.ui.member.modify.MemberInfoModifyFragment"
+        android:label="fragment_member_info_modify" />
+    <dialog
+        android:id="@+id/menuDetailDialogFragment"
+        android:name="com.capstone.foodtesting.ui.restaurant.dialog.MenuDetailDialogFragment"
+        android:label="MenuDetailDialogFragment" >
+        <argument
+            android:name="menu"
+            app:argType="com.capstone.foodtesting.data.model.menu.Menu" />
+    </dialog>
 
 </navigation>

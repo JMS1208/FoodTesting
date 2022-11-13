@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="20dp"
+    android:elevation="5dp"
+    app:cardBackgroundColor="@color/white"
+    >
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="20dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/iv_menu_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:background="@color/point_red"
+                    android:scaleType="centerCrop" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_menu_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="메뉴이름"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                android:includeFontPadding="false"
+                android:gravity="center"
+                android:textColor="@color/point_red"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                android:layout_marginTop="20dp"
+                android:includeFontPadding="false"
+                android:textSize="18sp"
+                android:text="테스트 기간"
+                android:gravity="start"
+                />
+
+            <TextView
+                android:id="@+id/tv_testing_period"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                android:textSize="16sp"
+                android:includeFontPadding="false"
+                android:gravity="start"
+                android:textColor="@color/blue"
+                android:layout_marginTop="10dp"
+                android:text="2022.10.10 ~ 2022.10.16"
+                />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="메뉴 설명"
+                android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                android:textSize="18sp"
+                android:layout_marginTop="30dp"
+                android:includeFontPadding="false"
+                />
+
+
+            <com.webtoonscorp.android.readmore.ReadMoreTextView
+                android:id="@+id/tv_menu_explains"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:readMoreText="더보기"
+                android:text="11111111111114444444444444444444444444444444444111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                app:readMoreTypeface="sans"
+                app:readMoreTextStyle="bold"
+                app:readMoreTextSize="16sp"
+                android:textSize="16sp"
+                app:readMoreTextUnderline="true"
+                app:readMoreMaxLines="2"
+                android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                android:includeFontPadding="false"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey"
+                app:readMoreTextColor="@color/dark_grey"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="원산지 설명"
+                android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                android:textSize="18sp"
+                android:layout_marginTop="30dp"
+                android:includeFontPadding="false"
+                />
+
+
+            <com.webtoonscorp.android.readmore.ReadMoreTextView
+                android:id="@+id/tv_menu_ingredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:readMoreText="더보기"
+                android:text="11111111111114444444444444444444444444444444444111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                app:readMoreTypeface="sans"
+                app:readMoreTextStyle="bold"
+                app:readMoreTextSize="16sp"
+                android:textSize="16sp"
+                app:readMoreTextUnderline="true"
+                app:readMoreMaxLines="2"
+                android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                android:includeFontPadding="false"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey"
+                app:readMoreTextColor="@color/dark_grey"
+                />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.cardview.widget.CardView>
+

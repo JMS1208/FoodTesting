@@ -9,7 +9,7 @@
     android:layout_marginEnd="20dp"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
-    android:fontFamily="@font/noto_sans_kr_medium_font_family"
+    android:fontFamily="@font/noto_sans_kr_regular_font_family"
     android:includeFontPadding="false"
     android:textSize="20sp"
     android:text="음식의 향은 어떠셨나요"

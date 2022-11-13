@@ -49,7 +49,7 @@ class AddressInfoAdapter : ListAdapter<AddressInfo, AddressInfoAdapter.ViewHolde
             }
             itemBinding.apply {
                 tvAddress.text = addressInfo.address?.addressFullName ?: "주소 정보 없음"
-                val tmpText = "[도로명: ${addressInfo.roadAddress?.roadAddressFullName ?: "주소 정보 없음"}]"
+                val tmpText = "${addressInfo.roadAddress?.roadAddressFullName ?: "도로명 정보 없음"}"
                 tvRoadAddress.text = tmpText
                 ivDeleteItem.setOnClickListener {
                     onItemRemoveListener?.let {
@@ -57,7 +57,7 @@ class AddressInfoAdapter : ListAdapter<AddressInfo, AddressInfoAdapter.ViewHolde
                     }
                 }
                 tvCurrentGuide.text = if (addressInfo.isFirstItem) {
-                    "(현재 위치)"
+                    "[현재 위치]"
 
                 } else {
                     ""

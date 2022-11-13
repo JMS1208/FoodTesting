@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.restaurant.register.CorporateFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ll_contents"
+        android:gravity="center"
+        android:padding="30dp"
+        >
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_logo"
+            android:adjustViewBounds="true"
+            android:layout_marginEnd="20dp"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="매장을 등록하고\n개발 메뉴를 소개해보세요!"
+            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+            android:includeFontPadding="false"
+            android:gravity="start"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="음식 카테고리 &amp; 연락처 &amp; 주소"
+            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="start"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="우리 매장의 카테고리와 연락처, 주소를 입력해주세요"
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:includeFontPadding="false"
+            android:textSize="18sp"
+            android:gravity="start"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="음식 카테고리"
+            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="start"
+            android:layout_marginTop="20dp"
+            />
+        <com.skydoves.powerspinner.PowerSpinnerView
+            android:id="@+id/spinner_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_stroke_black_5"
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:includeFontPadding="false"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:padding="10dp"
+            app:spinner_popup_animation="dropdown"
+            app:spinner_popup_background="@color/white"
+            app:spinner_popup_elevation="14dp"
+            app:spinner_item_height="50dp"
+            app:spinner_divider_show="true"
+            app:spinner_divider_color="@color/point_red"
+            app:spinner_divider_size="0.4dp"
+            android:hint="음식 카테고리 설정"
+            android:textColorHint="@color/blue"
+            app:spinner_arrow_gravity="end"
+            android:gravity="center"
+            android:textColor="@color/point_red"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="bottom"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="연락처"
+                android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:gravity="start"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="ex) 하이픈(-) 없이 입력해주세요"
+                android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                android:includeFontPadding="false"
+                android:textSize="14sp"
+                android:gravity="end"
+                android:layout_gravity="bottom"
+                />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/et_telephone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_stroke_black_5"
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:includeFontPadding="false"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:inputType="phone"
+            android:hint="01012345678 (하이픈 제외)"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="주소"
+            android:fontFamily="@font/noto_sans_kr_bold_font_family"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="start"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_stroke_black_5"
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:includeFontPadding="false"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:text="클릭하여 설정해주세요"
+            android:gravity="center"
+            android:textColor="@color/blue"
+            android:bufferType="spannable"
+            />
+
+        <TextView
+            android:id="@+id/tv_notice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="운영시간을 입력해주세요"
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:includeFontPadding="false"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            android:gravity="start"
+            android:layout_marginTop="5dp"
+            android:visibility="invisible"
+            />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

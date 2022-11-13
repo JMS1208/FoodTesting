@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.restaurant.questionnaire.add.RestaurantQueryRegisterAddPersonallyFragment">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/ic_checklist"
+        app:layout_constraintStart_toStartOf="@id/tv_title_add"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp"
+        />
+    <TextView
+        android:id="@+id/tv_title_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="직접 질문 추가 (선택)"
+        android:fontFamily="@font/noto_sans_kr_medium_font_family"
+        android:includeFontPadding="false"
+        android:textSize="23sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/iv_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        />
+    <TextView
+        android:id="@+id/tv_explains"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사장님께서 직접 질문을 추가하고\n질문에 대한 키워드를 만드실 수 있습니다"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_add"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+        android:includeFontPadding="false"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_query_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="질문 입력"
+        android:fontFamily="@font/noto_sans_kr_medium_font_family"
+        android:includeFontPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/tv_explains"
+        app:layout_constraintStart_toStartOf="@id/tv_explains"
+        android:layout_marginTop="30dp"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+        android:id="@+id/et_query_contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_stroke_black_5"
+        app:layout_constraintTop_toBottomOf="@id/tv_query_title"
+        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+        android:includeFontPadding="false"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="5dp"
+        android:textSize="18sp"
+        android:padding="10dp"
+        />
+    <TextView
+        android:id="@+id/tv_keyword_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="키워드 입력 (선택)"
+        android:fontFamily="@font/noto_sans_kr_medium_font_family"
+        android:includeFontPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/et_query_contents"
+        app:layout_constraintStart_toStartOf="@id/et_query_contents"
+        android:layout_marginTop="30dp"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        />
+
+    <ImageView
+        android:id="@+id/iv_explains"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:srcCompat="@drawable/ic_question_mark"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@id/tv_keyword_title"
+        app:layout_constraintTop_toTopOf="@id/tv_keyword_title"
+        app:layout_constraintBottom_toBottomOf="@id/tv_keyword_title"
+        android:adjustViewBounds="true"
+        android:background="@drawable/ripple_background"
+        android:focusable="true"
+        android:clickable="true"
+        />
+
+    <TextView
+        android:id="@+id/tv_add_keyword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_kr_medium_font_family"
+        android:includeFontPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/et_keyword_contents"
+        android:layout_marginBottom="5dp"
+        android:text="+ 추가"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_marginEnd="30dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/ripple_background"
+        />
+
+    <EditText
+        android:id="@+id/et_keyword_contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_stroke_black_5"
+        app:layout_constraintTop_toBottomOf="@id/tv_keyword_title"
+        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+        android:includeFontPadding="false"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="5dp"
+        android:textSize="18sp"
+        android:padding="10dp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_keyword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_keyword_contents"
+        app:layout_constraintBottom_toTopOf="@id/btn_add_query"
+        android:layout_marginTop="10dp"
+        android:paddingStart="20dp"
+        android:layoutAnimation="@anim/rv_animation_sticking_on_right"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_add_query"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_kr_bold_font_family"
+        android:includeFontPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/rv_keyword"
+        android:text="+ 질문추가"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_btn_gradient2_5"
+        android:elevation="5dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

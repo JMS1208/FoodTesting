@@ -10,8 +10,24 @@ import android.view.View
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.core.view.WindowCompat
+import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieDrawable
 import com.amar.library.ui.StickyScrollView
 
+
+fun LottieAnimationView.sandboxAnimations() {
+    try {
+        val field = javaClass.getDeclaredField("lottieDrawable")
+        field.isAccessible = true
+        val lottieDrawable = (field.get(this) as LottieDrawable)
+        val clazz = Class.forName(LottieDrawable::class.qualifiedName)
+        val systemAnimationsEnabled = clazz.getDeclaredField("systemAnimationsEnabled")
+        systemAnimationsEnabled.isAccessible = true
+        systemAnimationsEnabled.set(lottieDrawable, true)
+    } catch (ex: Exception) {
+
+    }
+}
 
 fun StickyScrollView.scrollToView(view: View) {
     this.smoothScrollTo(view.x.toInt(), view.y.toInt()-10)

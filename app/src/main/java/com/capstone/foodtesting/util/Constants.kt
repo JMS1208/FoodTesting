@@ -1,8 +1,5 @@
 package com.capstone.foodtesting.util
 
-import androidx.fragment.app.Fragment
-import com.capstone.foodtesting.ui.dashboard.category.*
-
 object Constants {
 
     const val MAX_QUERY_COUNT = 8
@@ -31,6 +28,10 @@ object Constants {
 
     const val UNSPLASH_BASE_URL = "https://api.unsplash.com"
     const val KAKAO_BASE_URL = "https://dapi.kakao.com"
+    const val FOOD_TESTING_BASE_URL = "http://ec2-13-125-198-213.ap-northeast-2.compute.amazonaws.com:8000/"
+    const val NAVER_BASE_URL = "https://naveropenapi.apigw.ntruss.com/"
+
+    const val NAVER_CLIENT_ID = ""
 
     //데이터베이스 이름
     const val DATABASE_NAME = "foodtesting_db"
@@ -55,4 +56,10 @@ object Constants {
     //FragmentResultKey
     const val CODE_SCAN_REQUEST_KEY = "code scan request key"
     const val CODE_SCAN_BUNDLE_KEY = "code scan bundle key"
+
+
+
+    //중앙대 위도 경도
+    const val InitLatitude: Double = 37.50415
+    const val InitLongitude: Double = 126.9570
 }

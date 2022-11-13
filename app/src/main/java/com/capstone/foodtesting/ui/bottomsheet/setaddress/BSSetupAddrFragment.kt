@@ -229,11 +229,6 @@ class BSSetupAddrFragment : BottomSheetDialogFragment() {
 
         }
 
-        binding.tilSearchAddress.setEndIconOnClickListener { editText->
-            binding.etSearchAddress.setText("")
-            viewModel.searchAddress(" ")
-        }
-
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.searchPagingResult.collectLatest {

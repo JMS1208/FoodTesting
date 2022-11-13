@@ -20,6 +20,6 @@ interface LocationDao {
     fun getAllAddressInfo(): Flow<List<AddressInfo>>
 
     @Query("SELECT * FROM address_info ORDER BY date DESC LIMIT 1")
-    fun getLatestAddressInfo(): Flow<AddressInfo>
+    fun getLatestAddressInfo(): Flow<AddressInfo?>
 
 }

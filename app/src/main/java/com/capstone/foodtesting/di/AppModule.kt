@@ -2,18 +2,19 @@ package com.capstone.foodtesting.di
 
 import android.content.ContentResolver
 import android.content.Context
+import android.os.Build.VERSION_CODES.M
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
-import com.capstone.foodtesting.data.api.KakaoAddressSearchApi
-import com.capstone.foodtesting.data.api.KakaoLocalApi
-import com.capstone.foodtesting.data.api.UnsplashApi
+import com.capstone.foodtesting.data.api.*
 import com.capstone.foodtesting.data.db.FoodTestingDatabase
 import com.capstone.foodtesting.util.Constants.DATABASE_NAME
 import com.capstone.foodtesting.util.Constants.DATASTORE_NAME
+import com.capstone.foodtesting.util.Constants.FOOD_TESTING_BASE_URL
 import com.capstone.foodtesting.util.Constants.KAKAO_BASE_URL
+import com.capstone.foodtesting.util.Constants.NAVER_BASE_URL
 import com.capstone.foodtesting.util.Constants.UNSPLASH_BASE_URL
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -27,6 +28,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Qualifier
@@ -66,6 +68,21 @@ object AppModule {
     @Retention(AnnotationRetention.BINARY)
     annotation class unsplashApi
 
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class foodTestingApi
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class naverApi
+
+    @Singleton
+    @Provides
+    @naverApi
+    fun provideNaverApi(
+        @naverApi retrofit: Retrofit
+    ): NaverGeoApi = retrofit.create(NaverGeoApi::class.java)
+
     @Singleton
     @Provides
     @kakaoApi
@@ -80,13 +97,31 @@ object AppModule {
         @unsplashApi retrofit: Retrofit
     ): UnsplashApi = retrofit.create(UnsplashApi::class.java)
 
-
     @Singleton
     @Provides
     @kakaoApi
     fun provideKakaoAddressSearchApi(
         @kakaoApi retrofit: Retrofit
     ): KakaoAddressSearchApi = retrofit.create(KakaoAddressSearchApi::class.java)
+
+    @Singleton
+    @Provides
+    @foodTestingApi
+    fun provideFoodTestingApi(
+        @foodTestingApi retrofit: Retrofit
+    ): FoodTestingApi = retrofit.create(FoodTestingApi::class.java)
+
+
+    @Singleton
+    @Provides
+    @naverApi
+    fun provideNaverRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl(NAVER_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
 
     @Singleton
     @Provides
@@ -117,6 +152,18 @@ object AppModule {
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
+    }
+
+    @Singleton
+    @Provides
+    @foodTestingApi
+    fun provideFoodTestingRetrofit(okHttpClient: OkHttpClient): Retrofit {
+
+        return Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl(FOOD_TESTING_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 
 

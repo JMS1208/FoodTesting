@@ -160,4 +160,15 @@ dependencies {
     //Ken Burns View
     implementation 'com.flaviofaria:kenburnsview:1.0.7'
 
+    //ReadMoreView
+    implementation "com.webtoonscorp.android:readmore-view:1.2.0"
+
+    //FlipView
+    implementation 'com.wajahatkarim:EasyFlipView:3.0.3'
+
+    //Naver Map
+    implementation("com.naver.maps:map-sdk:3.16.0")
+
+    //Lottie
+    implementation 'com.airbnb.android:lottie:5.2.0'
 }

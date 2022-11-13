@@ -1,11 +1,7 @@
 package com.capstone.foodtesting.data.repository
 
 import android.content.ContentResolver
-import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.*
-import androidx.datastore.preferences.preferencesDataStore
-import com.capstone.foodtesting.data.datastore.UserInfo
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
@@ -13,16 +9,22 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.capstone.foodtesting.data.api.KakaoAddressSearchApi
-import com.capstone.foodtesting.data.api.KakaoLocalApi
-import com.capstone.foodtesting.data.api.UnsplashApi
+import com.capstone.foodtesting.data.api.*
 import com.capstone.foodtesting.data.datastore.LogInStateOptions
 import com.capstone.foodtesting.data.db.FoodTestingDatabase
+import com.capstone.foodtesting.data.model.file.process.ImageHashResponse
 import com.capstone.foodtesting.data.model.kakao.local.AddressInfo
 import com.capstone.foodtesting.data.model.kakao.local.KakaoLocalResponse
 import com.capstone.foodtesting.data.model.kakao.search.address.AddressSearchResponse
 import com.capstone.foodtesting.data.model.kakao.search.address.Document
 import com.capstone.foodtesting.data.model.member.Member
+import com.capstone.foodtesting.data.model.member.Testing
+import com.capstone.foodtesting.data.model.menu.Menu
+import com.capstone.foodtesting.data.model.naver.geo.NaverGeoResponse
+import com.capstone.foodtesting.data.model.questionnaire.QueryLine
+import com.capstone.foodtesting.data.model.restaurant.Restaurant
+import com.capstone.foodtesting.data.model.restaurant.RestaurantResponse
+import com.capstone.foodtesting.data.model.review.Review
 import com.capstone.foodtesting.data.model.unsplash.Result
 import com.capstone.foodtesting.data.model.unsplash.UnsplashResponse
 import com.capstone.foodtesting.data.paging.AddressSearchPagingSource
@@ -30,12 +32,13 @@ import com.capstone.foodtesting.data.paging.NewRestaurantPagingSource
 import com.capstone.foodtesting.data.repository.MainRepositoryImpl.PreferencesKeys.CURRENT_LOCATION
 import com.capstone.foodtesting.data.repository.MainRepositoryImpl.PreferencesKeys.LOGIN_STATE
 import com.capstone.foodtesting.di.AppModule
-import com.capstone.foodtesting.util.Constants.GALLERY_PAGING_SIZE
 import com.capstone.foodtesting.util.Constants.PAGING_SIZE
 
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Response
+import java.io.File
 import java.io.IOException
 import java.util.*
 import javax.inject.Inject
@@ -49,6 +52,8 @@ class MainRepositoryImpl @Inject constructor(
     @AppModule.unsplashApi private val unsplashApi: UnsplashApi,
     @AppModule.kakaoApi private val kakaoLocalApi: KakaoLocalApi,
     @AppModule.kakaoApi private val kakaoAddressSearchApi: KakaoAddressSearchApi,
+    @AppModule.foodTestingApi private val foodTestingApi: FoodTestingApi,
+    @AppModule.naverApi private val naverGeoApi: NaverGeoApi,
     private val db: FoodTestingDatabase,
     private val contentResolver: ContentResolver
 ): MainRepository{
@@ -82,6 +87,65 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun convertCoordToAddress(x: String, y: String): Response<KakaoLocalResponse> {
         return kakaoLocalApi.convertCoordToAddress(x,y)
+    }
+
+    override suspend fun getUserInfo(uuid: String): Response<Testing> {
+        return foodTestingApi.getUserInfo(uuid)
+    }
+
+    override suspend fun registerUserInfo(
+        member: Member
+    ): Response<Member> {
+        return foodTestingApi.registerUserInfo(member)
+    }
+
+    override suspend fun loginUser(email: String, password: String): Response<Member> {
+        return foodTestingApi.loginUser(email, password)
+    }
+
+    override suspend fun getStoreInfoByCustomerId(uuid: String): Response<List<RestaurantResponse>> {
+       return foodTestingApi.getStoreInfoByCustomerId(uuid)
+    }
+
+    override suspend fun getStoreInfoByRegNum(reg_num: String): Response<List<RestaurantResponse>> {
+        return foodTestingApi.getStoreInfoByRegNum(reg_num)
+    }
+
+    override suspend fun getRestaruantByCategory(
+        category: String,
+        latitude: Double,
+        longitude: Double
+    ): Response<List<Restaurant>> {
+        return foodTestingApi.getRestaruantByCategory(category, latitude, longitude)
+    }
+
+    override suspend fun postNewMenu(menu: Menu): Response<Menu> {
+        return foodTestingApi.postNewMenu(menu)
+    }
+
+    override suspend fun uploadRestaurantImage(imageFile: File): Response<ImageHashResponse> {
+        return foodTestingApi.postRestaurantPhoto(
+            MultipartBody.Part.createFormData("image", imageFile.name, imageFile.asRequestBody())
+        )
+    }
+
+    override suspend fun getRestaurantQuestions(
+        reg_num: String
+    ): Response<List<QueryLine>> {
+        return foodTestingApi.getRestaurantQuestions(reg_num)
+    }
+
+    override suspend fun postReview(reviewList: List<Review>): Response<List<Review>> {
+        return foodTestingApi.postReview(reviewList)
+    }
+
+    override suspend fun updateUserInfo(member: Member): Response<Member> {
+        return foodTestingApi.updateUserInfo(member)
+    }
+
+    //Naver Geo API
+    override suspend fun searchGeoInfo(query: String, coordinate: String): Response<NaverGeoResponse> {
+        return naverGeoApi.searchGeoInfo(query, coordinate)
     }
 
 
@@ -194,7 +258,7 @@ class MainRepositoryImpl @Inject constructor(
         return db.locationDao().getAllAddressInfo()
     }
 
-    override fun getLatestAddressInfo(): Flow<AddressInfo> {
+    override fun getLatestAddressInfo(): Flow<AddressInfo?> {
         return db.locationDao().getLatestAddressInfo()
     }
 
@@ -225,6 +289,23 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun updateMember(nickname: String, gender: Int, birthDate: Date) {
         db.memberDao().updateMember(nickname,gender,birthDate)
+    }
+
+    //Room - FavoriteRestaurant
+    override fun getAllFavoriteRestaurant(): Flow<List<Restaurant>?> {
+        return db.favoriteRestaurantDao().getAllFavoriteRestaurant()
+    }
+
+    override suspend fun insertFavoriteRestaurant(restaurant: Restaurant) {
+        db.favoriteRestaurantDao().insertFavoriteRestaurant(restaurant)
+    }
+
+    override suspend fun deleteFavoriteRestaurant(restaurant: Restaurant) {
+        db.favoriteRestaurantDao().deleteFavoriteRestaurant(restaurant)
+    }
+
+    override fun doExistsFavoriteRestaurant(reg_num: String): Restaurant? {
+        return db.favoriteRestaurantDao().doExistsFavoriteRestaurant(reg_num)
     }
 
 

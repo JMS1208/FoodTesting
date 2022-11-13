@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:cardCornerRadius="5dp"
         >
-        <ImageView
+        <com.flaviofaria.kenburnsview.KenBurnsView
             android:id="@+id/iv_food"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

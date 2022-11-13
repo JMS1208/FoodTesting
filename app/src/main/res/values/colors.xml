@@ -26,4 +26,6 @@
     <color name="base_blue">#92C8F3</color>
     <color name="bright_green">#83CD55</color>
     <color name="base_pink">#FFDBDB</color>
+    <color name="light_pink">#FFF7F7</color>
+    <color name="dark_blue">#005485</color>
 </resources>

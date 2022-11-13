@@ -1,21 +1,30 @@
 package com.capstone.foodtesting.data.model.questionnaire
 
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
+import java.util.*
+
+@Parcelize
+@JsonClass(generateAdapter = true)
 data class QueryLine(
+    @field:SerializedName("uuid")
+    val uuid: UUID = UUID.randomUUID(),
+    @field:SerializedName("reg_num")
+    val reg_num: String?=null,
+    @field:SerializedName("query")
     val query: String,
-    val keywords: List<String>,
-    val queryType: QueryType
-) {
+    @field:SerializedName("keywords")
+    val keywords: List<String>? = null,
+    @field:SerializedName("type")
+    val queryType: Int
+): Parcelable {
 
-//    companion object {
-//        const val type_restaurant = 1
-//        const val type_menu = 2
-//        const val type_add = 3
-//    }
-
-    enum class QueryType {
-        type_restaurant,
-        type_menu,
-        type_add
+    companion object QueryType{
+        const val TypeRestaurant = 0
+        const val TypeMenu = 1
+        const val TypeAdd = 2
     }
 
 }
