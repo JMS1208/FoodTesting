@@ -1,6 +1,11 @@
 package com.capstone.foodtesting.data.repository
 
 import android.content.ContentResolver
+import android.content.Context
+import android.database.Cursor
+import android.net.Uri
+import android.provider.OpenableColumns
+import androidx.core.net.toFile
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -20,11 +25,18 @@ import com.capstone.foodtesting.data.model.kakao.search.address.Document
 import com.capstone.foodtesting.data.model.member.Member
 import com.capstone.foodtesting.data.model.member.Testing
 import com.capstone.foodtesting.data.model.menu.Menu
+import com.capstone.foodtesting.data.model.menu.NewMenuList
 import com.capstone.foodtesting.data.model.naver.geo.NaverGeoResponse
 import com.capstone.foodtesting.data.model.questionnaire.QueryLine
+import com.capstone.foodtesting.data.model.questionnaire.QueryLineList
 import com.capstone.foodtesting.data.model.restaurant.Restaurant
 import com.capstone.foodtesting.data.model.restaurant.RestaurantResponse
+import com.capstone.foodtesting.data.model.restaurant.home.NewRestaurantList
+import com.capstone.foodtesting.data.model.restaurant.register.MessageResponse
 import com.capstone.foodtesting.data.model.review.Review
+import com.capstone.foodtesting.data.model.review.ReviewList
+import com.capstone.foodtesting.data.model.review.ReviewRecords
+import com.capstone.foodtesting.data.model.statistics.ReviewStatisticsResponse
 import com.capstone.foodtesting.data.model.unsplash.Result
 import com.capstone.foodtesting.data.model.unsplash.UnsplashResponse
 import com.capstone.foodtesting.data.paging.AddressSearchPagingSource
@@ -33,13 +45,17 @@ import com.capstone.foodtesting.data.repository.MainRepositoryImpl.PreferencesKe
 import com.capstone.foodtesting.data.repository.MainRepositoryImpl.PreferencesKeys.LOGIN_STATE
 import com.capstone.foodtesting.di.AppModule
 import com.capstone.foodtesting.util.Constants.PAGING_SIZE
+import dagger.hilt.android.qualifiers.ApplicationContext
+import gun0912.tedimagepicker.util.ToastUtil.context
 
 import kotlinx.coroutines.flow.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Response
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
+import java.io.InputStream
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -54,9 +70,10 @@ class MainRepositoryImpl @Inject constructor(
     @AppModule.kakaoApi private val kakaoAddressSearchApi: KakaoAddressSearchApi,
     @AppModule.foodTestingApi private val foodTestingApi: FoodTestingApi,
     @AppModule.naverApi private val naverGeoApi: NaverGeoApi,
+    @ApplicationContext context: Context,
     private val db: FoodTestingDatabase,
     private val contentResolver: ContentResolver
-): MainRepository{
+) : MainRepository {
 
     //Rest API
     override suspend fun searchFoods(
@@ -86,7 +103,7 @@ class MainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun convertCoordToAddress(x: String, y: String): Response<KakaoLocalResponse> {
-        return kakaoLocalApi.convertCoordToAddress(x,y)
+        return kakaoLocalApi.convertCoordToAddress(x, y)
     }
 
     override suspend fun getUserInfo(uuid: String): Response<Testing> {
@@ -104,14 +121,14 @@ class MainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getStoreInfoByCustomerId(uuid: String): Response<List<RestaurantResponse>> {
-       return foodTestingApi.getStoreInfoByCustomerId(uuid)
+        return foodTestingApi.getStoreInfoByCustomerId(uuid)
     }
 
     override suspend fun getStoreInfoByRegNum(reg_num: String): Response<List<RestaurantResponse>> {
         return foodTestingApi.getStoreInfoByRegNum(reg_num)
     }
 
-    override suspend fun getRestaruantByCategory(
+    override suspend fun getRestaurantByCategory(
         category: String,
         latitude: Double,
         longitude: Double
@@ -123,19 +140,32 @@ class MainRepositoryImpl @Inject constructor(
         return foodTestingApi.postNewMenu(menu)
     }
 
-    override suspend fun uploadRestaurantImage(imageFile: File): Response<ImageHashResponse> {
-        return foodTestingApi.postRestaurantPhoto(
-            MultipartBody.Part.createFormData("image", imageFile.name, imageFile.asRequestBody())
-        )
+    override suspend fun uploadRestaurantImage(imageUri: Uri): Response<ImageHashResponse> {
+
+
+        val bodyPart = try {
+            val imageFile = getFile(context, imageUri)
+            MultipartBody.Part.createFormData("files", imageFile.name, imageFile.asRequestBody())
+
+        } catch (E: Exception) {
+            //val imageFile = File(imageUri.path ?: imageUri.encodedPath ?: imageUri.toFile())
+            val imageFile = imageUri.toFile()
+
+            MultipartBody.Part.createFormData("files", imageFile.name, imageFile.asRequestBody())
+        }
+        //원래는 name 을 "file"로 지정했었음
+        return foodTestingApi.postRestaurantPhoto(bodyPart)
+
     }
 
     override suspend fun getRestaurantQuestions(
         reg_num: String
-    ): Response<List<QueryLine>> {
+    ): Response<QueryLineList> {
         return foodTestingApi.getRestaurantQuestions(reg_num)
     }
 
-    override suspend fun postReview(reviewList: List<Review>): Response<List<Review>> {
+    override suspend fun postReview(reviews: List<Review>): Response<MessageResponse> {
+        val reviewList = ReviewList(reviews)
         return foodTestingApi.postReview(reviewList)
     }
 
@@ -143,8 +173,68 @@ class MainRepositoryImpl @Inject constructor(
         return foodTestingApi.updateUserInfo(member)
     }
 
+    override suspend fun getDefaultQuestions(type: Int): Response<List<QueryLine>?> {
+        return foodTestingApi.getDefaultQuestions(type)
+    }
+
+    //매장 질문 등록하기
+    override suspend fun registerQuestionnaire(
+        queryLineList: QueryLineList
+    ): Response<MessageResponse> {
+        return foodTestingApi.registerQuestionnaire(queryLineList)
+    }
+
+    //매장 등록하기 (데이터베이스에 정보 저장)
+    override suspend fun registerRestaurant(
+        restaurantInfo: Restaurant
+    ): Response<MessageResponse> {
+        return foodTestingApi.registerRestaurant(restaurantInfo)
+    }
+
+    //매장 정보 수정하기
+    override suspend fun modifyRestaurantInfo(restaurantInfo: Restaurant): Response<MessageResponse> {
+        return foodTestingApi.modifyRestaurantInfo(restaurantInfo)
+    }
+
+    //메뉴 삭제
+    override suspend fun deleteMenu(reg_num: String, menu_uuid: String): Response<MessageResponse> {
+        return foodTestingApi.deleteMenu(reg_num, menu_uuid)
+    }
+
+    //메뉴 수정
+    override suspend fun modifyMenu(menu: Menu): Response<MessageResponse> {
+        return foodTestingApi.modifyMenu(menu)
+    }
+
+    //신규등록 매장 가져오기
+    override suspend fun getHomeNewRestaurantList(
+        y: Double,
+        x: Double
+    ): Response<NewRestaurantList> {
+        return foodTestingApi.getNewRestaurantList(y, x)
+    }
+
+    //신규등록 메뉴 가져오기
+    override suspend fun getNewMenuList(): Response<NewMenuList> {
+        return foodTestingApi.getNewMenuList()
+    }
+
+    //통계 정보 가져오기
+    override suspend fun getReviewStatistics(reg_num: String): Response<ReviewStatisticsResponse> {
+        return foodTestingApi.getReviewStatistics(reg_num)
+    }
+
+    //내가 작성한 리뷰 가져오기
+    override suspend fun getMyReviews(customer_uuid: String): Response<ReviewRecords> {
+        return foodTestingApi.getMyReviews(customer_uuid)
+    }
+
+
     //Naver Geo API
-    override suspend fun searchGeoInfo(query: String, coordinate: String): Response<NaverGeoResponse> {
+    override suspend fun searchGeoInfo(
+        query: String,
+        coordinate: String
+    ): Response<NaverGeoResponse> {
         return naverGeoApi.searchGeoInfo(query, coordinate)
     }
 
@@ -155,16 +245,16 @@ class MainRepositoryImpl @Inject constructor(
 
         return Pager(
             config = PagingConfig(
-                pageSize =  PAGING_SIZE,
+                pageSize = PAGING_SIZE,
                 enablePlaceholders = false,
-                maxSize =  PAGING_SIZE * 3
+                maxSize = PAGING_SIZE * 3
             ),
             pagingSourceFactory = pagingSourceFactory
         ).flow
     }
 
     override fun searchAddressPaging(query: String): Flow<PagingData<Document>> {
-        val pagingSourceFactory = { AddressSearchPagingSource(kakaoAddressSearchApi,query) }
+        val pagingSourceFactory = { AddressSearchPagingSource(kakaoAddressSearchApi, query) }
 
         return Pager(
             config = PagingConfig(
@@ -177,15 +267,10 @@ class MainRepositoryImpl @Inject constructor(
     }
 
 
-
-
-
-
-
     //DataStore
 
     private object PreferencesKeys {
-        val LOGIN_STATE  = stringPreferencesKey("login_state")
+        val LOGIN_STATE = stringPreferencesKey("login_state")
         val CURRENT_LOCATION = stringPreferencesKey("addressInfo_uuid")
 
     }
@@ -202,7 +287,7 @@ class MainRepositoryImpl @Inject constructor(
 
 
     override suspend fun saveLogInState(state: String) {
-        dataStore.edit { prefs->
+        dataStore.edit { prefs ->
             prefs[LOGIN_STATE] = state
 
         }
@@ -211,7 +296,7 @@ class MainRepositoryImpl @Inject constructor(
     override suspend fun getLogInState(): Flow<String> {
         return dataStore.data
             .catch { exception ->
-                if(exception is IOException) {
+                if (exception is IOException) {
                     exception.printStackTrace()
                     emit(emptyPreferences())
                 } else {
@@ -219,7 +304,7 @@ class MainRepositoryImpl @Inject constructor(
                 }
 
             }
-            .map { prefs->
+            .map { prefs ->
                 prefs[LOGIN_STATE] ?: LogInStateOptions.LOGGED_OUT.value
 
             }
@@ -229,7 +314,7 @@ class MainRepositoryImpl @Inject constructor(
 
         return dataStore.data
             .catch { exception ->
-                if(exception is IOException) {
+                if (exception is IOException) {
                     exception.printStackTrace()
                     emit(emptyPreferences())
 
@@ -237,7 +322,7 @@ class MainRepositoryImpl @Inject constructor(
                     throw exception
                 }
             }
-            .map { prefs->
+            .map { prefs ->
 
                 prefs[CURRENT_LOCATION] ?: ""
             }
@@ -246,7 +331,7 @@ class MainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun saveCurrentAddressInfoUUID(uuid: String) {
-        dataStore.edit { prefs->
+        dataStore.edit { prefs ->
             prefs[CURRENT_LOCATION] = uuid
         }
     }
@@ -288,7 +373,7 @@ class MainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateMember(nickname: String, gender: Int, birthDate: Date) {
-        db.memberDao().updateMember(nickname,gender,birthDate)
+        db.memberDao().updateMember(nickname, gender, birthDate)
     }
 
     //Room - FavoriteRestaurant
@@ -309,4 +394,47 @@ class MainRepositoryImpl @Inject constructor(
     }
 
 
+    //PhotoFile Processing
+
+    private fun getFile(context: Context, uri: Uri): File {
+        val destinationFilename =
+            File(context.filesDir.path + File.separatorChar + queryName(context, uri))
+        try {
+            context.contentResolver.openInputStream(uri).use { ins ->
+                createFileFromStream(
+                    ins!!,
+                    destinationFilename
+                )
+            }
+        } catch (ex: Exception) {
+
+            ex.printStackTrace()
+        }
+        return destinationFilename
+    }
+
+    private fun createFileFromStream(ins: InputStream, destination: File?) {
+        try {
+            FileOutputStream(destination).use { os ->
+                val buffer = ByteArray(4096)
+                var length: Int
+                while (ins.read(buffer).also { length = it } > 0) {
+                    os.write(buffer, 0, length)
+                }
+                os.flush()
+            }
+        } catch (ex: Exception) {
+
+            ex.printStackTrace()
+        }
+    }
+
+    private fun queryName(context: Context, uri: Uri): String {
+        val returnCursor: Cursor = context.contentResolver.query(uri, null, null, null, null)!!
+        val nameIndex: Int = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+        returnCursor.moveToFirst()
+        val name: String = returnCursor.getString(nameIndex)
+        returnCursor.close()
+        return name
+    }
 }

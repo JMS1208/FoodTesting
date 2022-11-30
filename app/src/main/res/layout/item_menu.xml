@@ -14,14 +14,34 @@
         app:cardElevation="0dp"
         app:cardCornerRadius="10dp"
         >
-        <ImageView
-            android:id="@+id/iv_menu_image"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:background="@color/point_red"
-            />
+            >
+            <ImageView
+                android:id="@+id/iv_menu_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:background="@color/bright_grey"
+                />
+            <TextView
+                android:id="@+id/tv_sold_out"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_shadow_darker"
+                android:text="SOLD OUT"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:fontFamily="@font/noto_sans_kr_bold_font_family"
+                android:includeFontPadding="false"
+                android:gravity="center"
+                android:visibility="invisible"
+                />
+        </FrameLayout>
+
+
     </androidx.cardview.widget.CardView>
 
     <LinearLayout

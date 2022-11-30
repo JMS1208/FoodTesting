@@ -1,17 +1,18 @@
 package com.capstone.foodtesting.ui.restaurant.register
 
-import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.capstone.foodtesting.data.model.file.process.ImageHashResponse
+import com.capstone.foodtesting.data.model.member.Member
+import com.capstone.foodtesting.data.model.restaurant.Restaurant
 import com.capstone.foodtesting.data.model.restaurant.RestaurantResponse
+import com.capstone.foodtesting.data.model.restaurant.register.MessageResponse
 import com.capstone.foodtesting.data.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import okhttp3.MultipartBody
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
-import java.io.File
-import java.net.URI
 import javax.inject.Inject
+
 
 @HiltViewModel
 class RestaurantRegisterViewModel @Inject constructor(
@@ -22,12 +23,19 @@ class RestaurantRegisterViewModel @Inject constructor(
         return repository.getStoreInfoByRegNum(reg_num)
     }
 
-    suspend fun uploadRestaurantImage( imageUriPath: String): Response<ImageHashResponse> {
+    suspend fun uploadRestaurantImage(uri: Uri): Response<ImageHashResponse> {
 
-        val imageFile = File(imageUriPath)
-
-        return repository.uploadRestaurantImage(imageFile)
+        return repository.uploadRestaurantImage(uri)
 
     }
+
+    val getMemberInfo: Flow<Member?> = repository.getMember()
+
+    suspend fun registerRestaurantInfo(restaurant: Restaurant): Response<MessageResponse> {
+        return repository.registerRestaurant(restaurant)
+    }
+
+
+
 
 }

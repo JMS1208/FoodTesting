@@ -1,5 +1,6 @@
 package com.capstone.foodtesting.ui.activity
 
+
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
@@ -44,8 +45,10 @@ import com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.security.MessageDigest
+import com.capstone.foodtesting.R
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -55,12 +58,24 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
 
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+
+        setupInitFragment()
+
+
     }
 
+    private fun setupInitFragment() {
+        val host = supportFragmentManager.findFragmentById(R.id.navHostFragment)  as NavHostFragment
+        navController = host.navController
+
+
+    }
 
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

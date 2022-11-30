@@ -14,7 +14,7 @@ import com.capstone.foodtesting.R
 import com.capstone.foodtesting.data.model.questionnaire.QueryLine
 import com.capstone.foodtesting.databinding.FragmentRestaurantQueryRegisterAddPersonallyBinding
 import com.capstone.foodtesting.ui.member.review.KeywordAdapter
-import com.capstone.foodtesting.ui.restaurant.questionnaire.survey.RestaurantQueryRegisterFragment
+import com.capstone.foodtesting.ui.restaurant.questionnaire.RestaurantQueryRegisterFragment
 import com.capstone.foodtesting.util.CommonFunc.showTooltip
 import com.capstone.foodtesting.util.Constants.IS_ALREADY_EXISTED
 import com.capstone.foodtesting.util.Constants.IS_SUCCESS
@@ -64,10 +64,11 @@ class RestaurantQueryRegisterAddPersonallyFragment : Fragment() {
 
 
         binding.ivExplains.setOnClickListener {
+//            showToast(requireContext(),"해당 질문과 같이 제공되며, 질문에 대한 보기의 역할을 합니다", binding.ivExplains, window = requireActivity().window)
             showTooltip(
                 requireContext(),
                 binding.ivExplains,
-                "해당 질문과 같이 제공되며,\n질문에 대한 보기의 역할을 합니다",
+                "해당 질문과 같이 제공되며\n질문에 대한 보기 역할을 합니다",
                 viewLifecycleOwner
             )
         }
@@ -83,6 +84,8 @@ class RestaurantQueryRegisterAddPersonallyFragment : Fragment() {
         binding.tvAddKeyword.setOnClickListener {
             val keyword = binding.etKeywordContents.text.toString().trim()
             if (keyword.isEmpty()) {
+
+//                showToast(requireContext(), "키워드를 입력해주세요!")
                 showTooltip(
                     requireContext(),
                     binding.tvAddKeyword,
@@ -121,13 +124,8 @@ class RestaurantQueryRegisterAddPersonallyFragment : Fragment() {
             val query = binding.etQueryContents.text.toString().trim()
 
             if (query.isEmpty()) {
-                showTooltip(
-                    requireContext(),
-                    binding.btnAddQuery,
-                    "질문을 입력해주세요!",
-                    viewLifecycleOwner,
-                    R.color.black
-                )
+                showTooltip(requireContext(),binding.btnAddQuery,"질문을 입력해주세요!" )
+
             } else {
 
                 val remainedKeyword = binding.etKeywordContents.text.toString().trim()
@@ -142,7 +140,7 @@ class RestaurantQueryRegisterAddPersonallyFragment : Fragment() {
                         .setArrowPosition(0.5f)
                         .setPadding(12)
                         .setCornerRadius(8f)
-                        .setBackgroundColorResource(R.color.white)
+                        .setBackgroundColorResource(R.color.balloon_blue)
                         .setBalloonAnimation(BalloonAnimation.ELASTIC)
                         .setTextTypeface(Typeface.SANS_SERIF)
                         .setLifecycleOwner(viewLifecycleOwner)
@@ -190,9 +188,9 @@ class RestaurantQueryRegisterAddPersonallyFragment : Fragment() {
     }
 
     private fun addQueryLine(query: String, keywordList: List<String>) {
-        val result = (parentFragment as RestaurantQueryRegisterFragment).addQueryLine(query, keywordList,
-            QueryLine.TypeAdd
-        )
+        val regNum = (parentFragment as RestaurantQueryRegisterFragment).getRegNum()
+        val queryLine = QueryLine(reg_num = regNum, query = query, keywords = keywordList, queryType = QueryLine.TypeAdd)
+        val result = (parentFragment as RestaurantQueryRegisterFragment).addQueryLine(queryLine)
 
         when (result) {
             IS_SUCCESS -> {

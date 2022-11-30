@@ -104,7 +104,7 @@ class BSBannerFragment : BottomSheetDialogFragment() {
         }
 
         binding.tvShowAll.setOnClickListener {
-            Toast.makeText(requireContext(), "$peekHeight", Toast.LENGTH_SHORT).show()
+
         }
     }
 }

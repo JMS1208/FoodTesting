@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragment_common_login">
+    app:startDestination="@id/fragment_common_login"
+    >
 
     <fragment
         android:id="@+id/fragment_common_dash_board"
@@ -15,12 +16,15 @@
             android:defaultValue="전체"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_fragment_common_dash_board_to_fragment_restaurant_room"
+            app:destination="@id/fragment_restaurant_room" />
     </fragment>
     <fragment
         android:id="@+id/fragment_common_home"
         android:name="com.capstone.foodtesting.ui.common.home.CommonHomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_common_home4" >
+        tools:layout="@layout/fragment_common_home" >
         <action
             android:id="@+id/action_fragment_common_home_to_fragment_common_dash_board"
             app:destination="@id/fragment_common_dash_board"
@@ -34,11 +38,14 @@
         <action
             android:id="@+id/action_fragment_common_home_to_fragment_member_review"
             app:destination="@id/fragment_member_review" />
+        <action
+            android:id="@+id/action_fragment_common_home_to_fragment_restaurant_room"
+            app:destination="@id/fragment_restaurant_room" />
 
     </fragment>
     <fragment
         android:id="@+id/fragment_common_manage"
-        android:name="com.capstone.foodtesting.ui.common.info.CommonManageFragment"
+        android:name="com.capstone.foodtesting.ui.common.manage.CommonManageFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_common_manage3" >
         <action
@@ -73,6 +80,15 @@
         <action
             android:id="@+id/action_fragment_common_manage_to_fragment_restaurant_info_modify"
             app:destination="@id/fragment_restaurant_info_modify" />
+        <action
+            android:id="@+id/action_fragment_common_manage_to_fragment_review_anal"
+            app:destination="@id/fragment_review_anal" />
+        <action
+            android:id="@+id/action_fragment_common_manage_to_restaurantModifyMenuFragment"
+            app:destination="@id/fragment_restaurant_modify_menu" />
+        <action
+            android:id="@+id/action_fragment_common_manage_to_reviewRecordsFragment"
+            app:destination="@id/reviewRecordsFragment" />
 
     </fragment>
     <fragment
@@ -114,6 +130,12 @@
         android:label="fragment_restaurant_add_menu"
         tools:layout="@layout/fragment_restaurant_add_menu" >
 
+        <argument
+            android:name="reg_num"
+            app:argType="string" />
+        <argument
+            android:name="customer_uuid"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/fragment_common_code_generate"
@@ -121,8 +143,8 @@
         android:label="fragment_common_code_generate"
         tools:layout="@layout/fragment_common_code_generate" >
         <argument
-            android:name="uuid"
-            app:argType="java.util.UUID" />
+            android:name="reg_num"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/fragment_restaurant_room"
@@ -153,15 +175,21 @@
         <argument
             android:name="reg_num"
             app:argType="string" />
+        <argument
+            android:name="member"
+            app:argType="com.capstone.foodtesting.data.model.member.Member" />
     </fragment>
     <fragment
         android:id="@+id/fragment_restaurant_query_register"
-        android:name="com.capstone.foodtesting.ui.restaurant.questionnaire.survey.RestaurantQueryRegisterFragment"
+        android:name="com.capstone.foodtesting.ui.restaurant.questionnaire.RestaurantQueryRegisterFragment"
         android:label="fragment_restaurant_query_register"
         tools:layout="@layout/fragment_restaurant_query_register" >
         <action
             android:id="@+id/action_fragment_restaurant_query_register_to_fragment_common_manage"
             app:destination="@id/fragment_common_manage" />
+        <argument
+            android:name="reg_num"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/fragment_restaurant_query_register_add_personally"
@@ -193,7 +221,11 @@
     <fragment
         android:id="@+id/fragment_member_info_modify"
         android:name="com.capstone.foodtesting.ui.member.modify.MemberInfoModifyFragment"
-        android:label="fragment_member_info_modify" />
+        android:label="fragment_member_info_modify" >
+        <argument
+            android:name="member"
+            app:argType="com.capstone.foodtesting.data.model.member.Member" />
+    </fragment>
     <dialog
         android:id="@+id/menuDetailDialogFragment"
         android:name="com.capstone.foodtesting.ui.restaurant.dialog.MenuDetailDialogFragment"
@@ -202,5 +234,44 @@
             android:name="menu"
             app:argType="com.capstone.foodtesting.data.model.menu.Menu" />
     </dialog>
+    <fragment
+        android:id="@+id/fragment_review_anal"
+        android:name="com.capstone.foodtesting.ui.restaurant.review.ReviewAnalFragment"
+        android:label="fragment_review_anal"
+        tools:layout="@layout/fragment_review_anal" >
+        <argument
+            android:name="reg_num"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_restaurant_modify_menu"
+        android:name="com.capstone.foodtesting.ui.restaurant.menu.RestaurantModifyMenuFragment"
+        android:label="fragment_restaurant_modify_menu"
+        tools:layout="@layout/fragment_restaurant_modify_menu3" >
+        <argument
+            android:name="reg_num"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_fragment_restaurant_modify_menu_to_fragment_restaurant_modify_menu_detail"
+            app:destination="@id/fragment_restaurant_modify_menu_detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_restaurant_modify_menu_detail"
+        android:name="com.capstone.foodtesting.ui.restaurant.menu.RestaurantModifyMenuDetailFragment"
+        android:label="fragment_restaurant_modify_menu_detail"
+        tools:layout="@layout/fragment_restaurant_modify_menu_detail" >
+        <argument
+            android:name="menu"
+            app:argType="com.capstone.foodtesting.data.model.menu.Menu" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewRecordsFragment"
+        android:name="com.capstone.foodtesting.ui.member.review.records.ReviewRecordsFragment"
+        android:label="fragment_review_records"
+        tools:layout="@layout/fragment_review_records" >
+        <argument
+            android:name="member"
+            app:argType="com.capstone.foodtesting.data.model.member.Member" />
+    </fragment>
 
 </navigation>

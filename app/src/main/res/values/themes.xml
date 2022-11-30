@@ -22,9 +22,17 @@
     </style>
 
     <style name="TabLayoutTextStyle">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_regular_font_family</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="CustomToolbarTitle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/grey</item>
         <item name="android:fontFamily">@font/noto_sans_kr_regular_font_family</item>
         <item name="android:includeFontPadding">false</item>
     </style>

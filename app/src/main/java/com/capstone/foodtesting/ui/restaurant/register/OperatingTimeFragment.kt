@@ -1,6 +1,8 @@
 package com.capstone.foodtesting.ui.restaurant.register
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +39,7 @@ class OperatingTimeFragment : Fragment() {
             dialog.show(childFragmentManager, dialog.tag)
         }
 
+
         setFragmentResultListener("OperatingTime"){ _, bundle ->
             val restaurant = (parentFragment as RestaurantRegisterFragment).getCurrentRestaurant()
 
@@ -61,6 +64,10 @@ class OperatingTimeFragment : Fragment() {
             binding.tvOperatingTime.text = "$openTimeText ~ $closeTimeText"
             binding.tvOperatingTime.setTextColor(ContextCompat.getColor(requireContext(), R.color.point_red))
         }
+    }
+
+    fun getDayOff(): String {
+        return binding.etDayOff.text.toString()
     }
 
     override fun onDestroyView() {

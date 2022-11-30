@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.databinding.FragmentRestaurantQueryRegisterOverviewBinding
-import com.capstone.foodtesting.ui.restaurant.questionnaire.survey.RestaurantQueryRegisterFragment
+import com.capstone.foodtesting.ui.restaurant.questionnaire.RestaurantQueryRegisterFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

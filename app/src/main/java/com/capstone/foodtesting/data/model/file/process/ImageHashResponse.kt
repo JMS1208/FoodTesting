@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class ImageHashResponse(
-    @field:SerializedName("hash")
-    val hash: String?
+    @field:SerializedName("MESSAGE")
+    val imageHash: String?
  ): Parcelable
 

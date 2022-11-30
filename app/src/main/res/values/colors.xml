@@ -28,4 +28,9 @@
     <color name="base_pink">#FFDBDB</color>
     <color name="light_pink">#FFF7F7</color>
     <color name="dark_blue">#005485</color>
+    <color name="balloon_blue">#B2BDCC</color>
+    <color name="gradient_color1">#12c2e9</color>
+    <color name="gradient_color2">#c471ed</color>
+    <color name="gradient_color3">#f64f59</color>
+    <color name="transparent_black">#66000000</color>
 </resources>

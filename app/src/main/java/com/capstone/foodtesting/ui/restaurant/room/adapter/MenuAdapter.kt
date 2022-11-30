@@ -34,6 +34,11 @@ class MenuAdapter(private val menuList: List<Menu>): RecyclerView.Adapter<MenuAd
 
                 tvHopePrice.text = decFormat.format(menu.hope_price)
                 tvSalePrice.text = decFormat.format(menu.discount_price)
+                tvSoldOut.visibility = if(menu.is_break == 1) {
+                    View.VISIBLE
+                } else {
+                    View.INVISIBLE
+                }
             }
 
             itemView.setOnClickListener {

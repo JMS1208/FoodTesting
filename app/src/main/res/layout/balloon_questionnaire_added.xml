@@ -7,6 +7,7 @@
     android:paddingStart="20dp"
     android:paddingTop="10dp"
     android:paddingEnd="20dp"
+    android:background="@color/balloon_blue"
     android:paddingBottom="10dp">
 
     <TextView
@@ -17,6 +18,7 @@
         android:gravity="center"
         android:includeFontPadding="false"
         android:text="안내"
+        android:textColor="@color/white"
         android:textSize="18sp" />
 
 
@@ -25,6 +27,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_kr_regular_font_family"
         android:text="질문이 추가되었어요 !"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         />
 
 </LinearLayout>

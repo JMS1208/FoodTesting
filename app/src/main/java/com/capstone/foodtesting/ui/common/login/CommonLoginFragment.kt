@@ -7,8 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -20,6 +18,7 @@ import com.capstone.foodtesting.data.datastore.LogInStateOptions
 import com.capstone.foodtesting.data.model.member.Member
 
 import com.capstone.foodtesting.databinding.FragmentCommonLoginBinding
+import com.capstone.foodtesting.util.CommonFunc
 import com.capstone.foodtesting.util.Constants.RC_SIGN_IN
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -45,7 +44,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.*
 
 @AndroidEntryPoint
@@ -150,38 +148,36 @@ class CommonLoginFragment : Fragment() {
 
     private val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {
-            when {
-                error.toString() == AuthErrorCause.AccessDenied.toString() -> {
-                    Toast.makeText(context, "접근이 거부됨(동의 취소)", Toast.LENGTH_SHORT).show()
+            when(error.toString()) {
+                AuthErrorCause.AccessDenied.toString() -> {
+                    CommonFunc.showToast(requireContext(), "접근이 거부됨(동의 취소)")
                 }
-                error.toString() == AuthErrorCause.InvalidClient.toString() -> {
-                    Toast.makeText(context, "유효하지 않은 앱", Toast.LENGTH_SHORT).show()
+                AuthErrorCause.InvalidClient.toString() -> {
+                    CommonFunc.showToast(requireContext(), "유효하지 않은 앱")
                 }
-                error.toString() == AuthErrorCause.InvalidGrant.toString() -> {
-                    Toast.makeText(context, "인증수단이 유효하지 않아 인증할 수 없는 상태", Toast.LENGTH_SHORT).show()
+                AuthErrorCause.InvalidGrant.toString() -> {
+                    CommonFunc.showToast(requireContext(), "인증수단이 유효하지 않아 인증할 수 없는 상태")
                 }
-                error.toString() == AuthErrorCause.InvalidRequest.toString() -> {
-                    Toast.makeText(context, "요청 파라미터 오류", Toast.LENGTH_SHORT).show()
+                AuthErrorCause.InvalidRequest.toString() -> {
+                    CommonFunc.showToast(requireContext(), "요청 파라미터 오류")
                 }
-                error.toString() == AuthErrorCause.InvalidScope.toString() -> {
-                    Toast.makeText(context, "유효하지 않은 scope ID", Toast.LENGTH_SHORT).show()
+                AuthErrorCause.InvalidScope.toString() -> {
+                    CommonFunc.showToast(requireContext(), "유효하지 않은 scope ID")
                 }
-                error.toString() == AuthErrorCause.Misconfigured.toString() -> {
-                    Toast.makeText(context, "설정이 올바르지 않음(android key hash)", Toast.LENGTH_SHORT)
-                        .show()
+                AuthErrorCause.Misconfigured.toString() -> {
+                    CommonFunc.showToast(requireContext(), "설정이 올바르지 않음(android key hash)")
+
                 }
-                error.toString() == AuthErrorCause.ServerError.toString() -> {
-                    Toast.makeText(context, "서버 네부 에러", Toast.LENGTH_SHORT).show()
+                AuthErrorCause.ServerError.toString() -> {
+                    CommonFunc.showToast(requireContext(), "서버 네부 에러")
                 }
-                error.toString() == AuthErrorCause.Unauthorized.toString() -> {
-                    Toast.makeText(context, "앱이 요청 권한이 없음", Toast.LENGTH_SHORT).show()
+                AuthErrorCause.Unauthorized.toString() -> {
+                    CommonFunc.showToast(requireContext(), "앱이 요청 권한이 없음")
                 }
-                else -> {
-                    // Toast.makeText(context,"기타 에러",Toast.LENGTH_SHORT).show()
-                }
+                else -> Unit
             }
         } else if (token != null) {
-            Toast.makeText(context, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+            CommonFunc.showToast(requireContext(), "로그인에 성공하였습니다.")
             UserApiClient.instance.me { user, error ->
                 // get user info
                 Log.d(
@@ -286,9 +282,9 @@ class CommonLoginFragment : Fragment() {
             val password = binding.etPassword.text.toString()
 
             if (email.isEmpty()) {
-                Toast.makeText(requireContext(), "이메일을 입력해주세요", Toast.LENGTH_SHORT).show()
+                CommonFunc.showToast(requireContext(), "이메일을 입력해주세요")
             } else if (password.isEmpty()) {
-                Toast.makeText(requireContext(), "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+                CommonFunc.showToast(requireContext(), "비밀번호를 입력해주세요")
             } else {
                 CoroutineScope(Dispatchers.Main).launch {
 
@@ -303,13 +299,13 @@ class CommonLoginFragment : Fragment() {
                                 CommonLoginFragmentDirections.actionFragmentCommonLoginToFragmentCommonHome()
                             // TODO("email,pw로 BE에서 정보 맞는지 확인")
                             findNavController().navigate(action)
-                        } ?: Toast.makeText(requireContext(), "유효하지 않은 회원입니다", Toast.LENGTH_SHORT)
-                            .show()
+                        } ?: CommonFunc.showToast(requireContext(), "유효하지 않은 회원입니다")
+
 
 
                     } else {
-                        Toast.makeText(requireContext(), "이메일과 비밀번호를 확인해주세요", Toast.LENGTH_SHORT)
-                            .show()
+                        CommonFunc.showToast(requireContext(), "이메일과 비밀번호를 확인해주세요")
+
                     }
                 }
             }

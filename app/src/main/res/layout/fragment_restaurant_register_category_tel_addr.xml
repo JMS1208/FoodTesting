@@ -59,7 +59,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="우리 매장의 카테고리와 연락처, 주소를 입력해주세요"
+            android:text="매장의 카테고리와 연락처, 주소를 입력해주세요"
             android:fontFamily="@font/noto_sans_kr_regular_font_family"
             android:includeFontPadding="false"
             android:textSize="18sp"
@@ -120,7 +120,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="ex) 하이픈(-) 없이 입력해주세요"
+                android:text="하이픈(-) 없이 입력해주세요"
                 android:fontFamily="@font/noto_sans_kr_regular_font_family"
                 android:includeFontPadding="false"
                 android:textSize="14sp"
@@ -140,7 +140,8 @@
             android:textSize="18sp"
             android:padding="10dp"
             android:inputType="phone"
-            android:hint="01012345678 (하이픈 제외)"
+            android:maxLength="13"
+            android:hint="010-1234-5678"
             />
         <TextView
             android:layout_width="match_parent"

@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.restaurant.review.ReviewAnalFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_restaurant_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@color/base_pink"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="bottom"
+            >
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="리뷰들을 분석해드려요 !"
+                android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                android:includeFontPadding="false"
+                android:textSize="18sp"
+                android:gravity="end"
+
+                android:layout_gravity="bottom"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                />
+            <TextView
+                android:id="@+id/tv_restaurant_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="매장 이름 [카테고리]"
+                android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                android:includeFontPadding="false"
+                android:textSize="18sp"
+                android:gravity="end"
+                android:textColor="@color/black"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/point_red"
+        app:tabIndicatorFullWidth="true"
+        app:tabIndicatorHeight="2dp"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/point_red"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
+        >
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전체"
+            />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주 손님층"
+            />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="월별 손님"
+            />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="피드백 수"
+            />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="피드백 확인"
+            />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="리뷰 요약"
+            />
+
+    </com.google.android.material.tabs.TabLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <View
+            android:id="@+id/v_idx0"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_gravity="top"
+            android:background="@drawable/bg_shadow" />
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:id="@+id/ll_idx0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="30dp"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&quot; 매장에 방문한 손님이예요 ! &quot;"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:textSize="16sp"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@drawable/bg_btn_white_stroke_red2_5"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingTop="30dp"
+                        android:paddingBottom="30dp"
+                        >
+
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/chart_gender"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            />
+                        <com.github.mikephil.charting.charts.BarChart
+                            android:id="@+id/chart_age"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_marginTop="30dp"
+                            />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_result_age_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="주 손님층은 &apos;남성 20대&apos; 입니다"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="end"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue"
+                        />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/v_idx1"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/bg_grey" />
+
+                <LinearLayout
+                    android:id="@+id/ll_idx1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="30dp"
+                    >
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&quot; 손님이 가장 많았던 달은 !? &quot;"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:textSize="16sp"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@drawable/bg_btn_white_stroke_red2_5"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingTop="30dp"
+                        android:paddingBottom="30dp"
+                        >
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/chart_month"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_result_month"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="가장 손님이 많았던 달은 &apos;10월&apos; 이었어요"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="end"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue"
+                        />
+
+                </LinearLayout>
+
+
+
+                <View
+                    android:id="@+id/v_idx2"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:visibility="gone"
+                    android:background="@color/bg_grey" />
+
+
+
+                <LinearLayout
+                    android:id="@+id/ll_idx2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="30dp"
+                    android:visibility="gone"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&quot; 지금까지 받은 피드백은 총 N 개 &quot;"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:textSize="16sp"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="50dp"
+                        android:background="@drawable/bg_btn_white_stroke_red2_5"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        >
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="긍정적인 평가가 10% 더 높았어요 !"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="end"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue"
+                        />
+                </LinearLayout>
+
+
+                <View
+                    android:id="@+id/v_idx3"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/bg_grey" />
+
+
+                <LinearLayout
+                    android:id="@+id/ll_idx3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="30dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&quot; 피드백 확인 &quot;"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:textSize="16sp"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        >
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_review"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="200dp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+                <View
+                    android:id="@+id/v_idx4"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/bg_grey" />
+
+
+                <LinearLayout
+                    android:id="@+id/ll_idx4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="30dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&quot; 리뷰 요약 &quot;"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:textSize="16sp"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="50dp"
+                        android:background="@drawable/bg_btn_white_stroke_red2_5"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        >
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <View
+                    android:id="@+id/v_idx5"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/bg_grey" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
+
+
+</LinearLayout>
+
+
+

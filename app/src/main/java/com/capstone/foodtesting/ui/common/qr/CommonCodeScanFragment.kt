@@ -20,6 +20,7 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.capstone.foodtesting.databinding.FragmentCommonCodeScanBinding
+import com.capstone.foodtesting.util.CommonFunc
 import com.capstone.foodtesting.util.Constants.CODE_SCAN_BUNDLE_KEY
 import com.capstone.foodtesting.util.Constants.CODE_SCAN_REQUEST_KEY
 import kotlinx.coroutines.CoroutineScope
@@ -50,7 +51,7 @@ class CommonCodeScanFragment : Fragment() {
         registerForActivityResult(contract) { isGranted ->
             if (isGranted) {
                 startScanning()
-                if(::codeScanner.isInitialized) {
+                if (::codeScanner.isInitialized) {
                     codeScanner.startPreview()
                 }
             } else {
@@ -64,7 +65,8 @@ class CommonCodeScanFragment : Fragment() {
         AlertDialog.Builder(requireContext()).apply {
             setTitle("권한 설정")
             setMessage("QR 코드 스캔을 위해 카메라 권한을 허용해주세요")
-            setPositiveButton("권한 설정하러 가기"
+            setPositiveButton(
+                "권한 설정하러 가기"
             ) { _, _ ->
                 try {
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
@@ -77,7 +79,8 @@ class CommonCodeScanFragment : Fragment() {
                 }
 
             }
-            setNegativeButton("취소하기"
+            setNegativeButton(
+                "취소하기"
             ) { _, _ -> findNavController().popBackStack() }
             create()
             show()
@@ -95,7 +98,7 @@ class CommonCodeScanFragment : Fragment() {
         requestCameraPermission()
 
         binding.scannerView.setOnClickListener {
-            if(::codeScanner.isInitialized){
+            if (::codeScanner.isInitialized) {
                 codeScanner.startPreview()
             } else {
                 startScanning()
@@ -127,17 +130,21 @@ class CommonCodeScanFragment : Fragment() {
 
                 requireActivity().supportFragmentManager.setFragmentResult(CODE_SCAN_REQUEST_KEY,
                     Bundle().apply {
+                        //TODO {테스트용으로 작성한거고 원래는 위에꺼로 해야됨}
                         putString(CODE_SCAN_BUNDLE_KEY, it.text)
+//                        putString(CODE_SCAN_BUNDLE_KEY, "007-26-15182")
                     }
-                    )
+                )
 
                 findNavController().popBackStack()
             }
         }
         codeScanner.errorCallback = ErrorCallback {
             CoroutineScope(Dispatchers.Main).launch {
-                Toast.makeText(requireContext(), "Camera 초기화 오류 ${it.message}", Toast.LENGTH_SHORT)
-                    .show()
+                CommonFunc.showToast(
+                    requireContext(),
+                    "Camera 초기화 오류 ${it.message}"
+                )
             }
         }
 
@@ -145,16 +152,15 @@ class CommonCodeScanFragment : Fragment() {
     }
 
 
-
     override fun onResume() {
         super.onResume()
-        if(::codeScanner.isInitialized){
+        if (::codeScanner.isInitialized) {
             codeScanner.startPreview()
         }
     }
 
     override fun onPause() {
-        if(::codeScanner.isInitialized) {
+        if (::codeScanner.isInitialized) {
             codeScanner.releaseResources()
         }
         super.onPause()

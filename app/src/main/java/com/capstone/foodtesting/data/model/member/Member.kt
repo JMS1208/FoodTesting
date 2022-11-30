@@ -24,11 +24,11 @@ data class Member(
     @field:SerializedName("email")
     val email: String,
     @field:SerializedName("password")
-    val password: String?, //소셜로그인의 경우 null
+    var password: String?, //소셜로그인의 경우 null
     @field:SerializedName("name")
-    val name: String?,
+    var name: String?,
     @field:SerializedName("nickname")
-    val nickName: String?,
+    var nickName: String?,
     @field:SerializedName("gender")
     val gender: Int,
 //    val profile: String? = null,

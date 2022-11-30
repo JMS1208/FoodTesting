@@ -1,25 +1,17 @@
 package com.capstone.foodtesting.ui.restaurant.room
 
 import android.annotation.SuppressLint
-import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
-import androidx.core.widget.EdgeEffectCompat.getDistance
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.data.model.kakao.local.Address
@@ -27,8 +19,9 @@ import com.capstone.foodtesting.data.model.menu.Menu
 import com.capstone.foodtesting.data.model.restaurant.Restaurant
 import com.capstone.foodtesting.databinding.FragmentRestaurantRoomBinding
 import com.capstone.foodtesting.ui.restaurant.room.adapter.MenuAdapter
+import com.capstone.foodtesting.util.CommonFunc
 import com.capstone.foodtesting.util.CommonFunc.createLottieView
-import com.capstone.foodtesting.util.CommonFunc.showToast
+import com.capstone.foodtesting.util.Constants
 import com.capstone.foodtesting.util.Constants.InitLatitude
 import com.capstone.foodtesting.util.Constants.InitLongitude
 import com.naver.maps.geometry.LatLng
@@ -38,7 +31,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
 
 
 @AndroidEntryPoint
@@ -58,8 +50,8 @@ class RestaurantRoomFragment : Fragment(), OnMapReadyCallback {
 
     private var isSavedFavoriteRestaurant: Boolean = false
 
-    private var longitude: Double = 126.9570
-    private var latitude: Double = 37.50415
+    private var longitude: Double = InitLongitude
+    private var latitude: Double = InitLatitude
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
@@ -101,7 +93,7 @@ class RestaurantRoomFragment : Fragment(), OnMapReadyCallback {
                 val menuList = result.body()?.get(0)?.menuList
 
                 restaurant?.let {
-                    setupRestaurantInfo(it)
+                    viewModel.updateRestaurantInfoLiveData(it)
                 }
 
                 menuList?.let {
@@ -111,7 +103,7 @@ class RestaurantRoomFragment : Fragment(), OnMapReadyCallback {
 
             } else {
                 findNavController().popBackStack()
-                showToast(requireContext(), "현재 이용할 수 없습니다")
+                CommonFunc.showToast(requireContext(), "현재 이용할 수 없습니다")
             }
         }
 
@@ -140,6 +132,20 @@ class RestaurantRoomFragment : Fragment(), OnMapReadyCallback {
 
                 }
 
+            }
+
+        }
+
+        viewModel.restaurantInfoLiveData.observe(viewLifecycleOwner) { restaurant->
+            restaurant?.let {
+                setupRestaurantInfo(it)
+            }
+
+            if(this::naverMap.isInitialized) {
+                val cameraUpdate = CameraUpdate.scrollAndZoomTo(LatLng(latitude, longitude), 16.0).animate(
+                    CameraAnimation.Easing
+                )
+                this.naverMap.moveCamera((cameraUpdate))
             }
 
         }
@@ -204,8 +210,12 @@ class RestaurantRoomFragment : Fragment(), OnMapReadyCallback {
             binding.llRoadAddress.visibility = View.GONE
         }
 
-        longitude = restaurant.longitude ?: 126.9570
-        latitude = restaurant.latitude ?: 37.50415
+        restaurant.latitude?.let {
+            latitude = it
+        }
+        restaurant.longitude?.let {
+            longitude = it
+        }
 
         initFavoriteBtn()
         initDistanceText()

@@ -29,7 +29,9 @@ data class AddressInfo(
     val address: Address?,
     @field:Json(name = "road_address")
     @Embedded
-    val roadAddress: RoadAddress?
+    val roadAddress: RoadAddress?,
+    var x: String? = null,
+    var y: String? = null
 ) {
     @field:Json(ignore = true)
     @Ignore

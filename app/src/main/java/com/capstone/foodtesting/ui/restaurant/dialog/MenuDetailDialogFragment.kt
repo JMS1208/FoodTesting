@@ -45,8 +45,8 @@ class MenuDetailDialogFragment : DialogFragment() {
                 Glide.with(requireContext())
                     .load(menu.photoUrl)
                     .into(ivMenuImage)
-                val startDate = Date(menu.start_date)
-                val endDate = Date(menu.end_date)
+                val startDate = Date(menu.start_date ?: 0)
+                val endDate = Date(menu.end_date ?: 0)
                 val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd (E)")
                 val dateText = "${simpleDateFormat.format(startDate)} ~ ${simpleDateFormat.format(endDate)}"
                 tvTestingPeriod.text = dateText

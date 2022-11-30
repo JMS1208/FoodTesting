@@ -16,7 +16,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="50dp">
+            android:paddingBottom="70dp">
 
 
             <androidx.viewpager2.widget.ViewPager2
@@ -145,6 +145,7 @@
                 android:paddingEnd="10dp"
                 android:paddingBottom="5dp"
                 android:text="1 / 5"
+                android:visibility="gone"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:drawableEndCompat="@drawable/ic_right_arrow_24"
@@ -650,12 +651,25 @@
                 android:layout_marginStart="20dp"
                 android:fontFamily="@font/noto_sans_kr_medium_font_family"
                 android:includeFontPadding="false"
-                android:text="따끈따끈 가오픈 식당 !"
+                android:text="따끈따끈 신규등록 식당 !"
                 android:textSize="22sp"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_new" />
 
+            <TextView
+                android:id="@+id/tv_address_criteria1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                android:includeFontPadding="false"
+                tools:text="\'중앙대학교 ㅇㅇㅇ\' 기준"
+                android:textSize="14sp"
+                android:gravity="start"
+                app:layout_constraintTop_toBottomOf="@id/tv_new_restaurant"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_new_restaurant"
@@ -664,7 +678,7 @@
                 android:layout_marginTop="10dp"
                 android:clipToPadding="true"
                 android:layoutAnimation="@anim/rv_animation_sticking_on_right"
-                app:layout_constraintTop_toBottomOf="@id/tv_new_restaurant" />
+                app:layout_constraintTop_toBottomOf="@id/tv_address_criteria1" />
 
 
             <TextView
@@ -681,6 +695,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rv_new_restaurant" />
 
+            <TextView
+                android:id="@+id/tv_address_criteria2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                android:includeFontPadding="false"
+                tools:text="\'중앙대학교 ㅇㅇㅇ\' 기준"
+                android:textSize="14sp"
+                android:gravity="start"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/tv_existing_restaurant"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                />
             <ImageView
                 android:id="@+id/iv_tooltip_existing"
                 android:layout_width="wrap_content"
@@ -693,12 +721,12 @@
                 app:tint="@color/grey" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_existing_restaurant"
+                android:id="@+id/rv_new_menu"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:clipToPadding="true"
-                app:layout_constraintTop_toBottomOf="@id/tv_existing_restaurant"
+                app:layout_constraintTop_toBottomOf="@id/tv_address_criteria2"
 
                 />
 

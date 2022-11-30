@@ -10,20 +10,22 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="30dp"
         android:paddingBottom="30dp"
         >
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:title="매장 정보 수정"
+            app:titleCentered="true"
+            app:navigationIcon="@drawable/ic_back_24"
             app:layout_constraintTop_toTopOf="parent"
             />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:layout_constraintBottom_toBottomOf="parent"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
@@ -34,6 +36,7 @@
                 android:adjustViewBounds="true"
                 app:srcCompat="@drawable/ic_logo"
                 android:layout_gravity="end"
+                android:visibility="gone"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -63,6 +66,7 @@
                         />
 
                     <ImageView
+                        android:id="@+id/iv_modify_image"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:adjustViewBounds="true"
@@ -146,6 +150,89 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="혼잡도"
+                android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:gravity="start"
+                android:layout_marginTop="20dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                >
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_complexity_0"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_btn_grey_5"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/noto_sans_kr_bold_font_family"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="혼잡"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:backgroundTint="@null"
+                    app:elevation="5dp"
+                    app:rippleColor="@color/white"
+                    android:layout_marginEnd="5dp"
+                    />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_complexity_1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_btn_grey_5"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/noto_sans_kr_bold_font_family"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="보통"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:backgroundTint="@null"
+                    app:elevation="5dp"
+                    app:rippleColor="@color/white"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_complexity_2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_btn_grey_5"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/noto_sans_kr_bold_font_family"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="여유"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:backgroundTint="@null"
+                    app:elevation="5dp"
+                    app:rippleColor="@color/white"
+                    android:layout_marginStart="5dp"
+                    />
+            </LinearLayout>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="운영시간"
                 android:fontFamily="@font/noto_sans_kr_medium_font_family"
                 android:includeFontPadding="false"
@@ -211,6 +298,7 @@
                 android:layout_marginTop="5dp"
                 android:textSize="18sp"
                 android:padding="10dp"
+                android:maxLength="13"
                 android:inputType="phone"
                 />
             <TextView

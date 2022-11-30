@@ -6,7 +6,6 @@ import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
@@ -21,6 +20,7 @@ import com.capstone.foodtesting.data.model.kakao.local.AddressInfo
 import com.capstone.foodtesting.data.model.kakao.search.address.Document
 import com.capstone.foodtesting.databinding.DialogAddressSettingBinding
 import com.capstone.foodtesting.ui.bottomsheet.setaddress.adapter.AddressSearchPagingAdapter
+import com.capstone.foodtesting.util.CommonFunc
 import com.capstone.foodtesting.util.Constants
 import com.capstone.foodtesting.util.dialogFragmentResize
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,6 +61,7 @@ class AddressSettingsDialogFragment: DialogFragment() {
             setOnItemClickListener { document ->
                 //검색결과 클릭시
                 this@AddressSettingsDialogFragment.document = document
+                CommonFunc.showToast(requireContext(), "\'${document.addressName}\' 선택하셨습니다")
                 viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
                     val x = document.x
                     val y = document.y
@@ -131,7 +132,7 @@ class AddressSettingsDialogFragment: DialogFragment() {
                 })
                 dismiss()
             } else {
-                Toast.makeText(requireContext(),"주소를 선택해주세요",Toast.LENGTH_SHORT).show()
+                CommonFunc.showToast(requireContext(),"주소를 선택해주세요")
 
             }
         }

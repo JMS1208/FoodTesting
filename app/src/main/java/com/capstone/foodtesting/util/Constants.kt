@@ -28,7 +28,7 @@ object Constants {
 
     const val UNSPLASH_BASE_URL = "https://api.unsplash.com"
     const val KAKAO_BASE_URL = "https://dapi.kakao.com"
-    const val FOOD_TESTING_BASE_URL = "http://ec2-13-125-198-213.ap-northeast-2.compute.amazonaws.com:8000/"
+    const val FOOD_TESTING_BASE_URL = "http://ec2-43-201-7-157.ap-northeast-2.compute.amazonaws.com:8000/"
     const val NAVER_BASE_URL = "https://naveropenapi.apigw.ntruss.com/"
 
     const val NAVER_CLIENT_ID = ""
@@ -60,6 +60,6 @@ object Constants {
 
 
     //중앙대 위도 경도
-    const val InitLatitude: Double = 37.50415
-    const val InitLongitude: Double = 126.9570
+    const val InitLatitude: Double = 37.50415 // y
+    const val InitLongitude: Double = 126.9570 // x
 }

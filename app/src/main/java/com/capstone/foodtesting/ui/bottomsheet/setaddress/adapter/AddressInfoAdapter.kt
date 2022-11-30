@@ -46,6 +46,8 @@ class AddressInfoAdapter : ListAdapter<AddressInfo, AddressInfoAdapter.ViewHolde
                 onItemClickListener?.let {
                     it(addressInfo)
                 }
+
+
             }
             itemBinding.apply {
                 tvAddress.text = addressInfo.address?.addressFullName ?: "주소 정보 없음"

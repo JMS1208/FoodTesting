@@ -46,7 +46,12 @@ class SelectMenuManageDialogFragment : BottomSheetDialogFragment() {
         }
 
         binding.tvModifyMenu.setOnClickListener {
-
+            parentFragment?.apply {
+                setFragmentResult("modifyMenu", Bundle().apply{
+                    this.putBoolean("modifyMenu", true)
+                })
+                dismiss()
+            }
         }
     }
 }

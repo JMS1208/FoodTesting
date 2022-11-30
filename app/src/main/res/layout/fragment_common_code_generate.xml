@@ -61,7 +61,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:text="리뷰 작성을 위해 QR 코드를 스캔해주세요"
             />
         <TextView
@@ -71,7 +71,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="30dp"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="@color/blue"
             android:gravity="center"
             android:text="화면을 캡쳐한 후 프린트하여 \n매장에 비치해주세요"

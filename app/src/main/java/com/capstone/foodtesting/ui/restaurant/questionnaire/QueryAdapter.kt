@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.capstone.foodtesting.data.model.questionnaire.QueryLine
 import com.capstone.foodtesting.databinding.ItemQueryBinding
 
-class QueryAdapter: ListAdapter<String, QueryAdapter.ViewHolder>(queryDiffCallback) {
+class QueryAdapter: ListAdapter<QueryLine, QueryAdapter.ViewHolder>(queryDiffCallback) {
 
-    private var onItemClickListener: ((String) -> Unit)? = null
+    private var onItemClickListener: ((QueryLine) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (String) -> Unit) {
+    fun setOnItemClickListener(listener: (QueryLine) -> Unit) {
         onItemClickListener = listener
     }
 
@@ -19,8 +20,8 @@ class QueryAdapter: ListAdapter<String, QueryAdapter.ViewHolder>(queryDiffCallba
         RecyclerView.ViewHolder(itemBinding.root) {
 
 
-        fun bind(query: String) {
-            itemBinding.tvQuery.text = "\" $query \""
+        fun bind(query: QueryLine) {
+            itemBinding.tvQuery.text = "\" ${query.query} \""
 
             itemView.setOnClickListener {
                 onItemClickListener?.let {
@@ -32,12 +33,12 @@ class QueryAdapter: ListAdapter<String, QueryAdapter.ViewHolder>(queryDiffCallba
 
 
     companion object {
-        private val queryDiffCallback = object : DiffUtil.ItemCallback<String>() {
-            override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        private val queryDiffCallback = object : DiffUtil.ItemCallback<QueryLine>() {
+            override fun areItemsTheSame(oldItem: QueryLine, newItem: QueryLine): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+            override fun areContentsTheSame(oldItem: QueryLine, newItem: QueryLine): Boolean {
                 return oldItem == newItem
             }
 

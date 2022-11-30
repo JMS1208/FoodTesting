@@ -2,23 +2,18 @@ package com.capstone.foodtesting.ui.restaurant.dialog
 
 import android.app.Dialog
 import android.os.Bundle
-import android.text.format.DateUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.util.TimeUtils
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.MutableLiveData
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.databinding.DialogDatePickerTestingPeriodBinding
+import com.capstone.foodtesting.util.CommonFunc
 import com.capstone.foodtesting.util.dialogFragmentResize
-import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 class TestingPeriodDialogFragment : DialogFragment() {
 
@@ -62,10 +57,10 @@ class TestingPeriodDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnSelect.setOnClickListener {
-            startDate ?: Toast.makeText(requireContext(), "시작일을 설정해주세요", Toast.LENGTH_SHORT).show()
+            startDate ?: CommonFunc.showToast(requireContext(), "시작일을 설정해주세요")
 
 
-            endDate ?: Toast.makeText(requireContext(), "종료일을 설정해주세요", Toast.LENGTH_SHORT).show()
+            endDate ?: CommonFunc.showToast(requireContext(), "종료일을 설정해주세요")
 
 
             if (startDate != null && endDate != null) {

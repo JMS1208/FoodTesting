@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.foodtesting.data.model.questionnaire.QueryLine
 import com.capstone.foodtesting.databinding.FragmentRestaurantQueryRegisterAboutRestaurantBinding
 import com.capstone.foodtesting.ui.restaurant.questionnaire.QueryAdapter
-import com.capstone.foodtesting.ui.restaurant.questionnaire.survey.RestaurantQueryRegisterFragment
+import com.capstone.foodtesting.ui.restaurant.questionnaire.RestaurantQueryRegisterFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,9 +37,7 @@ class RestaurantQueryRegisterAboutRestaurantFragment : Fragment() {
         queryAdapter = QueryAdapter()
 
         queryAdapter.setOnItemClickListener {
-            (parentFragment as RestaurantQueryRegisterFragment).addQueryLine(it,listOf(),
-                QueryLine.QueryType.TypeRestaurant
-            )
+            (parentFragment as RestaurantQueryRegisterFragment).addQueryLine(it)
         }
 
         binding.rvRestaurantQuery.apply {
@@ -47,11 +45,14 @@ class RestaurantQueryRegisterAboutRestaurantFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        viewModel.aboutRestaurantQueryList.observe(viewLifecycleOwner) {
-            queryAdapter.submitList(it)
+        viewModel.aboutRestaurantQueryList.observe(viewLifecycleOwner) { queryList->
+            queryList?.let {
+                queryAdapter.submitList(it)
+            }
+
         }
 
-        viewModel.fetchAboutRestaurantQueryList()
+        viewModel.fetchAboutRestaurantQueryList(QueryLine.TypeRestaurant)
 
     }
 

@@ -1,5 +1,7 @@
 package com.capstone.foodtesting.ui.restaurant.room
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.capstone.foodtesting.data.model.kakao.local.AddressInfo
@@ -22,6 +24,13 @@ import retrofit2.Response
 class RestaurantRoomViewModel @Inject constructor(
     private val repository: MainRepository
 ): ViewModel() {
+
+    private var _restaurantInfoMutableLiveData: MutableLiveData<Restaurant> = MutableLiveData()
+    val restaurantInfoLiveData: LiveData<Restaurant> get() = _restaurantInfoMutableLiveData
+
+    fun updateRestaurantInfoLiveData(restaurant: Restaurant) {
+        _restaurantInfoMutableLiveData.postValue(restaurant)
+    }
 
     suspend fun getStoreInfoByRegNum(regNum: String): Response<List<RestaurantResponse>> {
         return repository.getStoreInfoByRegNum(regNum)

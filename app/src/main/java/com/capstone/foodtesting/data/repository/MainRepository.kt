@@ -1,5 +1,6 @@
 package com.capstone.foodtesting.data.repository
 
+import android.net.Uri
 import androidx.paging.PagingData
 import com.capstone.foodtesting.data.model.file.process.ImageHashResponse
 import com.capstone.foodtesting.data.model.kakao.local.AddressInfo
@@ -9,19 +10,25 @@ import com.capstone.foodtesting.data.model.kakao.search.address.Document
 import com.capstone.foodtesting.data.model.member.Member
 import com.capstone.foodtesting.data.model.member.Testing
 import com.capstone.foodtesting.data.model.menu.Menu
+import com.capstone.foodtesting.data.model.menu.NewMenuList
 import com.capstone.foodtesting.data.model.naver.geo.NaverGeoResponse
 import com.capstone.foodtesting.data.model.questionnaire.QueryLine
+import com.capstone.foodtesting.data.model.questionnaire.QueryLineList
 import com.capstone.foodtesting.data.model.restaurant.Restaurant
 import com.capstone.foodtesting.data.model.restaurant.RestaurantResponse
+import com.capstone.foodtesting.data.model.restaurant.home.NewRestaurantList
+import com.capstone.foodtesting.data.model.restaurant.register.MessageResponse
 import com.capstone.foodtesting.data.model.review.Review
+import com.capstone.foodtesting.data.model.review.ReviewRecords
+import com.capstone.foodtesting.data.model.statistics.ReviewStatistics
+import com.capstone.foodtesting.data.model.statistics.ReviewStatisticsResponse
 import com.capstone.foodtesting.data.model.unsplash.Result
 import com.capstone.foodtesting.data.model.unsplash.UnsplashResponse
 import kotlinx.coroutines.flow.Flow
-import okhttp3.MultipartBody
 import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.POST
 import retrofit2.http.Path
-import retrofit2.http.Query
-import java.io.File
 import java.util.*
 
 interface MainRepository {
@@ -73,7 +80,7 @@ interface MainRepository {
         reg_num: String
     ): Response<List<RestaurantResponse>>
 
-    suspend fun getRestaruantByCategory(
+    suspend fun getRestaurantByCategory(
         category: String,
         latitude: Double,
         longitude: Double
@@ -84,20 +91,72 @@ interface MainRepository {
     ): Response<Menu>
 
     suspend fun uploadRestaurantImage(
-        imageFile: File
+        imageUri: Uri
     ): Response<ImageHashResponse>
 
     suspend fun getRestaurantQuestions(
         reg_num: String
-    ): Response<List<QueryLine>>
+    ): Response<QueryLineList>
 
     suspend fun postReview(
         reviewList: List<Review>
-    ): Response<List<Review>>
+    ): Response<MessageResponse>
 
     suspend fun updateUserInfo(
         member: Member
     ): Response<Member>
+
+    //디폴트 질문 가져오기
+    suspend fun getDefaultQuestions(
+        type: Int
+    ): Response<List<QueryLine>?>
+
+    //매장 질문 등록하기
+    suspend fun registerQuestionnaire(
+        queryLineList: QueryLineList
+    ): Response<MessageResponse>
+
+    //매장 등록하기 (데이터베이스에 정보 저장)
+    suspend fun registerRestaurant(
+        restaurantInfo: Restaurant
+    ): Response<MessageResponse>
+
+    //매장 정보 수정하기
+    suspend fun modifyRestaurantInfo(
+        restaurantInfo: Restaurant
+    ): Response<MessageResponse>
+
+    //메뉴 삭제
+    suspend fun deleteMenu(
+        reg_num: String,
+        menu_uuid: String
+    ): Response<MessageResponse>
+
+    //메뉴 수정
+    suspend fun modifyMenu(
+        menu: Menu
+    ): Response<MessageResponse>
+
+    //신규등록 매장목록 가져오기
+    suspend fun getHomeNewRestaurantList(
+        y: Double,
+        x: Double
+    ): Response<NewRestaurantList>
+
+    //신규등록 메뉴리스트 가져오기
+    suspend fun getNewMenuList(
+    ):Response<NewMenuList>
+
+
+    //통계 정보 가져오기
+    suspend fun getReviewStatistics(
+        reg_num: String
+    ): Response<ReviewStatisticsResponse>
+
+    //작성한 리뷰 가져오기
+    suspend fun getMyReviews(
+        customer_uuid: String
+    ): Response<ReviewRecords>
 
     //Naver Geo API
     suspend fun searchGeoInfo(

@@ -12,7 +12,6 @@ import com.capstone.foodtesting.data.model.restaurant.Restaurant
 import com.capstone.foodtesting.databinding.FragmentCommonDashBoardCategoryContentsBinding
 import com.capstone.foodtesting.ui.common.dashboard.CategoryRestaurantAdapter
 import com.capstone.foodtesting.ui.common.dashboard.CommonDashBoardFragment
-import com.capstone.foodtesting.ui.common.home.adapter.NewRestaurantAdapter
 import com.capstone.foodtesting.util.Constants.InitLatitude
 import com.capstone.foodtesting.util.Constants.InitLongitude
 
@@ -43,29 +42,41 @@ class KoreanFoodFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            val result = viewModel.getRestaruantByCategory("한식", InitLatitude, InitLongitude)
+        initCategoryRecyclerView()
 
-            if(result.isSuccessful) {
-                val restaurantList: List<Restaurant>? = result.body()
+        setupSwipeRefreshLayoutListener()
+    }
+    private fun setupSwipeRefreshLayoutListener() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            val latitude = (parentFragment as CommonDashBoardFragment).latitude?.toDoubleOrNull() ?: InitLatitude
+            val longitude = (parentFragment as CommonDashBoardFragment).longitude?.toDoubleOrNull() ?: InitLongitude
 
-                restaurantList?.let {
-                    categoryAdapter = CategoryRestaurantAdapter(it)
-
-                    binding.rvSorted.adapter = categoryAdapter
-                    binding.rvSorted.layoutManager = GridLayoutManager(requireContext(), 3)
-
-                }
-
+            viewModel.setupCategoryRestaurantListFromChildFragment("kf", latitude, longitude)
+            if (binding.swipeRefreshLayout.isRefreshing) {
+                binding.swipeRefreshLayout.isRefreshing = false
             }
         }
+    }
+    private fun initCategoryRecyclerView() {
+        categoryAdapter = CategoryRestaurantAdapter()
+        categoryAdapter.setOnItemClickListener {
+            (parentFragment as CommonDashBoardFragment).moveToRestaurantRoom(it.reg_num)
+        }
 
+        binding.rvCategoryRestaurant.apply {
+            adapter = categoryAdapter
+            layoutManager = GridLayoutManager(requireContext(), 2)
+        }
 
+        viewModel.koreanFoodRestaurantListLiveData.observe(viewLifecycleOwner) { restaurantList->
+            restaurantList?.let {
+                categoryAdapter.submitList(it)
+            }
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d("TAG", "한식삭제")
         _binding = null
     }
 

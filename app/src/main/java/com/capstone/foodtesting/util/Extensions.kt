@@ -109,3 +109,7 @@ fun Context.dialogResize(dialog: Dialog, width: Float, height: Float){
     }
 
 }
+
+fun androidx.core.widget.NestedScrollView.scrollToView(view: View) {
+    this.smoothScrollTo(view.x.toInt(), view.y.toInt())
+}

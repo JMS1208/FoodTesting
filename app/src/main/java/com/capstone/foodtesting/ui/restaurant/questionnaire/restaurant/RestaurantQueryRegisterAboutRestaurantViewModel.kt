@@ -2,24 +2,33 @@ package com.capstone.foodtesting.ui.restaurant.questionnaire.restaurant
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.capstone.foodtesting.data.model.questionnaire.QueryLine
+import com.capstone.foodtesting.data.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class RestaurantQueryRegisterAboutRestaurantViewModel @Inject constructor(
-
+    private val repository: MainRepository
 ): ViewModel() {
 
-    val aboutRestaurantQueryList: MutableLiveData<MutableList<String>> = MutableLiveData(mutableListOf())
+    val aboutRestaurantQueryList: MutableLiveData<List<QueryLine>> = MutableLiveData(mutableListOf())
 
-    fun fetchAboutRestaurantQueryList() {
+    fun fetchAboutRestaurantQueryList(type: Int) = viewModelScope.launch(Dispatchers.IO) {
         //원래는 백으로부터 받아와야함
-        val tmpList = mutableListOf<String>()
 
-        for (i in 0 until 20) {
-            tmpList.add("매장 관련 질문 아무거나 $i")
+        val result = repository.getDefaultQuestions(type)
+
+        if (result.isSuccessful) {
+            result.body()?.let {
+                aboutRestaurantQueryList.postValue(it)
+            }
+
         }
 
-        aboutRestaurantQueryList.postValue(tmpList)
+
     }
 }

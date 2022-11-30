@@ -205,7 +205,10 @@ class BSSetupAddrFragment : BottomSheetDialogFragment() {
                     if(x != null && y != null) {
                         viewModel.convertCoordToAddress(x, y).collectLatest { addressInfo->
                             addressInfo?.let {
-                                viewModel.insertAddressInfo(it)
+                                viewModel.insertAddressInfo(it.apply {
+                                    this.x = x
+                                    this.y = y
+                                })
                             }
 
                         }

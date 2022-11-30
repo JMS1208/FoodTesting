@@ -13,7 +13,11 @@ class CommonCodeGenerateViewModel @Inject constructor(
     private val repository: MainRepository
 ): ViewModel() {
 
-    suspend fun getStoreInfoByCustomerId(uuid : String): Response<List<RestaurantResponse>> {
-        return repository.getStoreInfoByCustomerId(uuid)
+//    suspend fun getStoreInfoByCustomerId(uuid : String): Response<List<RestaurantResponse>> {
+//        return repository.getStoreInfoByCustomerId(uuid)
+//    }
+
+    suspend fun getStoreInfoByRegNum(regNum: String): Response<List<RestaurantResponse>> {
+        return repository.getStoreInfoByRegNum(regNum)
     }
 }

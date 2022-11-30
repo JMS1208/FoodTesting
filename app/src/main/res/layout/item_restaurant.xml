@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_banner"
+    android:layout_width="200dp"
+    android:layout_height="150dp"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="10dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_food"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/food_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tv_restaurant_name_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/noto_sans_kr_bold_font_family"
+                android:gravity="start"
+                android:includeFontPadding="false"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                tools:text="매장명 [카테고리]"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_margin="10dp"
+                android:background="@drawable/bg_btn_transparent_grey_5"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_shadow_darker_upper"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_menu_discount_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/noto_sans_kr_bold_font_family"
+                    android:gravity="start"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="15,000"
+                    android:background="@drawable/bg_btn_grey_10"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:includeFontPadding="false"
+                    android:backgroundTint="@color/white"
+                    android:layout_margin="10dp"
+                    android:visibility="invisible"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_complexity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/noto_sans_kr_bold_font_family"
+                    android:gravity="end"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="혼잡"
+                    android:textColor="@color/white"
+                    android:background="@drawable/bg_btn_gradient_5"
+                    android:paddingBottom="3dp"
+                    android:paddingTop="3dp"
+                    android:paddingStart="7dp"
+                    android:paddingEnd="7dp"
+                    android:layout_margin="10dp"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+
+</androidx.cardview.widget.CardView>

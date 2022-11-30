@@ -5,15 +5,16 @@
     android:id="@+id/cl_fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.common.info.CommonManageFragment">
+    tools:context=".ui.common.manage.CommonManageFragment">
 
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F3F3F3"
-        android:translationZ="10dp"
+        app:navigationIcon="@drawable/ic_back_24"
+        app:title="관리 및 설정"
+        app:titleCentered="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -106,7 +107,7 @@
                         android:paddingTop="10dp"
                         android:paddingEnd="20dp"
                         android:paddingBottom="10dp"
-                        android:text="서울특별시 강남구 강남대로 98길 12-5"
+                        android:text="주소를 설정해주세요"
                         android:textSize="18sp" />
 
                     <View
@@ -197,6 +198,7 @@
                             android:layout_marginTop="20dp"
                             android:layout_marginBottom="20dp"
                             android:layout_marginEnd="20dp"
+                            android:gravity="center_vertical"
                             app:layout_constraintStart_toEndOf="@id/v_divider_profile"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -207,7 +209,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:srcCompat="@drawable/ic_settings_24"
-                                android:layout_gravity="end"
+                                android:layout_gravity="top|end"
                                 app:tint="@color/grey"
                                 />
                             <TextView
@@ -215,7 +217,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/noto_sans_kr_regular_font_family"
-                                android:gravity="end"
+                                android:gravity="end|bottom"
                                 android:includeFontPadding="false"
                                 android:text="ㅇㅇㅇ 님 "
                                 android:textSize="18sp" />
@@ -224,7 +226,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/noto_sans_kr_regular_font_family"
-                                android:gravity="end"
+                                android:gravity="end|bottom"
                                 android:includeFontPadding="false"
                                 android:text="ㅇㅇㅇ 님 "
                                 android:textSize="18sp" />
@@ -233,7 +235,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/noto_sans_kr_regular_font_family"
-                                android:gravity="end"
+                                android:gravity="end|bottom"
                                 android:layout_gravity="end"
                                 android:includeFontPadding="false"
                                 android:text="email@email.com"
@@ -277,6 +279,7 @@
 
 
                     <TextView
+                        android:id="@+id/tv_my_reviews"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -308,7 +311,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:foregroundGravity="center"
-                            app:lottie_fileName="lottie/cook.json"
+                            app:lottie_fileName="lottie/restaurant.json"
                             app:lottie_loop="true"
                             app:lottie_autoPlay="true"
                             app:layout_constraintTop_toTopOf="parent"

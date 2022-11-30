@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp"
+    app:contentPadding="10dp"
+    android:id="@+id/cardView"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lv_info"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="lottie/info.json"
+            />
+
+        <TextView
+            android:id="@+id/tv_toast_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="토스트 메시지"
+            android:gravity="center"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:includeFontPadding="false"
+            />
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

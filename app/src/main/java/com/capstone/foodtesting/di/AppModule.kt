@@ -52,6 +52,8 @@ object AppModule {
     fun provideHttpClient(): OkHttpClient {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY)
+
+
         return OkHttpClient.Builder()
             .readTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(15, TimeUnit.SECONDS)
@@ -175,7 +177,7 @@ object AppModule {
             context.applicationContext,
             FoodTestingDatabase::class.java,
             DATABASE_NAME
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 
 

@@ -1,24 +1,34 @@
 package com.capstone.foodtesting.ui.common.dashboard
 
+import android.app.ProgressDialog.show
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.capstone.foodtesting.data.model.restaurant.Restaurant
 import com.capstone.foodtesting.databinding.BottomSheetListSortingBinding
 import com.capstone.foodtesting.databinding.FragmentCommonDashBoardBinding
 import com.capstone.foodtesting.ui.bottomsheet.setaddress.BSSetupAddrFragment
 import com.capstone.foodtesting.ui.common.dashboard.category.*
+import com.capstone.foodtesting.util.CommonFunc.showToast
+import com.capstone.foodtesting.util.Constants
+import com.capstone.foodtesting.util.Constants.InitLatitude
+import com.capstone.foodtesting.util.Constants.InitLongitude
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayoutMediator
+import com.navercorp.nid.NaverIdLoginSDK.behavior
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -32,6 +42,10 @@ class CommonDashBoardFragment : Fragment() {
     val viewModel by viewModels<CommonDashBoardViewModel>()
 
     private val args by navArgs<CommonDashBoardFragmentArgs>()
+
+    var latitude: String? = null
+    var longitude: String? = null
+
 
     companion object {
 
@@ -80,8 +94,55 @@ class CommonDashBoardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initViewPagerView()
+
+        initViewClickListener()
+
+        initObserver()
+
+        setupCategory(args.category)
+
+    }
+
+    private fun initObserver() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.latestAddressInfo.collectLatest { addressInfo ->
+                    binding.tvCurrentAddress.text = addressInfo?.address?.addressFullName ?: "주소 설정하러 가기"
+
+                    addressInfo?.let {
+
+                        try {
+                            if(it.y == null || it.x == null) {
+                                viewModel.setupCategoryRestaurantList(InitLatitude, InitLongitude)
+                            } else {
+                                viewModel.setupCategoryRestaurantList(it.y!!.toDouble(), it.x!!.toDouble())
+                            }
+                        } catch(E: Exception) {
+                            Log.e("TAG", "initObserver: ${E.message}" )
+                        }
+                    } ?: run {
+                        viewModel.setupCategoryRestaurantList(InitLatitude, InitLongitude)
+                    }
+                }
+            }
+        }
 
 
+    }
+
+    private fun initViewClickListener() {
+        binding.tvCurrentAddress.setOnClickListener {
+            val bottomSheet = BSSetupAddrFragment()
+            bottomSheet.show(childFragmentManager, bottomSheet.tag)
+        }
+
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun initViewPagerView() {
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int = categoryFragments.size
 
@@ -94,54 +155,6 @@ class CommonDashBoardFragment : Fragment() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = categoryList[position]
         }.attach()
-
-
-
-        val bottomSheetSortingBinding = BottomSheetListSortingBinding.inflate(layoutInflater)
-        val bottomSheetSortingDialog = BottomSheetDialog(requireContext()).apply {
-            setContentView(bottomSheetSortingBinding.root)
-        }
-
-        binding.tvSorting.setOnClickListener {
-            bottomSheetSortingDialog.apply {
-                when(behavior.state) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                        show()
-                    }
-                    else -> {
-                        hide()
-                    }
-                }
-            }
-        }
-
-
-
-        binding.tvCurrentAddress.setOnClickListener {
-            val bottomSheet = BSSetupAddrFragment()
-            bottomSheet.show(childFragmentManager, bottomSheet.tag)
-        }
-
-
-
-        binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.latestAddressInfo.collectLatest { addressInfo ->
-
-                    binding.tvCurrentAddress.text = addressInfo?.address?.addressFullName ?: "주소 설정하러 가기"
-
-                }
-            }
-        }
-
-
-
-        setupCategory(args.category)
     }
 
     private fun setupCategory(category: String?){
@@ -162,6 +175,12 @@ class CommonDashBoardFragment : Fragment() {
             }
             binding.tabLayout.selectTab(index)
         }
+    }
+
+
+    fun moveToRestaurantRoom(regNum: String) {
+        val action = CommonDashBoardFragmentDirections.actionFragmentCommonDashBoardToFragmentRestaurantRoom(regNum)
+        findNavController().navigate(action)
     }
 
 

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.capstone.foodtesting.databinding.FragmentRestaurantQueryRegisterCompletedBinding
-import com.capstone.foodtesting.ui.restaurant.questionnaire.survey.RestaurantQueryRegisterFragment
+import com.capstone.foodtesting.ui.restaurant.questionnaire.RestaurantQueryRegisterFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:text="이미 추가한 질문이예요 !"
         android:textColor="@color/white"
+        android:textSize="18sp"
         android:fontFamily="@font/noto_sans_kr_regular_font_family"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

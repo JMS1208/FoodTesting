@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.capstone.foodtesting.databinding.FragmentRestaurantRegisterCompletedBinding
 
 
@@ -26,6 +27,14 @@ class RestaurantCompletedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.btnMoveHome.setOnClickListener {
+            (parentFragment as RestaurantRegisterFragment).findNavController().popBackStack()
+        }
+
+        binding.btnMakeQuery.setOnClickListener {
+            (parentFragment as RestaurantRegisterFragment).makeQuestionnaire()
+        }
     }
 
     override fun onDestroyView() {

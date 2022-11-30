@@ -41,7 +41,7 @@
         android:layout_marginTop="10dp"
         android:drawableEnd="@drawable/ic_down_arrow_single_18"
         android:drawablePadding="5dp"
-        android:text="서울특별시 동작구 흑석로 84"
+        android:text="주소를 설정해주세요"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_logo" />
@@ -60,11 +60,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@id/tv_current_address"
-        app:tabIndicatorColor="@color/red"
+        app:tabIndicatorColor="@color/point_red"
         app:tabIndicatorFullWidth="true"
-        app:tabIndicatorHeight="3dp"
+        app:tabIndicatorHeight="2dp"
         app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/red"
+        app:tabSelectedTextColor="@color/point_red"
         app:tabTextAppearance="@style/TabLayoutTextStyle">
 
         <com.google.android.material.tabs.TabItem

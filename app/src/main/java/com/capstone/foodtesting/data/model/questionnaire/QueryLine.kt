@@ -9,15 +9,15 @@ import java.util.*
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class QueryLine(
-    @field:SerializedName("uuid")
+    @field:SerializedName("ques_uuid")
     val uuid: UUID = UUID.randomUUID(),
-    @field:SerializedName("reg_num")
-    val reg_num: String?=null,
-    @field:SerializedName("query")
+    @field:SerializedName("market_reg_num")
+    var reg_num: String? = null,
+    @field:SerializedName("contents")
     val query: String,
-    @field:SerializedName("keywords")
+    @field:SerializedName("fast_response")
     val keywords: List<String>? = null,
-    @field:SerializedName("type")
+    @field:SerializedName("ques_type")
     val queryType: Int
 ): Parcelable {
 

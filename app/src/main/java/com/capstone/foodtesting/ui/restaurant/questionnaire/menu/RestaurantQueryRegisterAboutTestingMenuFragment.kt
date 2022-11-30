@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.foodtesting.data.model.questionnaire.QueryLine
 import com.capstone.foodtesting.databinding.FragmentRestaurantQueryRegisterAboutTestingMenuBinding
 import com.capstone.foodtesting.ui.restaurant.questionnaire.QueryAdapter
-import com.capstone.foodtesting.ui.restaurant.questionnaire.survey.RestaurantQueryRegisterFragment
+import com.capstone.foodtesting.ui.restaurant.questionnaire.RestaurantQueryRegisterFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,9 +37,7 @@ class RestaurantQueryRegisterAboutTestingMenuFragment : Fragment() {
         queryAdapter = QueryAdapter()
 
         queryAdapter.setOnItemClickListener {
-            (parentFragment as RestaurantQueryRegisterFragment).addQueryLine(it,listOf(),
-                QueryLine.QueryType.TypeMenu
-            )
+            (parentFragment as RestaurantQueryRegisterFragment).addQueryLine(it)
         }
 
         binding.rvMenuQuery.apply {
@@ -51,7 +49,7 @@ class RestaurantQueryRegisterAboutTestingMenuFragment : Fragment() {
             queryAdapter.submitList(it)
         }
 
-        viewModel.fetchAboutMenuQueryList()
+        viewModel.fetchAboutMenuQueryList(QueryLine.TypeMenu)
     }
 
     override fun onDestroyView() {

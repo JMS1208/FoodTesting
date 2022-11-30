@@ -5,11 +5,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.capstone.foodtesting.data.model.questionnaire.QueryLine
 import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
 @Entity(tableName = "restaurant")
 @kotlinx.parcelize.Parcelize
+@JsonClass(generateAdapter = true)
 data class Restaurant(
     @PrimaryKey(autoGenerate = false)
     @field:SerializedName("reg_num")
@@ -20,7 +22,7 @@ data class Restaurant(
     var photoUrl: String? = null,
     @field:SerializedName("start_date")
     val startDate: Long = System.currentTimeMillis(),
-    @field:SerializedName("customer_uuid_id")
+    @field:SerializedName(value = "customer_uuid")
     var customer_id: UUID? = null,
     @field:SerializedName("location")
     var address: String? = null,

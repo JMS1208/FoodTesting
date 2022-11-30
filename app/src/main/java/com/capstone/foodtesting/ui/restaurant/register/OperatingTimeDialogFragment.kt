@@ -1,22 +1,21 @@
 package com.capstone.foodtesting.ui.restaurant.register
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.MutableLiveData
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.databinding.DialogDatePickerOperatingTimeBinding
+import com.capstone.foodtesting.util.CommonFunc
 import com.capstone.foodtesting.util.dialogFragmentResize
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 class OperatingTimeDialogFragment : DialogFragment() {
 
@@ -27,7 +26,8 @@ class OperatingTimeDialogFragment : DialogFragment() {
     private var closeTime: Long? = null
 
     private var currentTime: MutableLiveData<OperatingTime> = MutableLiveData(OperatingTime.OPEN)
-
+    @SuppressLint("SimpleDateFormat")
+    private val simpleDateFormat = SimpleDateFormat("aa HH:mm")
     enum class OperatingTime {
         OPEN,
         CLOSE
@@ -58,12 +58,13 @@ class OperatingTimeDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnSelect.setOnClickListener {
-            openTime?:
-                Toast.makeText(requireContext(), "오픈 시간을 설정해주세요", Toast.LENGTH_SHORT).show()
+
+//            CommonFunc.showToast(requireContext(), "$openTime, ${simpleDateFormat.format(Date(openTime?:0))}")
+            openTime?: CommonFunc.showToast(requireContext(), "오픈 시간을 설정해주세요")
 
 
-            closeTime?:
-                Toast.makeText(requireContext(), "클로즈 시간을 설정해주세요", Toast.LENGTH_SHORT).show()
+
+            closeTime?: CommonFunc.showToast(requireContext(), "클로즈 시간을 설정해주세요")
 
 
             if (openTime != null && closeTime != null) {
@@ -90,8 +91,8 @@ class OperatingTimeDialogFragment : DialogFragment() {
         }
 
         binding.timePicker.setOnTimeChangedListener { _, hourOfDay, minute ->
-            val simpleDateFormat = SimpleDateFormat("aa HH:mm")
-            val calendar = GregorianCalendar(0,0,0,hourOfDay, minute)
+
+            val calendar = GregorianCalendar(2022,0,0,hourOfDay, minute)
 
             when (currentTime.value) {
                 OperatingTime.OPEN -> {

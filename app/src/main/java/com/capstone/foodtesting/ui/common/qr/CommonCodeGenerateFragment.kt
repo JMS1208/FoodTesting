@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.databinding.FragmentCommonCodeGenerateBinding
+import com.capstone.foodtesting.util.CommonFunc
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.google.zxing.qrcode.QRCodeWriter
@@ -47,20 +47,23 @@ class CommonCodeGenerateFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
 
-            val result = viewModel.getStoreInfoByCustomerId(args.uuid.toString())
+            val result = viewModel.getStoreInfoByRegNum(args.regNum)
 
             if (result.isSuccessful) {
                 result.body()?.get(0)?.market?.let { restaurant->
-                    restaurant.reg_num?.let {
-                        createQRCode(it)
-                    }
+                    createQRCode(restaurant.reg_num)
+
                     restaurant.name?.let {
                         binding.tvRestaurantName.text = it
+                    }
+
+                    restaurant.category?.let {
+                        binding.tvRestaurantName.append(" [$it]")
                     }
                 }
             } else {
                 findNavController().popBackStack()
-                Toast.makeText(requireContext(), "매장을 우선 등록해주세요", Toast.LENGTH_SHORT).show()
+                CommonFunc.showToast(requireContext(), "매장 먼저 등록해주세요")
             }
 
         }
