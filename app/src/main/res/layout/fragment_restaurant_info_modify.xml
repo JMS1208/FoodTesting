@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             app:title="매장 정보 수정"
             app:titleCentered="true"
+            app:titleTextAppearance="@style/CustomToolbarTitle"
             app:navigationIcon="@drawable/ic_back_24"
             app:layout_constraintTop_toTopOf="parent"
             />

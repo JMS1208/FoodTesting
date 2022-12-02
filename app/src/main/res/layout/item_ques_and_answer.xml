@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        app:cardBackgroundColor="@color/bright_red"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="1dp"
+        app:contentPaddingBottom="5dp"
+        app:contentPaddingLeft="15dp"
+        app:contentPaddingRight="15dp"
+        app:contentPaddingTop="5dp">
+
+        <com.webtoonscorp.android.readmore.ReadMoreTextView
+            android:id="@+id/tv_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:readMoreText="더보기"
+            app:readMoreMaxLines="1"
+            app:readMoreTextUnderline="true"
+            app:readMoreTextSize="12sp"
+            app:emojiCompatEnabled="true"
+            tools:text="매장의 질문11111111111111111111111111111111111" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        app:cardBackgroundColor="@color/balloon_blue"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="1dp"
+        app:contentPaddingBottom="5dp"
+        app:contentPaddingLeft="15dp"
+        app:contentPaddingRight="15dp"
+        app:contentPaddingTop="5dp">
+
+        <com.webtoonscorp.android.readmore.ReadMoreTextView
+            android:id="@+id/tv_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="14sp"
+            app:readMoreText="더보기"
+            app:readMoreMaxLines="1"
+            app:readMoreTextUnderline="true"
+            app:readMoreTextSize="12sp"
+            app:emojiCompatEnabled="true"
+            tools:text="질문에 대한 대답111111111111111111111111111111111111" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_write_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        tools:text="2022.11.30 (수) 오후 7:50"
+        android:gravity="end"
+        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+        android:includeFontPadding="false"
+        />
+</LinearLayout>

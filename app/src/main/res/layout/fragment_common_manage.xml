@@ -15,6 +15,7 @@
         app:navigationIcon="@drawable/ic_back_24"
         app:title="관리 및 설정"
         app:titleCentered="true"
+        app:titleTextAppearance="@style/CustomToolbarTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

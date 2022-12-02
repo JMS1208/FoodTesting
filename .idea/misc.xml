@@ -31,6 +31,7 @@
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_btn_gradient_5.xml" value="0.1545" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_btn_gradient_blue_5.xml" value="0.1" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_btn_gradient_green_5.xml" value="0.1" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_btn_gradient_orange_5.xml" value="0.1535" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_btn_gradient_ㅠㅣㅕㄷ_5.xml" value="0.1" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_btn_grey.xml" value="0.1505" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_btn_grey_10.xml" value="0.1335" />
@@ -60,6 +61,7 @@
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_login_google.xml" value="0.274" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_login_kakao.xml" value="0.274" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_login_naver.xml" value="0.274" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_radius_solid_15.xml" value="0.177" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_rounded_black_10.xml" value="0.1085" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_rounded_btn_blue.xml" value="0.2765" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_rounded_grey.xml" value="0.3125" />
@@ -82,6 +84,7 @@
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_shadow_darker_upper.xml" value="0.1295" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_shadow_upper.xml" value="0.298" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_stroke_address.xml" value="0.222" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_tablayout.xml" value="0.163" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bg_white_10.xml" value="0.1225" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/bs_bar.xml" value="0.2895" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/checkbox.xml" value="0.1505" />
@@ -155,7 +158,9 @@
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/ripple_bg_red_outlined.xml" value="0.153" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/ripple_bg_white.xml" value="0.1" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/ripple_black_stroke_5.xml" value="0.131" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/selected_tab.xml" value="0.163" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/selector_ic_checked.xml" value="0.1795" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/selector_tablayout.xml" value="0.163" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/stroke_gradient.xml" value="0.1225" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/stroke_gradient_bg_white.xml" value="0.1" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/drawable/tes.xml" value="0.1625" />
@@ -270,6 +275,7 @@
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_query_register.xml" value="0.27803521779425394" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_query_register_about_testing_menu.xml" value="0.22076825664837485" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_query_register_completed.xml" value="0.19752030782385635" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_query_register_overview.xml" value="0.22573749465583584" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_register.xml" value="0.25" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_register_add_photo.xml" value="0.16075245831551946" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_register_category_tel_addr.xml" value="0.22" />
@@ -278,8 +284,10 @@
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_register_operating_time.xml" value="0.2612227447627191" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_room.xml" value="0.25" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_review.xml" value="0.25" />
-        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_review_anal.xml" value="0.22" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_review_anal.xml" value="0.33" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_review_anal2.xml" value="0.30012825994014536" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_review_anal3.xml" value="0.22573749465583584" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_review_anal4.xml" value="0.29585292860196666" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_review_line.xml" value="0.3619791666666667" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_review_records.xml" value="0.30012825994014536" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_review_records_detail.xml" value="0.30012825994014536" />
@@ -316,11 +324,16 @@
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_query.xml" value="0.3435897435897436" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_query_keyword.xml" value="0.30462962962962964" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_query_line.xml" value="0.25" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_ques_and_answer.xml" value="0.5" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_recommed.xml" value="0.328125" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_restaurant.xml" value="0.5" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_review.xml" value="0.31296296296296294" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_review_by_customer.xml" value="0.30055579307396324" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_review_for_customer.xml" value="0.2921063739974673" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_review_hash_tag.xml" value="0.2375" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_review_records.xml" value="0.30012825994014536" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_review_records_for_restaurant.xml" value="0.33" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_review_records_for_restaurant2.xml" value="0.33" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_search_address.xml" value="0.2947916666666667" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_simple_review.xml" value="0.25" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/item_sorted.xml" value="0.1" />

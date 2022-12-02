@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodtesting.R
-import com.capstone.foodtesting.data.model.review.ReviewRecords
 import com.capstone.foodtesting.databinding.FragmentReviewRecordsBinding
 import com.capstone.foodtesting.util.CommonFunc.showToast
 import com.capstone.foodtesting.util.sandboxAnimations
@@ -62,12 +61,6 @@ class ReviewRecordsFragment : Fragment() {
         binding.rvMyReviews.apply {
             adapter = reviewRecordsAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(),
-                    DividerItemDecoration.VERTICAL
-                )
-            )
         }
     }
 
@@ -77,9 +70,11 @@ class ReviewRecordsFragment : Fragment() {
                 val response = viewModel.getMyReviews(args.member.uuid.toString())
 
                 if (response.isSuccessful) {
-                    response.body()?.reviewList?.let {
+
+                    response.body()?.myReviews?.let {
                         reviewRecordsAdapter.submitList(it)
                     }
+
                 }
 
             } catch (nullException: NullPointerException) {
@@ -96,10 +91,10 @@ class ReviewRecordsFragment : Fragment() {
     }
 
     private fun initLottieView() {
-        binding.lvReview.apply {
-            sandboxAnimations()
-            playAnimation()
-        }
+//        binding.lvReview.apply {
+//            sandboxAnimations()
+//            playAnimation()
+//        }
     }
 
     private fun initToolbarView() {

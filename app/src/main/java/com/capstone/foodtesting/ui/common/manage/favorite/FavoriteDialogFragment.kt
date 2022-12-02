@@ -79,6 +79,16 @@ class FavoriteDialogFragment() : BottomSheetDialogFragment() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        binding.blurLayout.startBlur()
+    }
+
+    override fun onStop() {
+        binding.blurLayout.pauseBlur()
+        super.onStop()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

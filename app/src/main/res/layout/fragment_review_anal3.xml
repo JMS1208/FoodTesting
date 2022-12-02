@@ -4,14 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_grey"
     tools:context=".ui.restaurant.review.ReviewAnalFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -20,125 +18,97 @@
             app:navigationIcon="@drawable/ic_back_24"
             app:title="리뷰 조회 및 분석"
             app:titleCentered="true"
-            android:background="@color/white"
             app:titleTextAppearance="@style/CustomToolbarTitle" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/bg_btn_gradient"
-            android:elevation="5dp"
-            >
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="3dp"
-                app:cardPreventCornerOverlap="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="5dp"
-                >
-                <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_restaurant_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@color/bright_grey" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_restaurant_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                    android:gravity="end"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:text="매장 이름 [카테고리]" />
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/iv_restaurant_image"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@color/bright_grey" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tv_restaurant_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:fontFamily="@font/noto_sans_kr_regular_font_family"
-                            android:gravity="end"
-                            android:includeFontPadding="false"
-                            android:textColor="@color/black"
-                            android:textSize="18sp"
-                            tools:text="매장 이름 [카테고리]" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tv_cumulative_review"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:fontFamily="@font/noto_sans_kr_regular_font_family"
-                            android:gravity="end"
-                            android:includeFontPadding="false"
-                            tools:text="누적리뷰: N개"
-                            android:textSize="16sp"
-                            />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabIndicatorFullWidth="false"
-                app:tabIndicatorHeight="0dp"
-                app:tabMode="scrollable"
-                android:layout_margin="10dp"
-                app:tabBackground="@drawable/selector_tablayout"
-                android:background="@drawable/bg_tablayout"
-                app:tabSelectedTextColor="@color/point_red"
-                app:tabTextColor="@color/white"
-                app:tabTextAppearance="@style/TabLayoutTextStyleWhite">
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="전체" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                    android:gravity="end"
+                    android:includeFontPadding="false"
+                    android:text="리뷰들을 분석해드려요 !"
+                    android:textSize="18sp" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="주 손님층" />
+            </LinearLayout>
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="월별 손님" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="피드백 확인" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="리뷰 요약" />
-
-            </com.google.android.material.tabs.TabLayout>
 
         </LinearLayout>
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/point_red"
+            app:tabIndicatorFullWidth="true"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/point_red"
+            app:tabTextAppearance="@style/TabLayoutTextStyle">
 
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전체" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="주 손님층" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="월별 손님" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="피드백 확인" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="리뷰 요약" />
+
+        </com.google.android.material.tabs.TabLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -147,7 +117,7 @@
             <View
                 android:id="@+id/v_idx0"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="10dp"
                 android:layout_gravity="top"
                 android:background="@drawable/bg_shadow" />
 
@@ -168,19 +138,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:paddingBottom="30dp"
-                        >
+                        android:paddingBottom="30dp">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="30dp"
+                            android:layout_marginTop="20dp"
                             android:layout_marginEnd="20dp"
                             android:fontFamily="@font/noto_sans_kr_regular_font_family"
                             android:includeFontPadding="false"
-                            android:text="&quot; 매장에 방문한 손님 &quot;"
-                            android:textSize="16sp"/>
+                            android:text="&quot; 매장에 방문한 손님이예요 ! &quot;"
+                            android:textSize="16sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"

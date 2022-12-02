@@ -20,7 +20,7 @@
     app:closeIconTint="@color/white"
     app:textStartPadding="10dp"
     app:textEndPadding="10dp"
-    app:chipBackgroundColor="@color/grey"
+    app:chipBackgroundColor="@color/bright_red"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 

@@ -52,6 +52,7 @@ class ReviewAnalFragment : Fragment() {
 
     private lateinit var simpleReviewAdapter: SimpleReviewAdapter
 
+    private lateinit var reviewByCustomerAdapter: ReviewByCustomerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,6 +82,16 @@ class ReviewAnalFragment : Fragment() {
 
                     reviewStatistics.age?.let {
                         initAgeBarChart(it, total)
+                        var cnt = 0
+
+                        cnt += it.age_10?:0
+                        cnt += it.age_20?:0
+                        cnt += it.age_30?:0
+                        cnt += it.age_40?:0
+                        cnt += it.age_50?:0
+
+
+                        binding.tvCumulativeReview.text = "누적리뷰: ${cnt}개"
                     }
                     reviewStatistics.gender?.let {
                         initGenderPieChart(it, total)
@@ -120,6 +131,26 @@ class ReviewAnalFragment : Fragment() {
 
         setupSimpleRecyclerview()
         setupScrollChangeListener()
+        setupReviewByCustomerRecyclerview()
+    }
+
+    private fun setupReviewByCustomerRecyclerview() {
+        reviewByCustomerAdapter = ReviewByCustomerAdapter()
+
+        binding.rvReview.apply {
+            adapter = reviewByCustomerAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val response = viewModel.getReviewsForRestaurant(args.regNum)
+
+            if(response.isSuccessful) {
+                response.body()?.let {
+                    reviewByCustomerAdapter.submitList(it)
+                }
+            }
+        }
 
     }
 
@@ -252,19 +283,19 @@ class ReviewAnalFragment : Fragment() {
     }
 
     private fun setupSimpleRecyclerview() {
-        simpleReviewAdapter = SimpleReviewAdapter().apply {
-            setOnItemClickListener {
-
-            }
-        }
-        binding.rvReview.apply {
-            adapter = simpleReviewAdapter
-            layoutManager = LinearLayoutManager(requireContext())
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            //여기서 심플리뷰 가져오기
-        }
+//        simpleReviewAdapter = SimpleReviewAdapter().apply {
+//            setOnItemClickListener {
+//
+//            }
+//        }
+//        binding.rvReview.apply {
+//            adapter = simpleReviewAdapter
+//            layoutManager = LinearLayoutManager(requireContext())
+//        }
+//
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            //여기서 심플리뷰 가져오기
+//        }
 
 
     }

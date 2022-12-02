@@ -18,8 +18,9 @@ import com.capstone.foodtesting.data.model.restaurant.Restaurant
 import com.capstone.foodtesting.data.model.restaurant.RestaurantResponse
 import com.capstone.foodtesting.data.model.restaurant.home.NewRestaurantList
 import com.capstone.foodtesting.data.model.restaurant.register.MessageResponse
+import com.capstone.foodtesting.data.model.review.QuesAnswer
 import com.capstone.foodtesting.data.model.review.Review
-import com.capstone.foodtesting.data.model.review.ReviewRecords
+import com.capstone.foodtesting.data.model.review.myreview.MyReviewResponse
 import com.capstone.foodtesting.data.model.statistics.ReviewStatistics
 import com.capstone.foodtesting.data.model.statistics.ReviewStatisticsResponse
 import com.capstone.foodtesting.data.model.unsplash.Result
@@ -156,7 +157,20 @@ interface MainRepository {
     //작성한 리뷰 가져오기
     suspend fun getMyReviews(
         customer_uuid: String
-    ): Response<ReviewRecords>
+    ): Response<MyReviewResponse>
+
+    //매장에 달린 리뷰들 가져오기
+    suspend fun getReviewsForRestaurant(
+        reg_num: String
+    ): Response<List<QuesAnswer>>
+
+
+
+
+
+
+
+
 
     //Naver Geo API
     suspend fun searchGeoInfo(

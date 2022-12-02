@@ -11,9 +11,10 @@ import com.capstone.foodtesting.data.model.restaurant.Restaurant
 import com.capstone.foodtesting.data.model.restaurant.RestaurantResponse
 import com.capstone.foodtesting.data.model.restaurant.home.NewRestaurantList
 import com.capstone.foodtesting.data.model.restaurant.register.MessageResponse
+import com.capstone.foodtesting.data.model.review.QuesAnswer
 import com.capstone.foodtesting.data.model.review.Review
 import com.capstone.foodtesting.data.model.review.ReviewList
-import com.capstone.foodtesting.data.model.review.ReviewRecords
+import com.capstone.foodtesting.data.model.review.myreview.MyReviewResponse
 import com.capstone.foodtesting.data.model.statistics.ReviewStatistics
 import com.capstone.foodtesting.data.model.statistics.ReviewStatisticsResponse
 import okhttp3.MultipartBody
@@ -159,7 +160,13 @@ interface FoodTestingApi {
     @GET("get/review/each/customer/{uuid}")
     suspend fun getMyReviews(
         @Path("uuid") customer_uuid: String
-    ): Response<ReviewRecords>
+    ): Response<MyReviewResponse>
+
+    //매장에 달린 리뷰들 가져오기
+    @GET("get/reviews/written-by-customer/{reg_num}")
+    suspend fun getReviewsForRestaurant(
+        @Path("reg_num") reg_num: String
+    ): Response<List<QuesAnswer>>
 
 
 }
