@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    android:backgroundTint="@color/balloon_blue"
+    android:background="@drawable/bg_rounded_stroke_grey_10"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    >
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lv_profile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="lottie/star.json"
+        app:lottie_loop="true" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_write_date"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:gravity="center_vertical|start"
+            android:includeFontPadding="false"
+            android:text="yyyy.MM.dd (E) hh:mm"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_simple_contents"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:gravity="center_vertical|start"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="리뷰 내용 ..."
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>
+

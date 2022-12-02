@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.common.manage.CommonManageFragment">
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigationIcon="@drawable/ic_back_24"
+        app:title="관리 및 설정"
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/CustomToolbarTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_logo"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:visibility="visible"
+                        app:srcCompat="@drawable/ic_logo" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        >
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/lv_address"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:foregroundGravity="center"
+                            app:lottie_fileName="lottie/location.json"
+                            app:lottie_loop="true"
+                            app:lottie_autoPlay="true"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_address_title"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            />
+                        <TextView
+                            android:id="@+id/tv_address_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                            android:includeFontPadding="false"
+                            android:text="주소 설정"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            app:layout_constraintStart_toEndOf="@id/lv_address"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                    <TextView
+                        android:id="@+id/tv_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/bg_btn_white_stroke_red2_5"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/ic_down_arrow_single_18"
+                        android:elevation="1dp"
+                        android:focusable="true"
+                        android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:paddingStart="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        android:text="주소를 설정해주세요"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/bg_grey" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="20dp"
+                        >
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/lv_my_activity"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:foregroundGravity="center"
+                            app:lottie_fileName="lottie/fork.json"
+                            app:lottie_loop="true"
+                            app:lottie_autoPlay="true"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_my_activity_title"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            />
+                        <TextView
+                            android:id="@+id/tv_my_activity_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                            android:includeFontPadding="false"
+                            android:text="나의 활동"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            app:layout_constraintStart_toEndOf="@id/lv_my_activity"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:orientation="horizontal"
+                        android:layout_margin="20dp"
+                        android:background="@drawable/bg_btn_white_stroke_dash_red2_5"
+                        >
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/lv_profile"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            app:lottie_fileName="lottie/boy.json"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/v_divider_profile"
+                            />
+
+                        <View
+                            android:id="@+id/v_divider_profile"
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:background="@color/bright_grey"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            app:layout_constraintStart_toEndOf="@id/lv_profile"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/ll_profile"
+                            />
+
+                        <LinearLayout
+                            android:id="@+id/ll_profile"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="2"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:gravity="center_vertical"
+                            app:layout_constraintStart_toEndOf="@id/v_divider_profile"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            >
+                            <ImageView
+                                android:id="@+id/iv_modify_profile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/ic_settings_24"
+                                android:layout_gravity="top|end"
+                                app:tint="@color/grey"
+                                />
+                            <TextView
+                                android:id="@+id/tv_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                                android:gravity="end|bottom"
+                                android:includeFontPadding="false"
+                                android:text="ㅇㅇㅇ 님 "
+                                android:textSize="18sp" />
+                            <TextView
+                                android:id="@+id/tv_nickname_type"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                                android:gravity="end|bottom"
+                                android:includeFontPadding="false"
+                                android:text="ㅇㅇㅇ 님 "
+                                android:textSize="18sp" />
+                            <TextView
+                                android:id="@+id/tv_email"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                                android:gravity="end|bottom"
+                                android:layout_gravity="end"
+                                android:includeFontPadding="false"
+                                android:text="email@email.com"
+                                android:textColor="@color/blue"
+                                android:textSize="18sp" />
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+                    <TextView
+                        android:id="@+id/tv_favorite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:text="즐겨찾기 매장"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tv_qr_scan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:text="큐알 코드 스캔"
+                        android:textSize="18sp" />
+
+
+
+                    <TextView
+                        android:id="@+id/tv_my_reviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:text="내가 쓴 리뷰"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/bg_grey" />
+
+
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="20dp"
+                        >
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/lv_restaurant_manage"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:foregroundGravity="center"
+                            app:lottie_fileName="lottie/restaurant.json"
+                            app:lottie_loop="true"
+                            app:lottie_autoPlay="true"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_restaurant_manage_title"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            />
+                        <TextView
+                            android:id="@+id/tv_restaurant_manage_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                            android:includeFontPadding="false"
+                            android:text="매장 관리"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            app:layout_constraintStart_toEndOf="@id/lv_restaurant_manage"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                    <com.skydoves.powerspinner.PowerSpinnerView
+                        android:id="@+id/spinner_restaurant"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_btn_white_stroke_red2_5"
+                        android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                        android:includeFontPadding="false"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:textSize="18sp"
+                        android:paddingStart="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        app:spinner_popup_animation="dropdown"
+                        app:spinner_popup_background="@color/white"
+                        app:spinner_popup_elevation="14dp"
+                        app:spinner_item_height="50dp"
+                        app:spinner_divider_show="true"
+                        app:spinner_divider_color="@color/point_red"
+                        app:spinner_divider_size="0.4dp"
+                        app:spinner_arrow_drawable="@drawable/ic_down_arrow_single_18"
+                        android:hint="현재 등록된 매장이 없습니다"
+                        app:spinner_arrow_gravity="end"
+                        android:gravity="center"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_qr_generate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:text="큐알 코드 생성"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tv_register_restaurant"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:text="매장 입점"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tv_question_manage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:text="매장 질문지 관리"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tv_menu_manage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:text="매장 메뉴 관리"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tv_restaurant_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:text="매장 정보 수정"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tv_review_check"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:text="리뷰 결과 분석"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/bg_grey" />
+
+                    <TextView
+                        android:id="@+id/tv_logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:gravity="end"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:includeFontPadding="false"
+                        android:text="로그아웃"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

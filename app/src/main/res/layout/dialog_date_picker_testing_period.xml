@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="5dp"
+
+    >
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="개발메뉴 테스팅 기간"
+                android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                android:includeFontPadding="false"
+                android:textSize="20sp"
+                android:gravity="center"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                >
+                <TextView
+                    android:id="@+id/tv_start"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_kr_bold_font_family"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="시작"
+                    android:textColor="@color/point_red"
+                    android:padding="10dp"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_end"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_kr_bold_font_family"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="종료"
+                    android:padding="10dp"
+                    android:textColor="@color/grey"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:id="@+id/tv_start_date"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="시작일을 설정해주세요"
+                    android:textColor="@color/point_red"
+                    android:padding="10dp"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_end_date"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="종료일을 설정해주세요"
+                    android:padding="10dp"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <DatePicker
+                android:id="@+id/datePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:datePickerMode="calendar"
+                android:layout_gravity="center"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                >
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_close"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="10dp"
+                    android:text="취소"
+                    android:background="@drawable/bg_btn_white_stroke_red2_5"
+                    app:backgroundTint="@null"
+                    android:textColor="@color/point_red"
+                    android:fontFamily="@font/noto_sans_kr_bold_font_family"
+                    android:includeFontPadding="false"
+                    app:cornerRadius="5dp"
+                    app:rippleColor="@color/black"
+                    app:elevation="5dp"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_select"
+
+                    />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_select"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:text="선택"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/bg_btn_gradient_5"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/noto_sans_kr_bold_font_family"
+                    android:includeFontPadding="false"
+                    app:cornerRadius="5dp"
+                    app:rippleColor="@color/black"
+                    app:elevation="5dp"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btn_close"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.cardview.widget.CardView>

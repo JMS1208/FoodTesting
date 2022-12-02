@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "106449633055",
+    "project_id": "foodtesting-f9026",
+    "storage_bucket": "foodtesting-f9026.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:106449633055:android:7adc4d43927ab0634dfa2a",
+        "android_client_info": {
+          "package_name": "com.capstone.foodtesting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "106449633055-3a416709os7r7pjc7kiuhi1m70una9ok.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.capstone.foodtesting",
+            "certificate_hash": "2c16015a781f8e10e35b105f0536e9d361e8be9e"
+          }
+        },
+        {
+          "client_id": "106449633055-13ql64jaephpeemdveuo293q6b98do4n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0ndxF3pO4HbNw_nOsW7xiZhcjDVa-wrE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "106449633055-13ql64jaephpeemdveuo293q6b98do4n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

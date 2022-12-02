@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_btn_gradient_10"
+    android:padding="10dp"
+    android:layout_marginBottom="10dp"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="5dp"
+        app:cardPreventCornerOverlap="true"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:orientation="horizontal">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lv_profile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_fileName="lottie/star.json"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_restaurant_name_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                    android:includeFontPadding="false"
+                    android:padding="10dp"
+                    android:textSize="18sp"
+                    tools:text="닉네임" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lv_rate"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:foregroundGravity="right"
+                    android:padding="10dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="lottie/rate.json"
+                    app:lottie_loop="true" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    
+
+
+
+
+    <TextView
+        android:id="@+id/tv_toggle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/noto_sans_kr_bold_font_family"
+        android:gravity="start"
+        android:includeFontPadding="false"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:text="내가 남긴 리뷰"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:drawableTint="@color/white"
+        app:drawableStartCompat="@drawable/ic_down_arrow_single_18" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_reviews_for_restaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:background="@drawable/bg_btn_gradient_10"
+        android:backgroundTint="@color/white"
+        />
+
+</LinearLayout>

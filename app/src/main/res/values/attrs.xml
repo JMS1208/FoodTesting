@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GradientStrokeCardView"
+        >
+        <attr name="GSC_StrokeWidth"
+            format="dimension"/>
+        <attr name="GSC_GradientColors"
+            format="reference"/>
+        <attr name="GSC_GradientAnimate"
+            format="boolean"/>
+        <attr name="GSC_AnimationDuration"
+            format="integer"
+            />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_rounded_stroke_black_10"
+    android:backgroundTint="@color/bright_grey"
+    android:padding="10dp"
+    android:layout_marginBottom="10dp"
+    >
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_restaurant_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@color/bright_grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_restaurant_name_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:fontFamily="@font/noto_sans_kr_medium_font_family"
+                android:includeFontPadding="false"
+                android:padding="10dp"
+                android:textSize="18sp"
+                tools:text="매장명 [카테고리]" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lv_rate"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:foregroundGravity="right"
+                android:padding="10dp"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="lottie/rate.json"
+                app:lottie_loop="true" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:background="@color/bright_grey" />
+
+
+    <TextView
+        android:id="@+id/tv_toggle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+        android:gravity="start"
+        android:includeFontPadding="false"
+        android:padding="10dp"
+        android:text="내가 남긴 리뷰"
+        android:textSize="16sp"
+
+        app:drawableStartCompat="@drawable/ic_down_arrow_single_18" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_reviews_for_restaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:visibility="gone"
+        />
+
+</LinearLayout>

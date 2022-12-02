@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.restaurant.review.ReviewAnalFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:navigationIcon="@drawable/ic_back_24"
+            app:title="리뷰 조회 및 분석"
+            app:titleCentered="true"
+            app:titleTextAppearance="@style/CustomToolbarTitle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_btn_gradient"
+            android:elevation="5dp"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="3dp"
+                app:cardPreventCornerOverlap="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_restaurant_image"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@color/bright_grey" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_restaurant_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                            android:gravity="end"
+                            android:includeFontPadding="false"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            tools:text="매장 이름 [카테고리]" />
+
+                        <TextView
+                            android:id="@+id/tv_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                            android:gravity="end"
+                            android:includeFontPadding="false"
+                            android:text="리뷰들을 분석해드려요 !"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/bg_tablayout"
+                app:tabBackground="@drawable/selector_tablayout"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorHeight="0dp"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/point_red"
+                app:tabTextAppearance="@style/TabLayoutTextStyleWhite"
+                app:tabTextColor="@color/white">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="전체" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="주 손님층" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="월별 손님" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="피드백 확인" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="리뷰 요약" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/v_idx0"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="top"
+                android:background="@drawable/bg_shadow" />
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                >
+
+                <LinearLayout
+                    android:id="@+id/ll_idx0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="15dp"
+                        app:cardPreventCornerOverlap="true"
+                        android:layout_margin="10dp"
+                        app:cardElevation="3dp"
+
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:elevation="3dp"
+                                android:fontFamily="@font/noto_sans_kr_bold_font_family"
+                                android:includeFontPadding="false"
+                                android:paddingStart="10dp"
+                                android:paddingTop="15dp"
+                                android:paddingEnd="20dp"
+                                android:paddingBottom="20dp"
+                                android:text="매장에 방문한 손님"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:background="@color/darker_red"
+                                app:drawableTint="@color/white"
+                                android:drawablePadding="5dp"
+                                android:gravity="center_vertical|start"
+                                app:drawableStartCompat="@drawable/ic_check_24"
+                                />
+
+                            <com.github.mikephil.charting.charts.PieChart
+                                android:id="@+id/chart_gender"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp" />
+
+                            <com.github.mikephil.charting.charts.BarChart
+                                android:id="@+id/chart_age"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                android:layout_marginTop="30dp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <TextView
+                        android:id="@+id/tv_result_age_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                        android:gravity="end"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/blue"
+                        android:textSize="16sp"
+                        tools:text="주 손님층은 &apos;남성 20대&apos; 입니다" />
+
+
+                    <View
+                        android:id="@+id/v_idx1"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="@color/bg_grey" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_idx1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="30dp">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginEnd="20dp"
+                            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                            android:includeFontPadding="false"
+                            android:text="&quot; 손님이 가장 많았던 달은 !? &quot;"
+                            android:textSize="16sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:background="@drawable/bg_btn_white_stroke_red2_5"
+                            android:orientation="vertical"
+                            android:paddingTop="30dp"
+                            android:paddingBottom="30dp">
+
+                            <com.github.mikephil.charting.charts.LineChart
+                                android:id="@+id/chart_month"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_result_month"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                            android:gravity="end"
+                            android:includeFontPadding="false"
+                            android:textColor="@color/blue"
+                            android:textSize="16sp"
+                            tools:text="가장 손님이 많았던 달은 &apos;10월&apos; 이었어요" />
+
+                    </LinearLayout>
+
+
+                    <View
+                        android:id="@+id/v_idx2"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="@color/bg_grey" />
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_idx2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="30dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginEnd="20dp"
+                            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                            android:includeFontPadding="false"
+                            android:text="&quot; 피드백 확인 &quot;"
+                            android:textSize="16sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:orientation="vertical">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_review"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:minHeight="200dp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <View
+                        android:id="@+id/v_idx3"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="@color/bg_grey" />
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_idx3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="30dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginEnd="20dp"
+                            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+                            android:includeFontPadding="false"
+                            android:text="&quot; 리뷰 요약 &quot;"
+                            android:textSize="16sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:background="@drawable/bg_btn_white_stroke_red2_5"
+                            android:orientation="vertical"
+                            android:padding="50dp">
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <View
+                        android:id="@+id/v_idx4"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="@color/bg_grey" />
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

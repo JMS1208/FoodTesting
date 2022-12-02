@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.restaurant.questionnaire.completed.RestaurantQueryRegisterCompletedFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+            android:includeFontPadding="false"
+            android:text="질문지 작성 완료 !"
+            android:layout_gravity="center_horizontal"
+            android:textSize="23sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
+            />
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/ic_congrats"
+            android:layout_marginBottom="20dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="&quot; 가게명 (카테고리명) &quot;"
+            android:fontFamily="@font/noto_sans_kr_medium_font_family"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:layout_marginBottom="40dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="매장을 성공적으로 등록하였습니다!\n질문지를 따로 작성하지 않으면,\n기본으로 제공되는 질문지를 이용하실 수 있어요!"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:includeFontPadding="false"
+            android:textSize="16sp"
+            android:layout_marginBottom="40dp"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_make_query"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_bold_font_family"
+            android:includeFontPadding="false"
+            android:text="질문지 작성하러가기"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="15dp"
+            app:backgroundTint="@null"
+            android:background="@drawable/bg_btn_gradient2_5"
+            android:elevation="5dp"
+            app:rippleColor="@color/white"
+            app:elevation="5dp"
+            app:cornerRadius="5dp"
+            android:visibility="invisible"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_move_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_bold_font_family"
+            android:includeFontPadding="false"
+            android:text="홈으로 이동"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="15dp"
+            app:backgroundTint="@null"
+            android:background="@drawable/bg_btn_gradient3_5"
+            android:elevation="5dp"
+            app:rippleColor="@color/white"
+            app:elevation="5dp"
+            app:cornerRadius="5dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            />
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
