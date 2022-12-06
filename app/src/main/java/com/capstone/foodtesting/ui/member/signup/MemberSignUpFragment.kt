@@ -1,5 +1,6 @@
 package com.capstone.foodtesting.ui.member.signup
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
@@ -10,11 +11,14 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.data.model.member.Member
 import com.capstone.foodtesting.databinding.FragmentMemberSignUpBinding
+import com.capstone.foodtesting.util.CommonFunc.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 
 @AndroidEntryPoint
@@ -41,7 +45,7 @@ class MemberSignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var calendar = java.util.Calendar.getInstance()
+        val calendar = java.util.Calendar.getInstance()
         val year = calendar.get(java.util.Calendar.YEAR)
         val month = calendar.get(java.util.Calendar.MONTH)
         val day = calendar.get(java.util.Calendar.DAY_OF_MONTH)
@@ -93,9 +97,7 @@ class MemberSignUpFragment : Fragment() {
                     "비밀번호를 입력해주세요"
                 }
                 SignUpNotice.EVERYTHING_IS_OKAY -> {
-                    val member = createMember()
-
-                    viewModel.registerUserInfo(member)
+                    runRegister()
 
                     ""
                 }
@@ -112,19 +114,19 @@ class MemberSignUpFragment : Fragment() {
             viewModel.updateGender(Member.FEMALE)
         }
 
-        viewModel.mutableSignUpSuccess.observe(viewLifecycleOwner) { member->
-            member?.let {
-                viewModel.insertMember(it)
-
-                setFragmentResult("SignUp", Bundle().apply {
-                    putBoolean("SignUp", true)
-                })
-
-                findNavController().popBackStack()
-
-            }
-
-        }
+//        viewModel.mutableSignUpSuccess.observe(viewLifecycleOwner) { member->
+//            member?.let {
+//                viewModel.insertMember(it)
+//
+//                setFragmentResult("SignUp", Bundle().apply {
+//                    putBoolean("SignUp", true)
+//                })
+//
+//                findNavController().popBackStack()
+//
+//            }
+//
+//        }
 
         viewModel.mutableGender.observe(viewLifecycleOwner) { gender ->
             gender?.let {
@@ -157,7 +159,52 @@ class MemberSignUpFragment : Fragment() {
             }
         }
     }
+    private fun runRegister() =
+        viewLifecycleOwner.lifecycleScope.launch {
 
+            try {
+                val member = createMember()
+
+                val response = viewModel.registerUserInfo(member)
+
+                if (response.isSuccessful) {
+                    val msg = response.body()?.message
+
+                    when (msg) {
+                        "Success to Add" -> {
+                            finishUserRegister(member)
+                        }
+                        "Failed to Add" -> {
+                            showToast(requireContext(), "회원가입에 실패했습니다")
+                        }
+                        "email is already exists" -> {
+                            showToast(requireContext(), "이미 존재하는 이메일 입니다")
+                        }
+                        else -> {
+                            showToast(requireContext(), "알 수 없는 오류가 발생했습니다")
+
+                        }
+                    }
+                }
+            } catch (E: Exception) {
+                showToast(requireContext(), "${E.message}")
+            }
+
+        }
+
+    private fun finishUserRegister(member: Member) {
+        viewModel.insertMember(member)
+
+//        setFragmentResult("SignUp", Bundle().apply {
+//            putBoolean("SignUp", true)
+//        })
+
+        showToast(requireContext(), "회원가입이 완료되었습니다")
+
+        findNavController().popBackStack()
+    }
+
+    @SuppressLint("SimpleDateFormat")
     private fun createMember(): Member {
         val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일")
 

@@ -1,66 +1,57 @@
-package com.capstone.foodtesting.ui.loading
+package com.capstone.foodtesting.ui.restaurant.review
 
-import android.animation.ValueAnimator
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.airbnb.lottie.Lottie
-import com.airbnb.lottie.LottieAnimationView
 import com.capstone.foodtesting.R
-import com.capstone.foodtesting.databinding.DialogLoadingBinding
+import com.capstone.foodtesting.databinding.FragmentReviewSummaryBinding
+import com.capstone.foodtesting.util.dialogFragmentResize
 import com.capstone.foodtesting.util.sandboxAnimations
-import com.skydoves.balloon.balloon
 import java.lang.NullPointerException
 
-class DialogLoading: DialogFragment() {
 
-    private var _binding: DialogLoadingBinding? = null
+class DialogReviewSummary : DialogFragment()  {
+
+    private var _binding: FragmentReviewSummaryBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var message: String
 
-    private var dialogIsCancellable: Boolean = true
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
         return Dialog(requireContext(), R.style.TransparentDialogDim)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DialogLoadingBinding.inflate(inflater, container, false)
+        _binding = FragmentReviewSummaryBinding.inflate(inflater, container, false)
+        // Inflate the layout for this fragment
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         if (this::message.isInitialized) {
-            binding.tvLoading.text = message
+            binding.tvReviewSummary.text = message
         }
 
-        binding.lottieView.apply {
+        setupLottieView()
+
+        requireContext().dialogFragmentResize(this, 1f,1f)
+    }
+
+    private fun setupLottieView() {
+        binding.lvRobot.apply {
             sandboxAnimations()
             playAnimation()
         }
-
-        binding.tvLoading.setOnClickListener {
-            if(dialogIsCancellable) {
-                dismiss()
-            }
-        }
-
     }
 
     override fun onDismiss(dialog: DialogInterface) {
@@ -68,15 +59,11 @@ class DialogLoading: DialogFragment() {
         super.onDismiss(dialog)
     }
 
-    fun setOutsideCancellable (isCancellable: Boolean) {
-        dialogIsCancellable = isCancellable
-    }
-
     fun setMessage(message: String) {
         this.message = message
 
         try {
-            binding.tvLoading.text = message
+            binding.tvReviewSummary.text = message
         } catch (e: NullPointerException) {
             e.printStackTrace()
         }

@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/bg_btn_grey_10"
-                android:backgroundTint="@color/base_pink"
+                android:backgroundTint="@color/bright_grey"
                 android:layout_marginTop="30dp"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"

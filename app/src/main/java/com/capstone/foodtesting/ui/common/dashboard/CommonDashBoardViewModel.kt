@@ -78,7 +78,6 @@ class CommonDashBoardViewModel @Inject constructor(
         latitude: Double,
         longitude: Double
     ) = viewModelScope.launch {
-
         val response = getRestaurantByCategory(category, latitude, longitude)
         handleResponse(category, response)
 

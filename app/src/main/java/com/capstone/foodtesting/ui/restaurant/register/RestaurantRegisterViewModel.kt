@@ -2,15 +2,20 @@ package com.capstone.foodtesting.ui.restaurant.register
 
 import android.net.Uri
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.capstone.foodtesting.data.model.file.process.ImageHashResponse
 import com.capstone.foodtesting.data.model.member.Member
+import com.capstone.foodtesting.data.model.questionnaire.QueryLine
+import com.capstone.foodtesting.data.model.questionnaire.QueryLineList
 import com.capstone.foodtesting.data.model.restaurant.Restaurant
 import com.capstone.foodtesting.data.model.restaurant.RestaurantResponse
 import com.capstone.foodtesting.data.model.restaurant.register.MessageResponse
 import com.capstone.foodtesting.data.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.util.*
 import javax.inject.Inject
 
 
@@ -33,6 +38,11 @@ class RestaurantRegisterViewModel @Inject constructor(
 
     suspend fun registerRestaurantInfo(restaurant: Restaurant): Response<MessageResponse> {
         return repository.registerRestaurant(restaurant)
+    }
+
+    fun registerBasicQuestionnaire() = viewModelScope.launch {
+
+
     }
 
 

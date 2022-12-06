@@ -55,8 +55,8 @@ object AppModule {
 
 
         return OkHttpClient.Builder()
-            .readTimeout(15, TimeUnit.SECONDS)
-            .connectTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.MINUTES)
+            .connectTimeout(10, TimeUnit.MINUTES)
             .addInterceptor(httpLoggingInterceptor)
             .build()
     }

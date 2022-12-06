@@ -2,7 +2,9 @@ package com.capstone.foodtesting.ui.restaurant.review
 
 import androidx.lifecycle.ViewModel
 import com.capstone.foodtesting.data.model.restaurant.RestaurantResponse
+import com.capstone.foodtesting.data.model.restaurant.register.MessageResponse
 import com.capstone.foodtesting.data.model.review.QuesAnswer
+import com.capstone.foodtesting.data.model.review.reviews.ReviewsForRestaurantResponse
 import com.capstone.foodtesting.data.model.statistics.ReviewStatistics
 import com.capstone.foodtesting.data.model.statistics.ReviewStatisticsResponse
 import com.capstone.foodtesting.data.repository.MainRepository
@@ -30,8 +32,14 @@ class ReviewAnalViewModel @Inject constructor(
 
     suspend fun getReviewsForRestaurant(
         reg_num: String
-    ): Response<List<QuesAnswer>> {
+    ): Response<ReviewsForRestaurantResponse> {
         return repository.getReviewsForRestaurant(reg_num)
+    }
+
+    suspend fun getReviewSummary(
+        reg_num: String
+    ): Response<MessageResponse> {
+        return repository.getReviewSummary(reg_num)
     }
 
 }

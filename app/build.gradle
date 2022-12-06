@@ -183,6 +183,4 @@ dependencies {
     //RefreshLayout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
-    //BlurKit
-    implementation("io.alterac.blurkit:blurkit:1.1.0")
 }

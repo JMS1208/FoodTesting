@@ -72,7 +72,9 @@ class CommonManageFragment : Fragment() {
 
         setupFragmentResultListener() //프래그먼트 결과 리스너
 
+
     }
+
 
     private fun initToolbarView() {
         binding.toolbar.apply {

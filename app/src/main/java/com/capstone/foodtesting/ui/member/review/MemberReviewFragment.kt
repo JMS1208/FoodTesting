@@ -14,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.capstone.foodtesting.data.model.questionnaire.QueryLine
 import com.capstone.foodtesting.databinding.FragmentMemberReviewBinding
 import com.capstone.foodtesting.util.CommonFunc
+import com.capstone.foodtesting.util.CommonFunc.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -75,6 +76,11 @@ class MemberReviewFragment : Fragment() {
             val queryList = viewModel.restaurantQueryList.value
 
             queryList?.let {
+                if(it.isEmpty()) {
+                    showToast(requireContext(), "현재 등록된 질문이 없습니다")
+                    findNavController().popBackStack()
+                }
+
                 if(binding.viewPager2.currentItem > 0 ) {
 //                    saveReview()
                     binding.viewPager2.currentItem -= 1
@@ -92,7 +98,14 @@ class MemberReviewFragment : Fragment() {
 
             val queryList = viewModel.restaurantQueryList.value
 
+
+
             queryList?.let {
+
+                if(it.isEmpty()) {
+                    showToast(requireContext(), "현재 등록된 질문이 없습니다")
+                    findNavController().popBackStack()
+                }
 
                 if(binding.viewPager2.currentItem < it.lastIndex) {
 //                    saveReview()

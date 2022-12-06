@@ -350,11 +350,11 @@ class CommonHomeFragment : Fragment() {
         }
 
         binding.ivTooltipCategory.setOnClickListener {
-            showTooltip(requireContext(), it, "카테고리 설명 추가", viewLifecycleOwner)
+            showTooltip(requireContext(), it, "매장들을 카테고리별로 확인해보세요", viewLifecycleOwner)
         }
 
         binding.ivTooltipExisting.setOnClickListener {
-            showTooltip(requireContext(), it, "신메뉴 설명 추가", viewLifecycleOwner)
+            showTooltip(requireContext(), it, "가장 최근에 등록된 개발 메뉴들입니다", viewLifecycleOwner)
         }
 
 
@@ -364,13 +364,13 @@ class CommonHomeFragment : Fragment() {
         setupFragmentResultListener()
 
 
-        binding.ivLogo.setOnClickListener {
-            val dialog = DialogLoading()
-
-            dialog.apply {
-                isCancelable = false
-            }.show(childFragmentManager, dialog.tag)
-        }
+//        binding.ivLogo.setOnClickListener {
+//            val dialog = DialogLoading()
+//
+//            dialog.apply {
+//                isCancelable = false
+//            }.show(childFragmentManager, dialog.tag)
+//        }
 
 
         setupNewMenuList()

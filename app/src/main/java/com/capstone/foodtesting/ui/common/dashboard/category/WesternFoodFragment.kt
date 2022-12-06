@@ -64,6 +64,7 @@ class WesternFoodFragment : Fragment() {
 
         viewModel.westernFoodRestaurantListLiveData.observe(viewLifecycleOwner) { restaurantList->
             restaurantList?.let {
+                categoryAdapter.submitList(emptyList())
                 categoryAdapter.submitList(it)
             }
         }

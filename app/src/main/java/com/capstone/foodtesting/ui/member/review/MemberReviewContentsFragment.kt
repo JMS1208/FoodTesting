@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.capstone.foodtesting.data.model.questionnaire.QueryLine
 import com.capstone.foodtesting.data.model.review.Review
 import com.capstone.foodtesting.databinding.FragmentMemberReviewContentsBinding
+import com.capstone.foodtesting.ui.activity.MainActivity
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -48,56 +49,70 @@ class MemberReviewContentsFragment : Fragment() {
         setupKeywordAdapter()
         initQueryView()
 
-        binding.etAnswer.addTextChangedListener(object: TextWatcher {
+        addTextChangeListenerToETAnswer()
+
+
+
+
+        setActivityDispatchTouchAvailable(false)
+    }
+
+    private fun addTextChangeListenerToETAnswer() {
+        binding.etAnswer.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
 
             override fun onTextChanged(answer: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val currentPage = (parentFragment as MemberReviewFragment).getCurrentPage()
                 viewModel.userReviewList.value?.apply {
                     this[currentPage].contents = answer.toString()
-//                    Log.d("TAG", "저장완료")
                 }
             }
 
             override fun afterTextChanged(p0: Editable?) = Unit
 
         })
+    }
 
+    private fun setActivityDispatchTouchAvailable(isAvailable: Boolean) {
+        (requireActivity() as MainActivity).setDispatchTouchAvailable(isAvailable)
     }
 
     private fun setupKeywordAdapter() {
         keywordAdapter = KeywordAdapter()
         keywordAdapter.setOnItemClickListener { keyword ->
 
-            val idx = binding.etAnswer.selectionEnd
+            val currIdx = binding.etAnswer.selectionEnd
+
             val oriText = binding.etAnswer.text.toString()
 
-            val newText = when(idx) {
-                0 -> { //맨앞
-                    "$keyword $oriText"
+            binding.etAnswer.text.clear()
+
+            when (currIdx) {
+                0 -> {
+
+                    val newText = "${keyword.trim()} $oriText"
+                    binding.etAnswer.setText(newText)
+                    binding.etAnswer.setSelection(newText.lastIndex+1)
+
                 }
-                oriText.lastIndex+1-> { //맨뒤
-                    "$oriText $keyword"
+                oriText.lastIndex + 1 -> {
+
+                    val newText = "$oriText ${keyword.trim()}"
+                    binding.etAnswer.setText(newText)
+                    binding.etAnswer.setSelection(newText.lastIndex+1)
+
                 }
-                else -> { //그외
-                    val beforeText = oriText.substring(0, idx)
-                    val afterText = oriText.substring(idx)
-                    "${beforeText.trimEnd()} $keyword ${afterText.trimStart()}"
+                else -> {
+
+                    val beforeText = oriText.substring(0, currIdx)
+                    val afterText = oriText.substring(currIdx)
+                    val newText =
+                        "${beforeText.trimEnd()} ${keyword.trim()} ${afterText.trimStart()}"
+                    binding.etAnswer.setText(newText)
+                    binding.etAnswer.setSelection("${beforeText.trimEnd()} ${keyword.trim()}".lastIndex+1)
                 }
             }
 
-//
-//
-//            val beforeText = oriText.substring(0, idx)
-//            val afterText = oriText.substring(idx+1)
-//            val keywordAddedText = "$beforeText $keyword $afterText"
-//
-//
-            binding.etAnswer.text.clear()
-
-            binding.etAnswer.setText(newText)
-
-            Log.d("TAG", "현재 Selection: $idx, ${binding.etAnswer.selectionStart}, ${oriText.lastIndex}")
 
         }
         keywordAdapter.setChipCloseBtnEnabled(false)
@@ -131,8 +146,8 @@ class MemberReviewContentsFragment : Fragment() {
     }
 
 
-
     override fun onDestroyView() {
+        setActivityDispatchTouchAvailable(true)
         super.onDestroyView()
         _binding = null
     }

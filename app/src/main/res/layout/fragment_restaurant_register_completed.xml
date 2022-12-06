@@ -46,19 +46,19 @@
             android:textSize="20sp"
             android:layout_marginBottom="40dp"
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="매장을 성공적으로 등록하였습니다!\n질문지를 따로 작성하지 않으면,\n기본으로 제공되는 질문지를 이용하실 수 있어요!"
             android:layout_gravity="center_horizontal"
-            android:gravity="center"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:fontFamily="@font/noto_sans_kr_regular_font_family"
-            android:includeFontPadding="false"
-            android:textSize="16sp"
             android:layout_marginBottom="40dp"
-            />
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="매장을 성공적으로 등록하였습니다!\n질문지를 작성한 후 피드백을 받으실 수 있어요!"
+            android:textSize="16sp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_make_query"
@@ -97,7 +97,7 @@
             android:paddingBottom="5dp"
             android:layout_marginTop="15dp"
             app:backgroundTint="@null"
-            android:background="@drawable/bg_btn_gradient3_5"
+            android:background="@drawable/bg_btn_gradient2_5"
             android:elevation="5dp"
             app:rippleColor="@color/white"
             app:elevation="5dp"

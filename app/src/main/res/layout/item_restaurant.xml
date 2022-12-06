@@ -107,6 +107,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:text="혼잡"
+                    android:visibility="invisible"
                     android:textColor="@color/white"
                     android:background="@drawable/bg_btn_gradient_5"
                     android:paddingBottom="3dp"

@@ -21,6 +21,7 @@ import com.capstone.foodtesting.data.model.restaurant.register.MessageResponse
 import com.capstone.foodtesting.data.model.review.QuesAnswer
 import com.capstone.foodtesting.data.model.review.Review
 import com.capstone.foodtesting.data.model.review.myreview.MyReviewResponse
+import com.capstone.foodtesting.data.model.review.reviews.ReviewsForRestaurantResponse
 import com.capstone.foodtesting.data.model.statistics.ReviewStatistics
 import com.capstone.foodtesting.data.model.statistics.ReviewStatisticsResponse
 import com.capstone.foodtesting.data.model.unsplash.Result
@@ -66,7 +67,7 @@ interface MainRepository {
 
     suspend fun registerUserInfo(
         member: Member
-    ): Response<Member>
+    ): Response<MessageResponse>
 
     suspend fun loginUser(
         email: String,
@@ -162,8 +163,12 @@ interface MainRepository {
     //매장에 달린 리뷰들 가져오기
     suspend fun getReviewsForRestaurant(
         reg_num: String
-    ): Response<List<QuesAnswer>>
+    ): Response<ReviewsForRestaurantResponse>
 
+    //리뷰 요약 가져오기
+    suspend fun getReviewSummary(
+        reg_num: String
+    ): Response<MessageResponse>
 
 
 

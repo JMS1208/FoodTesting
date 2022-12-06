@@ -2,48 +2,108 @@ package com.capstone.foodtesting.ui.restaurant.review
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.foodtesting.data.model.review.QuesAnswer
+import com.capstone.foodtesting.data.model.review.reviews.Answer
+import com.capstone.foodtesting.data.model.review.reviews.ReviewAll
 import com.capstone.foodtesting.databinding.ItemQuesAndAnswerBinding
 import com.capstone.foodtesting.databinding.ItemReviewByCustomerBinding
+import com.capstone.foodtesting.ui.member.review.records.ReviewRecordsAdapter
 import com.capstone.foodtesting.util.sandboxAnimations
 import java.text.SimpleDateFormat
 import java.util.*
 
 class ReviewByCustomerAdapter :
-    ListAdapter<QuesAnswer, ReviewByCustomerAdapter.ViewHolder>(diffCallback) {
+    ListAdapter<ReviewAll, ReviewByCustomerAdapter.ViewHolder>(diffCallback) {
 
     @SuppressLint("SimpleDateFormat")
     private val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd (E) hh:mm")
-    inner class ViewHolder(private val itemBinding: ItemQuesAndAnswerBinding) :
+
+    inner class ViewHolder(private val itemBinding: ItemReviewByCustomerBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(quesAnswer: QuesAnswer) {
 
-            quesAnswer.post_date.let {
-                itemBinding.tvWriteDate.text = simpleDateFormat.format(Date(it))
+        private lateinit var answerAdapter: AnswerAdapter
+
+        fun bind(reviewAll: ReviewAll) {
+
+            answerAdapter = AnswerAdapter()
+
+            itemBinding.rvReviewsForRestaurant.apply {
+                adapter = answerAdapter
+                layoutManager = LinearLayoutManager(itemView.context)
             }
-            quesAnswer.answer.let {
-                itemBinding.tvAnswer.text = it
+
+            reviewAll.customer?.gender?.let {
+                val fileName = when (it) {
+                    1 -> { //남자
+                        "lottie/boy.json"
+                    }
+                    2 -> { //여자
+                        "lottie/girl.json"
+                    }
+                    else -> {
+                        "lottie/star.json"
+                    }
+                }
+                itemBinding.lvProfile.apply {
+
+                    setAnimation(fileName)
+                    sandboxAnimations()
+                    playAnimation()
+                }
+
             }
-            quesAnswer.question.let {
-                itemBinding.tvQuestion.text = it
+
+            reviewAll.customer?.nickname?.let {
+                itemBinding.tvCustomerName.text = it
             }
 
+            reviewAll.customer?.age?.let {
+                itemBinding.tvCustomerName.append(" [$it]")
+            }
 
+            reviewAll.customer?.email?.let {
+                itemBinding.tvEmail.text = it
+            }
 
+            itemBinding.tvToggle.setOnClickListener {
+                itemBinding.rvReviewsForRestaurant.visibility = if(itemBinding.rvReviewsForRestaurant.isVisible) {
+                    View.GONE
+                } else {
+                    View.VISIBLE
+                }
+            }
+
+            reviewAll.answer?.let {
+                answerAdapter.submitList(it)
+            }
         }
     }
 
     companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<QuesAnswer>() {
-            override fun areItemsTheSame(oldItem: QuesAnswer, newItem: QuesAnswer): Boolean {
+        private val diffCallback = object : DiffUtil.ItemCallback<ReviewAll>() {
+            override fun areItemsTheSame(oldItem: ReviewAll, newItem: ReviewAll): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: QuesAnswer, newItem: QuesAnswer): Boolean {
+            override fun areContentsTheSame(oldItem: ReviewAll, newItem: ReviewAll): Boolean {
+                return oldItem == newItem
+            }
+
+        }
+
+        private val answerQuesDiffCallback = object: DiffUtil.ItemCallback<Answer>() {
+            override fun areItemsTheSame(oldItem: Answer, newItem: Answer): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: Answer, newItem: Answer): Boolean {
                 return oldItem == newItem
             }
 
@@ -51,12 +111,49 @@ class ReviewByCustomerAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemBinding = ItemQuesAndAnswerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemBinding =
+            ItemReviewByCustomerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val quesAnswer = currentList[position]
-        holder.bind(quesAnswer)
+        val reviewAll = currentList[position]
+        holder.bind(reviewAll)
+    }
+
+
+    inner class AnswerAdapter: ListAdapter<Answer, AnswerViewHolder>(answerQuesDiffCallback) {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnswerViewHolder {
+            val itemBinding = ItemQuesAndAnswerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            return AnswerViewHolder(itemBinding)
+        }
+
+        override fun onBindViewHolder(holder: AnswerViewHolder, position: Int) {
+            val answer = currentList[position]
+            holder.bind(answer)
+        }
+
+
+    }
+
+    inner class AnswerViewHolder(private val itemBinding: ItemQuesAndAnswerBinding): RecyclerView.ViewHolder(itemBinding.root) {
+
+        @SuppressLint("SimpleDateFormat")
+        private val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd (E) hh:mm:ss")
+
+        fun bind(answer: Answer) {
+            answer.reviewDate?.let {
+                itemBinding.tvWriteDate.text = simpleDateFormat.format(Date(it))
+            }
+
+
+            answer.contents?.let {
+                itemBinding.tvQuestion.text = it
+            }
+            answer.reviewLine?.let {
+                itemBinding.tvAnswer.text = it
+            }
+
+        }
     }
 }

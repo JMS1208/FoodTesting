@@ -60,6 +60,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
 
+    private var dispatchAvailable: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -81,24 +83,29 @@ class MainActivity : AppCompatActivity() {
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         // focus 를 받는 view 영역이 아닌 곳을 터치했을 때 소프트 키보드를 내림
         ev?.apply {
-
-            currentFocus?.apply {
-                val rect = Rect()
-                getGlobalVisibleRect(rect)
-                val x: Int = ev.x.toInt()
-                val y: Int = ev.y.toInt()
-                if(!rect.contains(x,y)) {
-                    val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
-                    inputMethodManager?.apply {
-                        hideSoftInputFromWindow(currentFocus!!.windowToken,0)
-                        currentFocus!!.clearFocus()
+            if(dispatchAvailable) {
+                currentFocus?.apply {
+                    val rect = Rect()
+                    getGlobalVisibleRect(rect)
+                    val x: Int = ev.x.toInt()
+                    val y: Int = ev.y.toInt()
+                    if(!rect.contains(x,y)) {
+                        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
+                        inputMethodManager?.apply {
+                            hideSoftInputFromWindow(currentFocus!!.windowToken,0)
+                            currentFocus!!.clearFocus()
+                        }
                     }
-                }
 
+                }
             }
         }
 
         return super.dispatchTouchEvent(ev)
+    }
+
+    fun setDispatchTouchAvailable(isAvailable: Boolean) {
+        dispatchAvailable = isAvailable
     }
 
 }

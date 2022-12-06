@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".ui.restaurant.review.DialogReviewSummary">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lv_robot"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:lottie_fileName="lottie/robot.json"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="리뷰 요약이 완성되었습니다 !"
+        android:textColor="@color/white"
+        android:fontFamily="@font/noto_sans_kr_bold_font_family"
+        android:includeFontPadding="false"
+        android:textSize="18sp"
+        android:gravity="center"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:contentPaddingTop="20dp"
+        app:contentPaddingBottom="20dp"
+        app:contentPaddingLeft="10dp"
+        app:contentPaddingRight="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:id="@+id/tv_review_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text = "리뷰요약 결과"
+            android:gravity="center"
+            android:fontFamily="@font/noto_sans_kr_regular_font_family"
+            android:includeFontPadding="false"
+            android:textSize="15sp"
+            />
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

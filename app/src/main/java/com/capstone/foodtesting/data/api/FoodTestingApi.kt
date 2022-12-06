@@ -15,6 +15,7 @@ import com.capstone.foodtesting.data.model.review.QuesAnswer
 import com.capstone.foodtesting.data.model.review.Review
 import com.capstone.foodtesting.data.model.review.ReviewList
 import com.capstone.foodtesting.data.model.review.myreview.MyReviewResponse
+import com.capstone.foodtesting.data.model.review.reviews.ReviewsForRestaurantResponse
 import com.capstone.foodtesting.data.model.statistics.ReviewStatistics
 import com.capstone.foodtesting.data.model.statistics.ReviewStatisticsResponse
 import okhttp3.MultipartBody
@@ -43,7 +44,7 @@ interface FoodTestingApi {
     @POST("register/userinfo")
     suspend fun registerUserInfo(
         @Body member: Member
-    ): Response<Member>
+    ): Response<MessageResponse>
 
     //회원정보수정
     @POST("modify/userinfo")
@@ -157,6 +158,7 @@ interface FoodTestingApi {
     suspend fun getNewMenuList(
     ):Response<NewMenuList>
 
+    //내가 쓴 리뷰 목록 가져오기
     @GET("get/review/each/customer/{uuid}")
     suspend fun getMyReviews(
         @Path("uuid") customer_uuid: String
@@ -166,7 +168,12 @@ interface FoodTestingApi {
     @GET("get/reviews/written-by-customer/{reg_num}")
     suspend fun getReviewsForRestaurant(
         @Path("reg_num") reg_num: String
-    ): Response<List<QuesAnswer>>
+    ): Response<ReviewsForRestaurantResponse>
 
 
+    //리뷰요약 가져오기
+    @GET("get/reviewsummary/{reg_num}")
+    suspend fun getReviewSummary(
+        @Path("reg_num") reg_num: String
+    ): Response<MessageResponse>
 }

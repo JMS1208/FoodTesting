@@ -67,9 +67,6 @@ class TotalFoodFragment : Fragment() {
         viewModel.allFoodRestaurantListLiveData.observe(viewLifecycleOwner) { restaurantList->
             restaurantList?.let {
                 categoryAdapter.submitList(it.toMutableList())
-                binding.rvCategoryRestaurant.layoutManager = GridLayoutManager(requireContext(), 2)
-//                categoryAdapter.onCurrentListChanged(categoryAdapter.currentList, it)
-                Log.d("TAG", "감지됨: $restaurantList")
             }
         }
     }

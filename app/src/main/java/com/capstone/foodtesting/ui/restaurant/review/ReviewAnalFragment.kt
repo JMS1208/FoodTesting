@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -21,7 +22,9 @@ import com.capstone.foodtesting.data.model.statistics.Gender
 import com.capstone.foodtesting.data.model.statistics.PerMonth
 import com.capstone.foodtesting.data.model.statistics.ReviewStatistics
 import com.capstone.foodtesting.databinding.FragmentReviewAnalBinding
+import com.capstone.foodtesting.ui.loading.DialogLoading
 import com.capstone.foodtesting.util.*
+import com.capstone.foodtesting.util.CommonFunc.showToast
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.LineChart
@@ -33,6 +36,7 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.*
 import java.util.Collections.max
@@ -132,6 +136,67 @@ class ReviewAnalFragment : Fragment() {
         setupSimpleRecyclerview()
         setupScrollChangeListener()
         setupReviewByCustomerRecyclerview()
+        setupReviewSummary()
+        setupLottieView()
+    }
+
+    private fun setupLottieView() {
+
+        binding.lvRobot.apply {
+            sandboxAnimations()
+            playAnimation()
+        }
+    }
+
+    private fun setupReviewSummary() {
+        binding.llReviewSummary.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                val dialog = DialogLoading()
+                try {
+                    dialog.setMessage("리뷰를 요약하고 있습니다...\n1~2분 정도 소요됩니다")
+                    dialog.setOutsideCancellable(false)
+                    dialog.isCancelable = false
+                    dialog.show(childFragmentManager, dialog.tag)
+
+                    val response =
+                        viewModel.getReviewSummary(args.regNum)
+
+
+                    val jobResult = viewLifecycleOwner.lifecycleScope.async {
+                        if (response.isSuccessful) {
+                            response.body()?.message ?: "리뷰 요약에 실패하였습니다"
+                        } else {
+                            "리뷰 요약에 실패하였습니다"
+                        }
+                    }
+
+                    if (dialog.isVisible) {
+                        dialog.dismiss()
+                    }
+                    val summary = jobResult.await()
+
+                    if(summary == "리뷰 요약에 실패하였습니다") {
+                        showToast(requireContext(), summary)
+                    } else {
+                        val summaryDialog = DialogReviewSummary()
+
+                        summaryDialog.setMessage(summary.trim())
+                        summaryDialog.show(childFragmentManager, summaryDialog.tag)
+                    }
+
+                } catch(E: Exception) {
+
+                    if (dialog.isVisible) {
+                        dialog.dismiss()
+                    }
+
+                    showToast(requireContext(), "${E.message}")
+                }
+
+
+
+            }
+        }
     }
 
     private fun setupReviewByCustomerRecyclerview() {
@@ -146,7 +211,7 @@ class ReviewAnalFragment : Fragment() {
             val response = viewModel.getReviewsForRestaurant(args.regNum)
 
             if(response.isSuccessful) {
-                response.body()?.let {
+                response.body()?.reviewAll?.let {
                     reviewByCustomerAdapter.submitList(it)
                 }
             }

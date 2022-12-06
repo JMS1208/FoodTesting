@@ -15,7 +15,6 @@ class RestaurantCompletedFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,6 +28,7 @@ class RestaurantCompletedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnMoveHome.setOnClickListener {
+
             (parentFragment as RestaurantRegisterFragment).findNavController().popBackStack()
         }
 

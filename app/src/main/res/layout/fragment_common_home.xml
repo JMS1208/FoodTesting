@@ -23,6 +23,7 @@
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -80,13 +81,12 @@
                 android:id="@+id/iv_banner_item"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="10dp"
                 android:adjustViewBounds="true"
+                android:scaleType="centerInside"
                 app:layout_constraintBottom_toBottomOf="@id/btn_banner"
-                app:layout_constraintEnd_toStartOf="@id/btn_banner"
+                app:layout_constraintEnd_toStartOf="@id/tv_banner_item_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_home_address"
+                app:layout_constraintTop_toBottomOf="@id/tv_banner_item_title"
                 app:srcCompat="@drawable/banner_image1" />
 
             <TextView
@@ -95,17 +95,14 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_sans_kr_medium_font_family"
                 android:includeFontPadding="false"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 tools:text="이곳에 타이틀"
+                android:visibility="gone"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_home_address"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="14sp"
-                android:autoSizeMaxTextSize="30sp"
-                android:autoSizeStepGranularity="2sp"
                 />
 
             <TextView
@@ -114,18 +111,15 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_sans_kr_regular_font_family"
                 android:includeFontPadding="false"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 tools:text="이곳에 내용"
                 android:gravity="end"
+                android:visibility="gone"
                 android:textColor="@color/dark_grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_banner_item_title"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="30dp"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="14sp"
-                android:autoSizeMaxTextSize="30sp"
-                android:autoSizeStepGranularity="2sp"
                 />
 
             <TextView

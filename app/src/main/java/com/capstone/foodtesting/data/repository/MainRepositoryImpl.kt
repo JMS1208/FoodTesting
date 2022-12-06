@@ -37,6 +37,7 @@ import com.capstone.foodtesting.data.model.review.QuesAnswer
 import com.capstone.foodtesting.data.model.review.Review
 import com.capstone.foodtesting.data.model.review.ReviewList
 import com.capstone.foodtesting.data.model.review.myreview.MyReviewResponse
+import com.capstone.foodtesting.data.model.review.reviews.ReviewsForRestaurantResponse
 import com.capstone.foodtesting.data.model.statistics.ReviewStatisticsResponse
 import com.capstone.foodtesting.data.model.unsplash.Result
 import com.capstone.foodtesting.data.model.unsplash.UnsplashResponse
@@ -113,7 +114,7 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun registerUserInfo(
         member: Member
-    ): Response<Member> {
+    ): Response<MessageResponse> {
         return foodTestingApi.registerUserInfo(member)
     }
 
@@ -231,8 +232,13 @@ class MainRepositoryImpl @Inject constructor(
     }
 
     //매장에 달린 리뷰 가져오기
-    override suspend fun getReviewsForRestaurant(reg_num: String): Response<List<QuesAnswer>> {
+    override suspend fun getReviewsForRestaurant(reg_num: String): Response<ReviewsForRestaurantResponse> {
         return foodTestingApi.getReviewsForRestaurant(reg_num)
+    }
+
+    //리뷰 요약 가져오기
+    override suspend fun getReviewSummary(reg_num: String): Response<MessageResponse> {
+        return foodTestingApi.getReviewSummary(reg_num)
     }
 
 
