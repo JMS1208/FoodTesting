@@ -13,6 +13,7 @@ import androidx.core.view.WindowCompat
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
 import com.amar.library.ui.StickyScrollView
+import java.util.Collections.replaceAll
 
 
 fun LottieAnimationView.sandboxAnimations() {
@@ -112,4 +113,9 @@ fun Context.dialogResize(dialog: Dialog, width: Float, height: Float){
 
 fun androidx.core.widget.NestedScrollView.scrollToView(view: View) {
     this.smoothScrollTo(view.x.toInt(), view.y.toInt())
+}
+
+fun String.emailMasking(): String {
+    val regex = """(?:\G(?!^)|(?<=^[^@]{2}|@))[^@](?!\.[^.]+$)""".toRegex()
+    return this.replace(regex, "*")
 }

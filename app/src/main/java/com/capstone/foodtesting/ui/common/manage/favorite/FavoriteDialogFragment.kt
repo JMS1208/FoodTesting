@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.view.isVisible
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -17,6 +19,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.data.model.restaurant.Restaurant
 import com.capstone.foodtesting.databinding.DialogFragmentFavoriteBinding
+import com.capstone.foodtesting.util.CommonFunc.showToast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -37,6 +40,9 @@ class FavoriteDialogFragment() : BottomSheetDialogFragment() {
 
     private val viewModel by viewModels<FavoriteDialogViewModel>()
 
+    private var selectedRegNum: String? = null
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,6 +51,8 @@ class FavoriteDialogFragment() : BottomSheetDialogFragment() {
         _binding = DialogFragmentFavoriteBinding.inflate(layoutInflater)
         return binding.root
     }
+
+
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -114,7 +122,14 @@ class FavoriteDialogFragment() : BottomSheetDialogFragment() {
         }
 
         binding.tvVisit.setOnClickListener {
+            selectedRegNum?.let { regNum->
+//                this@FavoriteDialogFragment.dismiss()
 
+                parentFragment?.setFragmentResult("MoveToRoom", Bundle().apply {
+                    putString("reg_num", regNum)
+                })
+
+            } ?: showToast(requireContext(), "선택된 매장이 없습니다")
         }
 
 
@@ -146,6 +161,7 @@ class FavoriteDialogFragment() : BottomSheetDialogFragment() {
                         val restaurant = it[position]
                         val nameCategory = "\" ${restaurant.name} (${restaurant.category}) \""
                         binding.tvRestaurantName.text = nameCategory
+                        selectedRegNum = restaurant.reg_num
                     }
                 }
             })

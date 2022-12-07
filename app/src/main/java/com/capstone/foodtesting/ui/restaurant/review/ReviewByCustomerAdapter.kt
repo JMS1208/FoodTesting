@@ -1,6 +1,7 @@
 package com.capstone.foodtesting.ui.restaurant.review
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.capstone.foodtesting.data.model.review.reviews.ReviewAll
 import com.capstone.foodtesting.databinding.ItemQuesAndAnswerBinding
 import com.capstone.foodtesting.databinding.ItemReviewByCustomerBinding
 import com.capstone.foodtesting.ui.member.review.records.ReviewRecordsAdapter
+import com.capstone.foodtesting.util.emailMasking
 import com.capstone.foodtesting.util.sandboxAnimations
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,6 +26,9 @@ class ReviewByCustomerAdapter :
 
     @SuppressLint("SimpleDateFormat")
     private val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd (E) hh:mm")
+
+    @SuppressLint("SimpleDateFormat")
+    private val yearSimpleDateFormat = SimpleDateFormat("yyyy")
 
     inner class ViewHolder(private val itemBinding: ItemReviewByCustomerBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
@@ -65,11 +70,18 @@ class ReviewByCustomerAdapter :
             }
 
             reviewAll.customer?.age?.let {
-                itemBinding.tvCustomerName.append(" [$it]")
+                try {
+                    val today = yearSimpleDateFormat.format(Date(System.currentTimeMillis())).toInt()
+                    val year = yearSimpleDateFormat.format(Date(it.toLong())).toInt()
+                    itemBinding.tvCustomerName.append(" [${(today-year)/10*10}대]")
+                } catch (E: Exception) {
+                    Log.e("TAG", E.message.toString())
+                }
+
             }
 
             reviewAll.customer?.email?.let {
-                itemBinding.tvEmail.text = it
+                itemBinding.tvEmail.text = it.emailMasking()
             }
 
             itemBinding.tvToggle.setOnClickListener {

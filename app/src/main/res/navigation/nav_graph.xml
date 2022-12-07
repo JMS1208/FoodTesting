@@ -47,7 +47,7 @@
         android:id="@+id/fragment_common_manage"
         android:name="com.capstone.foodtesting.ui.common.manage.CommonManageFragment"
         android:label="fragment_info"
-        tools:layout="@layout/fragment_common_manage3" >
+        tools:layout="@layout/fragment_common_manage" >
         <action
             android:id="@+id/action_fragment_common_manage_to_fragment_common_code_generate"
             app:destination="@id/fragment_common_code_generate" />

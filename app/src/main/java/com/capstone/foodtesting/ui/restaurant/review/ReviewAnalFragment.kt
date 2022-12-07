@@ -648,7 +648,7 @@ class ReviewAnalFragment : Fragment() {
             val genderEntries: ArrayList<PieEntry> = ArrayList()
             genderEntries.apply {
                 add(PieEntry(gender!!.male!!.div(total!!.toFloat()), "남성"))
-                add(PieEntry(gender.unknown!!.div(total.toFloat()), "미상"))
+//                add(PieEntry(gender.unknown!!.div(total.toFloat()), "미상"))
                 add(PieEntry(gender.female!!.div(total.toFloat()), "여성"))
             }
 
@@ -656,7 +656,7 @@ class ReviewAnalFragment : Fragment() {
 
             colors.apply {
                 add(ContextCompat.getColor(requireContext(), R.color.gradient_color1))
-                add(ContextCompat.getColor(requireContext(), R.color.gradient_color2))
+//                add(ContextCompat.getColor(requireContext(), R.color.gradient_color2))
                 add(ContextCompat.getColor(requireContext(), R.color.gradient_color3))
             }
 

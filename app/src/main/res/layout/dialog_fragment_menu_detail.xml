@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:elevation="5dp"
-    app:cardBackgroundColor="@color/white"
+    app:cardBackgroundColor="@color/bg_grey"
     app:cardCornerRadius="20dp">
 
     <androidx.core.widget.NestedScrollView
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/bg_btn_grey_10"
-                android:backgroundTint="@color/bright_grey"
+                android:backgroundTint="@color/white"
                 android:layout_marginTop="30dp"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
@@ -74,12 +74,11 @@
                     android:gravity="start"
                     android:includeFontPadding="false"
                     android:text="1. Testing Period"
-                    android:background="@drawable/bg_btn_grey_5"
-                    android:backgroundTint="@color/white"
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
+                    android:textColor="@color/point_red"
                     android:textSize="18sp" />
 
                 <TextView
@@ -91,7 +90,7 @@
                     android:gravity="start"
                     android:includeFontPadding="false"
                     tools:text="2022.10.10 ~ 2022.10.16"
-                    android:textColor="@color/white"
+                    android:textColor="@color/dark_grey"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
                     android:textSize="16sp" />
@@ -110,7 +109,9 @@
                     android:paddingBottom="3dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textColor="@color/point_red"
+                    />
 
 
                 <com.webtoonscorp.android.readmore.ReadMoreTextView
@@ -120,14 +121,13 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/noto_sans_kr_medium_font_family"
                     android:includeFontPadding="false"
+                    android:textColor="@color/dark_grey"
                     tools:text="11111111111114444444444444444444444444444444444111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
-                    android:textColor="@color/white"
                     android:textSize="16sp"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
                     app:readMoreMaxLines="2"
                     app:readMoreText="더보기"
-                    app:readMoreTextColor="@color/white"
                     app:readMoreTextSize="16sp"
                     app:readMoreTextStyle="bold"
                     app:readMoreTextUnderline="true"
@@ -146,7 +146,9 @@
                     android:paddingBottom="3dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textColor="@color/point_red"
+                    />
 
 
                 <com.webtoonscorp.android.readmore.ReadMoreTextView
@@ -157,13 +159,12 @@
                     android:fontFamily="@font/noto_sans_kr_medium_font_family"
                     android:includeFontPadding="false"
                     tools:text="11111111111114444444444444444444444444444444444111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
-                    android:textColor="@color/white"
+                    android:textColor="@color/dark_grey"
                     android:textSize="16sp"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
                     app:readMoreMaxLines="2"
                     app:readMoreText="더보기"
-                    app:readMoreTextColor="@color/white"
                     app:readMoreTextSize="16sp"
                     app:readMoreTextStyle="bold"
                     app:readMoreTextUnderline="true"

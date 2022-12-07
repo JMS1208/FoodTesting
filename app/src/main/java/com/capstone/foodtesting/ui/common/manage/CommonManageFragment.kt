@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -458,6 +459,23 @@ class CommonManageFragment : Fragment() {
 
             }
         }
+
+        setFragmentResultListener("MoveToRoom") { _, bundle->
+
+            try {
+                val regNum = bundle.getString("reg_num")
+
+                regNum?.let {
+                    val action = CommonManageFragmentDirections.actionFragmentCommonManageToFragmentRestaurantRoom(it)
+                    findNavController().navigate(action)
+                }
+
+            } catch (E: Exception) {
+                showToast(requireContext(), "${E.message}")
+            }
+
+        }
+
         setFragmentResultListener(
             "modifyMenu"
         ) { _, _ ->
