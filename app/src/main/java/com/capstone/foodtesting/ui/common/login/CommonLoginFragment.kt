@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.capstone.foodtesting.R
 import com.capstone.foodtesting.data.datastore.LogInStateOptions
@@ -277,6 +278,7 @@ class CommonLoginFragment : Fragment() {
             findNavController().navigate(action)
         }
 
+
         binding.btnLogin.setOnClickListener { //테스트용
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
@@ -287,26 +289,30 @@ class CommonLoginFragment : Fragment() {
                 CommonFunc.showToast(requireContext(), "비밀번호를 입력해주세요")
             } else {
                 CoroutineScope(Dispatchers.Main).launch {
+                    try {
+                        val result = viewModel.loginUser(email, password)
 
-                    val result = viewModel.loginUser(email, password)
+                        if (result.isSuccessful) {
+                            //아래는 홈 화면 들어가는 코드
+                            result.body()?.let {
 
-                    if (result.isSuccessful) {
-                        //아래는 홈 화면 들어가는 코드
-                        result.body()?.let {
-
-                            viewModel.insertMember(it)
-                            val action =
-                                CommonLoginFragmentDirections.actionFragmentCommonLoginToFragmentCommonHome()
-                            // TODO("email,pw로 BE에서 정보 맞는지 확인")
-                            findNavController().navigate(action)
-                        } ?: CommonFunc.showToast(requireContext(), "유효하지 않은 회원입니다")
+                                viewModel.insertMember(it)
+                                val action =
+                                    CommonLoginFragmentDirections.actionFragmentCommonLoginToFragmentCommonHome()
+                                // TODO("email,pw로 BE에서 정보 맞는지 확인")
+                                findNavController().navigate(action)
+                            } ?: CommonFunc.showToast(requireContext(), "유효하지 않은 회원입니다")
 
 
 
-                    } else {
-                        CommonFunc.showToast(requireContext(), "이메일과 비밀번호를 확인해주세요")
+                        } else {
+                            CommonFunc.showToast(requireContext(), "이메일과 비밀번호를 확인해주세요")
 
+                        }
+                    } catch(E: Exception) {
+                        CommonFunc.showToast(requireContext(), "알 수 없는 오류가 발생했습니다")
                     }
+
                 }
             }
 

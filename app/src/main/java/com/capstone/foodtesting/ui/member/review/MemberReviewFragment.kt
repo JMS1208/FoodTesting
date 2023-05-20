@@ -50,6 +50,13 @@ class MemberReviewFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 viewModel.fetchRestaurantQuestions(args.regNum)
+                val response = viewModel.getStoreInfoByRegNum(args.regNum)
+
+                if (response.isSuccessful) {
+                    response.body()?.get(0)?.market?.name?.let {
+                        binding.tvRestaurantName.text = it
+                    }
+                }
 
             } catch (E: Exception) {
                 E.printStackTrace()

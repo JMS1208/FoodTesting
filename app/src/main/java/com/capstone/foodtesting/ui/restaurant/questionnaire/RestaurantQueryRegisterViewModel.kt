@@ -1,6 +1,7 @@
 package com.capstone.foodtesting.ui.restaurant.questionnaire
 
 import android.system.Os.remove
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -36,6 +37,7 @@ class RestaurantQueryRegisterViewModel @Inject constructor(
 
             if (response.isSuccessful) {
                 response.body()?.let {
+                    Log.d("TAG", "테스트: $it")
                     _currentQuestionnaire.postValue(it.queryLineList.toMutableList())
                 }
             }

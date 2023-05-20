@@ -274,6 +274,7 @@
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_photo.xml" value="0.34739583333333335" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_query_register.xml" value="0.27803521779425394" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_query_register_about_testing_menu.xml" value="0.22076825664837485" />
+        <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_query_register_add_personally.xml" value="0.29243266353142366" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_query_register_completed.xml" value="0.19752030782385635" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_query_register_overview.xml" value="0.22573749465583584" />
         <entry key="..\:/MyAndroid/FoodTesting/app/src/main/res/layout/fragment_restaurant_register.xml" value="0.25" />
@@ -355,7 +356,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

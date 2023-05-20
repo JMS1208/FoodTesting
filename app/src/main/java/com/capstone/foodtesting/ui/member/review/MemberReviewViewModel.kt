@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.capstone.foodtesting.data.model.member.Member
 import com.capstone.foodtesting.data.model.questionnaire.QueryLine
 import com.capstone.foodtesting.data.model.questionnaire.QueryLineList
+import com.capstone.foodtesting.data.model.restaurant.RestaurantResponse
 import com.capstone.foodtesting.data.model.restaurant.register.MessageResponse
 import com.capstone.foodtesting.data.model.review.Review
 import com.capstone.foodtesting.data.repository.MainRepository
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import retrofit2.Response
+import retrofit2.http.Path
 import java.util.*
 
 @HiltViewModel
@@ -54,9 +56,17 @@ class MemberReviewViewModel @Inject constructor(
                 restaurantQueryList.postValue(it)
 
             }
+
+
         }
 
 
+    }
+
+    suspend fun getStoreInfoByRegNum(
+        reg_num: String
+    ): Response<List<RestaurantResponse>> {
+        return repository.getStoreInfoByRegNum(reg_num)
     }
 
     fun addReviewList(review: Review) {

@@ -58,6 +58,7 @@ interface FoodTestingApi {
         @Path("uuid") uuid: String
     ): Response<List<RestaurantResponse>>
 
+    //매장 정보 불러오기
     @GET("storeinfo/by-registartion-num/{regnum}")
     suspend fun getStoreInfoByRegNum(
         @Path("regnum") reg_num: String

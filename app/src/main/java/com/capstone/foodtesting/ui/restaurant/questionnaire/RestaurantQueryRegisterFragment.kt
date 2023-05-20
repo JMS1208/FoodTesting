@@ -340,7 +340,7 @@ class RestaurantQueryRegisterFragment : Fragment() {
 
 
                     else -> { //작성 완료
-                        CommonFunc.showToast(requireContext(), "테스트")
+//                        CommonFunc.showToast(requireContext(), "테스트")
 
 
                     }

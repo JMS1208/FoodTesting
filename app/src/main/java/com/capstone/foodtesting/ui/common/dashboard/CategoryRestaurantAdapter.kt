@@ -57,6 +57,7 @@ class CategoryRestaurantAdapter() : ListAdapter<Restaurant, CategoryRestaurantAd
                     it(restaurant)
                 }
             }
+
         }
     }
 
